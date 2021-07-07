@@ -8,6 +8,8 @@ public class Post {
     private int boardId; //板块ID
     private String userName; //用户姓名
     private String boardName; //板块名称
+    private String replyTo;  //假设这是一个回给A的帖，replyTo表示A的贴号
+    private String replyToUser; //表示发A贴的人的Id
 
     public int getPostId() {
         return postId;
