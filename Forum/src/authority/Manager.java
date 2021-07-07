@@ -1,2 +1,4 @@
-package authority;public interface Manager {
+package authority;
+
+public interface Manager {
 }

@@ -1,2 +1,4 @@
-package authority;public interface Normal {
+package authority;
+
+public interface Normal {
 }

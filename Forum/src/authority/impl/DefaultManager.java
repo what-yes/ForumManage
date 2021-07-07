@@ -1,2 +1,4 @@
-package authority.impl;public class DefaultManager {
+package authority.impl;
+
+public class DefaultManager {
 }

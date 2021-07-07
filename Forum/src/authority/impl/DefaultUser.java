@@ -1,2 +1,4 @@
-package authority.impl;public class DefaultUser {
+package authority.impl;
+
+public class DefaultUser {
 }

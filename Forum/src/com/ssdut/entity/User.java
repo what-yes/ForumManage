@@ -1,2 +1,4 @@
-package com.ssdut.entity;public class User {
+package com.ssdut.entity;
+
+public class User {
 }
