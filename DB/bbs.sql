@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 08/07/2021 10:02:46
+ Date: 08/07/2021 17:36:16
 */
 
 SET NAMES utf8mb4;
@@ -22,20 +22,18 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `blacklist`;
 CREATE TABLE `blacklist`  (
-  `blackListId` int NOT NULL AUTO_INCREMENT COMMENT '黑名单列表ID',
-  `userId` int NULL DEFAULT NULL COMMENT '黑名单所属的用户Id',
-  `blackUserId` int NULL DEFAULT NULL COMMENT '被列入黑名单的用户Id',
-  PRIMARY KEY (`blackListId`) USING BTREE,
-  INDEX `userId_blackList`(`userId`) USING BTREE,
+  `userId` int NOT NULL COMMENT '黑名单所属的用户Id',
+  `blackUserId` int NOT NULL COMMENT '被列入黑名单的用户Id',
+  PRIMARY KEY (`userId`, `blackUserId`) USING BTREE,
   INDEX `blackUserId_blackList`(`blackUserId`) USING BTREE,
-  CONSTRAINT `blackUserId_blackList` FOREIGN KEY (`blackUserId`) REFERENCES `user` (`userId`) ON DELETE SET NULL ON UPDATE RESTRICT,
-  CONSTRAINT `userId_blackList` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE SET NULL ON UPDATE RESTRICT
+  CONSTRAINT `blackUserId_blackList` FOREIGN KEY (`blackUserId`) REFERENCES `user` (`userId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `userId_blackList` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of blacklist
 -- ----------------------------
-INSERT INTO `blacklist` VALUES (1, 1, 2);
+INSERT INTO `blacklist` VALUES (1, 2);
 
 -- ----------------------------
 -- Table structure for board
@@ -44,14 +42,17 @@ DROP TABLE IF EXISTS `board`;
 CREATE TABLE `board`  (
   `boardId` int NOT NULL AUTO_INCREMENT COMMENT '板块id',
   `boardName` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '板块名称',
-  PRIMARY KEY (`boardId`) USING BTREE
+  `boardMgrId` int NULL DEFAULT NULL COMMENT '版主Id',
+  PRIMARY KEY (`boardId`) USING BTREE,
+  INDEX `boardMgrId`(`boardMgrId`) USING BTREE,
+  CONSTRAINT `boardMgrId` FOREIGN KEY (`boardMgrId`) REFERENCES `board` (`boardId`) ON DELETE SET NULL ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of board
 -- ----------------------------
-INSERT INTO `board` VALUES (1, '板块1');
-INSERT INTO `board` VALUES (2, '板块2');
+INSERT INTO `board` VALUES (1, '板块1', NULL);
+INSERT INTO `board` VALUES (2, '板块2', NULL);
 
 -- ----------------------------
 -- Table structure for post
@@ -64,6 +65,7 @@ CREATE TABLE `post`  (
   `userId` int NULL DEFAULT NULL COMMENT '用户ID',
   `boardId` int NULL DEFAULT NULL COMMENT '板块ID',
   `replyTo` int NULL DEFAULT NULL COMMENT '所回复贴的id',
+  `belongTo` int NULL DEFAULT NULL COMMENT '属于哪个主贴',
   PRIMARY KEY (`postId`) USING BTREE,
   INDEX `userId_post`(`userId`) USING BTREE,
   INDEX `boardId_post`(`boardId`) USING BTREE,
@@ -76,11 +78,12 @@ CREATE TABLE `post`  (
 -- ----------------------------
 -- Records of post
 -- ----------------------------
-INSERT INTO `post` VALUES (1, '帖子1', '这是用户1发的在版块1的帖1', 1, 1, NULL);
-INSERT INTO `post` VALUES (2, '帖子2', '这是用户2发的在版块2的帖2', 2, 2, NULL);
-INSERT INTO `post` VALUES (3, '帖子3', '这是用户3回复帖1的在版块1的帖3', 3, 1, 1);
-INSERT INTO `post` VALUES (4, '帖子4', '这是用户1回复帖3的在版块1的帖子4', 1, 1, 3);
-INSERT INTO `post` VALUES (5, '帖子5', '这是用户2发的在版块1的帖5', 2, 1, NULL);
+INSERT INTO `post` VALUES (1, '帖子1', '这是用户1发的在版块1的帖1', 1, 1, NULL, NULL);
+INSERT INTO `post` VALUES (2, '帖子2', '这是用户2发的在版块2的帖2', 2, 2, NULL, NULL);
+INSERT INTO `post` VALUES (3, '帖子3', '这是用户3在板块1下的主贴1下回复帖1的帖3', 3, 1, 1, 1);
+INSERT INTO `post` VALUES (4, '帖子4', '这是用户1在板块1下的主贴1下回复帖3的帖4', 1, 1, 3, 1);
+INSERT INTO `post` VALUES (5, '帖子5', '这是用户2发的在版块1的帖5', 2, 1, NULL, NULL);
+INSERT INTO `post` VALUES (6, '帖子6', '这是用户3在板块1下的主贴1下回复帖4的帖6', 3, 1, 4, 1);
 
 -- ----------------------------
 -- Table structure for user

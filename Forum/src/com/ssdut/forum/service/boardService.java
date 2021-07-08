@@ -11,17 +11,17 @@ package com.ssdut.forum.service;
  */
 public interface boardService {
     /**
-     * 显示所有板块信息
+     * @desciption 显示所有板块信息
      */
     void showBoard();
 
     /**
-     * 添加新的板块
+     * @desciption 添加新的板块
      */
     void addBoard();
 
     /**
-     * 删除板块
+     * @desciption 删除板块
      */
     void deleteBoard();
 }

@@ -8,29 +8,33 @@ public class Post {
     private int boardId; //板块ID
     private String userName; //用户姓名
     private String boardName; //板块名称
-    private String replyTo;  //假设这是一个回给A的帖，replyTo表示A的贴号
-    private String replyToUser; //表示发A贴的人的Id
+    private int replyTo;  //假设这是一个回给A的帖，replyTo表示A的贴号
+    private int replyToUser; //表示发A贴的人的Id
+    private int belongTo; //所属的主贴Id
 
-
-
-
-
-    public String getReplyTo() {
+    public int getReplyTo() {
         return replyTo;
     }
 
-    public void setReplyTo(String replyTo) {
+    public void setReplyTo(int replyTo) {
         this.replyTo = replyTo;
     }
 
-    public String getReplyToUser() {
+    public int getReplyToUser() {
         return replyToUser;
     }
 
-    public void setReplyToUser(String replyToUser) {
+    public void setReplyToUser(int replyToUser) {
         this.replyToUser = replyToUser;
     }
 
+    public int getBelongTo() {
+        return belongTo;
+    }
+
+    public void setBelongTo(int belongTo) {
+        this.belongTo = belongTo;
+    }
 
     public int getPostId() {
         return postId;

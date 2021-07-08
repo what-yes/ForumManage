@@ -16,7 +16,7 @@ public class User {
      */
     private String passWord;
     /**
-     * //用户状态数据库中0表示正常 1表示disable
+     * 用户状态数据库中0表示正常 1表示disable
      */
     private int state;
     /**
