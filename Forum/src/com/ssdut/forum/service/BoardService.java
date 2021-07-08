@@ -24,7 +24,7 @@ public interface BoardService {
      * 添加新的板块 注：用工厂模式实现添加
      * @return 成功返回true
      */
-    boolean addBoard();
+    boolean addBoard(Board board );
 
     /**
      * 删除板块

@@ -28,14 +28,14 @@ public interface UserDao {
      * @param userId
      * @return true表示成功禁止，false表示禁止失败
      */
-    boolean disableUser(String userId);
+    boolean disableUser(int userId);
 
     /**
      * 管理员将将用户从黑名单中删除
      * @param userId
      * @return
      */
-    boolean enableUser(String userId);
+    boolean enableUser(int userId);
 
     /**
      * 根据用户状态（被禁与否）显示用户  针对管理员而言

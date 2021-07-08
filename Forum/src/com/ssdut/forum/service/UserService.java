@@ -25,7 +25,7 @@ public interface UserService {
      * @param state
      * @return
      */
-    List<User> getAllUsersIsState(int state);
+    List<User> getAllUsersByState(int state);
 
     /**
      * 改变用户状态 (state为0正常  为1表示禁用)

@@ -18,11 +18,11 @@ public interface BaseService {
 
     /**
      * @desciption 根据判断账号密码是否正确决定是否能登录
-     * @param userId
+     * @param userName
      * @param password
      * @return
      */
-    User checkLogin(int userId, String password);
+    User checkLogin(String userName, String password);
 
     /**
      * @description 注册

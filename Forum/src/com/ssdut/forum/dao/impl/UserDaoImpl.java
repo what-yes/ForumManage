@@ -65,7 +65,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean disableUser(String userId) {
+    public boolean disableUser(int userId) {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -73,6 +73,7 @@ public class UserDaoImpl implements UserDao {
         try{
             conn = JdbcUtil.getConnection();
             st = conn.prepareStatement("update user set state=1 where userId=?");
+            st.setInt(1,userId);
             affectedRow = st.executeUpdate();
             if(affectedRow == 1)
                 System.out.println("该用户已是被禁状态，操作无效");
@@ -88,7 +89,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean enableUser(String userId) {
+    public boolean enableUser(int userId) {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -96,7 +97,10 @@ public class UserDaoImpl implements UserDao {
         try{
             conn = JdbcUtil.getConnection();
             st = conn.prepareStatement("update user set state=1 where userId=?");
+            st.setInt(1, userId);
             affectedRow = st.executeUpdate();
+
+            //这种输出信息似乎都应该在工厂模式中
             if(affectedRow == 0)
                 System.out.println("该用户已是正常状态，操作无效");
             else

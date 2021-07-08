@@ -39,6 +39,16 @@ public class BoardDaoImpl implements BoardDao {
         int affectedRow = 0;
         try{
             conn = JdbcUtil.getConnection();
+
+            //如果板块已经存在
+            st = conn.prepareStatement("select * from board where boardName=?");
+            st.setString(1, board.getBoardName());
+            rs = st.executeQuery();
+            if(rs.next()){
+                // System.out.println("'"+board.getBoardName()+"'"+"板块已存在");
+                return affectedRow;
+            }
+
             st = conn.prepareStatement("insert into board values(?)");
             st.setString(1, board.getBoardName());
             affectedRow = st.executeUpdate();
