@@ -1,13 +1,49 @@
 package com.ssdut.forum.role;
 
-/**
- * ClassName: user
- * Description:
- * Date: 2021/7/8 18:03
- *
- * @author Crescent
- * @version 1.0
- * @since JDK 1.8
- */
+
+import com.ssdut.forum.authority.Admin;
+import com.ssdut.forum.authority.BoardMgr;
+import com.ssdut.forum.authority.Normal;
+
 public class Role {
+    private String description; //角色名
+    private Normal normal = null;
+    private BoardMgr boardMgr = null;
+    private Admin admin = null;
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public BoardMgr getBoardMgr() {
+        return boardMgr;
+    }
+
+    public void setBoardMgr(BoardMgr boardMgr) {
+        this.boardMgr = boardMgr;
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
+
+    public Normal getNormal() {
+        return normal;
+    }
+
+    public void setNormal(Normal normal) {
+        this.normal = normal;
+    }
+
+
+
 }
