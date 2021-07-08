@@ -1,25 +1,44 @@
 package com.ssdut.forum.util;
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.*;
+import java.util.Properties;
 
 public final class JdbcUtil {
-    private static String DRIVER_CLASS = "com.mysql.jdbc.Driver";
-    private static String URL="jdbc:mysql:///bbs";
-    private static String USER = "root";//自己数据库的账号密码
-    private static String PASSWORD = "123456";//自己数据库的密码
-    private static ThreadLocal<Connection> threadLocal = new ThreadLocal<>();
+    private static String DRIVER = null;
+    private static String URL= null;
+    private static String USER = null;//自己数据库的账号密码
+    private static String PASSWORD = null;//自己数据库的密码
+    Connection conn=null;
+    //private static ThreadLocal<Connection> threadLocal = new ThreadLocal<>();
     static {
-        try {
-            Class.forName(DRIVER_CLASS);
-        } catch (ClassNotFoundException e) {
+        init();
+    }
+
+    /**
+     * 通过配置文件实现属性初始化
+     */
+    public static void init(){
+        Properties params=new Properties();
+        String config="database.properties";
+        InputStream is= JdbcUtil.class.getClassLoader().getResourceAsStream(config);
+        try{
+            params.load(is);
+        }catch (IOException e){
             e.printStackTrace();
         }
+        DRIVER=params.getProperty("driver");
+        URL=params.getProperty("url");
+        USER=params.getProperty("user");
+        PASSWORD=params.getProperty("password");
     }
+
+    /**
+     * 数据库链接
+     * @return
+     */
     public static Connection getConnection()  {
 	/*	Connection conn = threadLocal.get();
 		if(conn == null) {
@@ -33,15 +52,23 @@ public final class JdbcUtil {
 		}
 
 		return conn;*/
-
+        Connection conn =null;
         try {
-            return DriverManager.getConnection(URL, USER, PASSWORD);
-        } catch (SQLException e) {
+            Class.forName(DRIVER);
+            conn=DriverManager.getConnection(URL,USER,PASSWORD);
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        return null;
+        return conn;
     }
+
+    /**
+     * 释放资源
+     * @param rs
+     * @param st
+     * @param conn
+     */
     public static void closeAll(ResultSet rs, Statement st, Connection conn) {
         try {
             if (rs != null)
@@ -79,15 +106,54 @@ public final class JdbcUtil {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            threadLocal.remove();
+            //threadLocal.remove();
         }
     }
 
+    /**
+     * 执行增删改操作
+     * @param preparedSql
+     * @param param
+     * @return
+     */
+    public static int executeSQL(String preparedSql, Object[] param){
+        Connection conn=null; //数据库链接
+        PreparedStatement pstmt=null; //sql语句
+        int num=0; //操作的行数
+        try{
+            conn=getConnection();
+            pstmt=conn.prepareStatement(preparedSql);
+            if(param!=null){
+                for (int i=0;i< param.length;i++){
+                    pstmt.setObject(i+1,param[i]);
+                }
+            }
+            num=pstmt.executeUpdate();
+        } catch (SQLException e){
+            e.printStackTrace();
+        } finally {
+            closeAll(null,pstmt,conn);
+        }
+
+        return num;
+    }
+
     public static void main(String[] args) {
-        System.out.println(getConnection());
-        closeConnection();
-        System.out.println(getConnection());
-        System.out.println(getConnection());
-        System.out.println(getConnection());
+        Connection conn=null;
+        System.out.println(conn=getConnection());
+        PreparedStatement pstmt=null; //sql语句
+        String preparedSql="select * from post";
+        try{
+            conn=getConnection();
+            pstmt=conn.prepareStatement(preparedSql);
+            ResultSet rs=pstmt.executeQuery();
+            while (rs.next()){
+                System.out.println(rs.getString("content"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        } finally {
+            closeAll(null,pstmt,conn);
+        }
     }
 }
