@@ -38,7 +38,7 @@ public interface UserDao {
     boolean enableUser(String userId);
 
     /**
-     * 根据用户状态（被禁与否）显示用户
+     * 根据用户状态（被禁与否）显示用户  针对管理员而言
      * @param state
      * @return
      */
@@ -49,5 +49,19 @@ public interface UserDao {
      * @return
      */
     List<User> listAllUser();
+
+    /**
+     * 用户添加黑名单，来决定不看哪些人的帖子.
+     * @param userId
+     * @return true表示添加成功 false表示添加失败
+     */
+    boolean addBlackList(String userId, String blackUserId);
+
+    /**
+     * 用户将某些人从黑名单中移除
+     * @param userId
+     * @return
+     */
+    boolean removeBlackList(String userId, String blackUserId);
 
 }

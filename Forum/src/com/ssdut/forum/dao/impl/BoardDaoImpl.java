@@ -59,7 +59,7 @@ public class BoardDaoImpl implements BoardDao {
         int affectedRow = 0;
         try{
             conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("delete from board where boardId?");
+            st = conn.prepareStatement("delete from board where boardId=?");
             st.setInt(1, boardId);
             affectedRow = st.executeUpdate();
 

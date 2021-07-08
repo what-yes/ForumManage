@@ -11,6 +11,27 @@ public class Post {
     private String replyTo;  //假设这是一个回给A的帖，replyTo表示A的贴号
     private String replyToUser; //表示发A贴的人的Id
 
+
+
+
+
+    public String getReplyTo() {
+        return replyTo;
+    }
+
+    public void setReplyTo(String replyTo) {
+        this.replyTo = replyTo;
+    }
+
+    public String getReplyToUser() {
+        return replyToUser;
+    }
+
+    public void setReplyToUser(String replyToUser) {
+        this.replyToUser = replyToUser;
+    }
+
+
     public int getPostId() {
         return postId;
     }

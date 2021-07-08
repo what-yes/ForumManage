@@ -26,9 +26,22 @@ public interface baseService {
     boolean register(User user);
 
     /**
-     * @desription
-     * @param psot
+     * @desription 发帖
+     * @param post
      * @return
      */
-    boolean post(Post psot);
+    boolean post(Post post);
+
+    /**
+     * @description 删帖
+     * @param postId
+     * @return
+     */
+    boolean deletePost(String postId);
+
+    /**
+     * 回帖
+     */
+
+
 }

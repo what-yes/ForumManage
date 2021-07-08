@@ -170,4 +170,81 @@ public class UserDaoImpl implements UserDao {
         }
         return list;
     }
+
+    @Override
+    public boolean addBlackList(String userId, String blackUserId) {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        int affectedRow = 0;
+        try{
+            conn = JdbcUtil.getConnection();
+            st = conn.prepareStatement("insert into blacklist values(?,?)");
+            st.setString(1,userId);
+            st.setString(2,blackUserId);
+            affectedRow = st.executeUpdate();
+            if(affectedRow == 0){
+                System.out.println("添加失败。原因：该用户已在您的黑名单中");
+            }
+            else{
+                System.out.println("用户"+getUserById(blackUserId). getUserName()+"(ID"+blackUserId+")" +"已被添加至您的黑名单");
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            JdbcUtil.closeAll(rs, st, conn);
+        }
+        return (affectedRow == 1);
+    }
+
+    @Override
+    public boolean removeBlackList(String userId, String blackUserId) {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        int affectedRow = 0;
+        try{
+            conn = JdbcUtil.getConnection();
+            st = conn.prepareStatement("delete from blacklist where userId=? and blackUserId=?");
+            affectedRow = st.executeUpdate();
+            if(affectedRow == 0){
+                System.out.println("移除失败。原因：该用户不在您的黑名单中");
+            }
+            else{
+                System.out.println("用户"+getUserById(blackUserId). getUserName()+"(ID"+blackUserId+")" +"已从您的黑名单中移除");
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            JdbcUtil.closeAll(rs, st, conn);
+        }
+        return (affectedRow == 1);
+    }
+
+    public User getUserById(String userId){
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        User user = null;
+        List<User> list = new ArrayList<>();
+        try {
+            conn = JdbcUtil.getConnection();
+            st = conn.prepareStatement("select * from user where userId=?");
+            st.setString(2,userId);
+            rs = st.executeQuery();
+            user = new User();
+            user.setUserId(rs.getInt("userId"));
+            user.setUserName(rs.getString("userName"));
+            user.setPassWord(rs.getString("password"));
+            user.setState(rs.getInt("state"));
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            JdbcUtil.closeAll(rs,st,conn);
+        }
+        return user;
+    }
 }
