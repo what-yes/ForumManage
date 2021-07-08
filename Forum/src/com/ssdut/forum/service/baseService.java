@@ -7,8 +7,6 @@ import com.ssdut.forum.entity.Post;
 import com.ssdut.forum.entity.User;
 
 public interface baseService {
-    UserDaoImpl udi = new UserDaoImpl();
-    BoardDaoImpl bdi = new BoardDaoImpl();
 
     /**
      * @desciption 根据判断账号密码是否正确决定是否能登录
@@ -40,7 +38,7 @@ public interface baseService {
     boolean deletePost(String postId);
 
     /**
-     * 回帖
+     * 回帖 暂时不清楚发帖的Dao代码
      */
 
 
