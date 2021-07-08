@@ -25,16 +25,16 @@ public class BaseServiceImpl implements BaseService {
 
     @Override
     public boolean post(Post post) {
-        return false;
+        return pd.savePost(post) > 0;
     }
 
     @Override
     public boolean deletePost(int postId) {
-        return false;
+        return pd.deletePost(postId) > 0;
     }
 
     @Override
     public boolean replyPost(Post post) {
-        return false;
+        return pd.savePost(post) > 0;
     }
 }
