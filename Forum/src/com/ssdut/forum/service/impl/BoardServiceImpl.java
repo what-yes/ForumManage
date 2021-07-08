@@ -17,12 +17,12 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public boolean addBoard(Board board ) {
-       return bdi.saveBoard(board) > 0;
+    public boolean addBoard(Board board) {
+        return bdi.saveBoard(board) > 0;
     }
 
     @Override
     public boolean deleteBoard(int boardId) {
-        return false;
+        return bdi.deleteBoard(boardId) > 0;
     }
 }

@@ -176,7 +176,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean addBlackList(String userId, String blackUserId) {
+    public boolean addBlackList(int userId, int blackUserId) {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -184,8 +184,8 @@ public class UserDaoImpl implements UserDao {
         try{
             conn = JdbcUtil.getConnection();
             st = conn.prepareStatement("insert into blacklist values(?,?)");
-            st.setString(1,userId);
-            st.setString(2,blackUserId);
+            st.setInt(1,userId);
+            st.setInt(2,blackUserId);
             affectedRow = st.executeUpdate();
             if(affectedRow == 0){
                 System.out.println("添加失败。原因：该用户已在您的黑名单中");
@@ -203,7 +203,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean removeBlackList(String userId, String blackUserId) {
+    public boolean removeBlackList(int userId, int blackUserId) {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -211,6 +211,8 @@ public class UserDaoImpl implements UserDao {
         try{
             conn = JdbcUtil.getConnection();
             st = conn.prepareStatement("delete from blacklist where userId=? and blackUserId=?");
+            st.setInt(1,userId);
+            st.setInt(2,blackUserId);
             affectedRow = st.executeUpdate();
             if(affectedRow == 0){
                 System.out.println("移除失败。原因：该用户不在您的黑名单中");
@@ -227,7 +229,7 @@ public class UserDaoImpl implements UserDao {
         return (affectedRow == 1);
     }
 
-    public User getUserById(String userId){
+    public User getUserById(int userId){
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -236,7 +238,7 @@ public class UserDaoImpl implements UserDao {
         try {
             conn = JdbcUtil.getConnection();
             st = conn.prepareStatement("select * from user where userId=?");
-            st.setString(2,userId);
+            st.setInt(1,userId);
             rs = st.executeQuery();
             user = new User();
             user.setUserId(rs.getInt("userId"));

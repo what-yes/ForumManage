@@ -1,5 +1,6 @@
 package com.ssdut.forum.service.impl;
 
+import com.ssdut.forum.dao.UserDao;
 import com.ssdut.forum.dao.impl.UserDaoImpl;
 import com.ssdut.forum.entity.User;
 import com.ssdut.forum.service.UserService;
@@ -8,7 +9,7 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    UserDaoImpl udi = new UserDaoImpl();
+    UserDao udi = new UserDaoImpl();
 
     @Override
     public List<User> getAllUsers() {

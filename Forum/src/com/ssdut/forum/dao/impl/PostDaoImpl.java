@@ -69,6 +69,7 @@ public class PostDaoImpl implements PostDao{
         Post post;
         try{
             conn = JdbcUtil.getConnection();
+            // TODO 黑名单的帖子不显示
             st = conn.prepareStatement("select * from post where belongTo is null and boardId =?");
             st.setInt(1, boardId);
             rs = st.executeQuery();

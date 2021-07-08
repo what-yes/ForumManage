@@ -5,7 +5,7 @@ import com.ssdut.forum.role.Role;
 
 public class User {
     private Role role = null;
-    public boolean login(String username, String password){
-
-    }
+//    public boolean login(String username, String password){
+//
+//    }
 }

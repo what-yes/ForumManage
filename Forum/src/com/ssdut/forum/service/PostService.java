@@ -33,18 +33,4 @@ public interface PostService {
      * @return List<Post>
      */
     List<Post> getAllReplyByPostId(int postId);
-
-    /**
-     * 根据帖Id删除所有回帖
-     * @param postId
-     * @return
-     */
-    boolean deleteAllReplyByPostId(int postId);
-
-    /**
-     * 根据版块统计主贴数目
-     * @param boardId
-     * @return
-     */
-    int countByBoardId(int boardId);
 }

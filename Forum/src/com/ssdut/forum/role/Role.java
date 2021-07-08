@@ -43,7 +43,4 @@ public class Role {
     public void setNormal(Normal normal) {
         this.normal = normal;
     }
-
-
-
 }

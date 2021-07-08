@@ -55,13 +55,13 @@ public interface UserDao {
      * @param userId
      * @return true表示添加成功 false表示添加失败
      */
-    boolean addBlackList(String userId, String blackUserId);
+    boolean addBlackList(int userId, int blackUserId);
 
     /**
      * 用户将某些人从黑名单中移除
      * @param userId
      * @return
      */
-    boolean removeBlackList(String userId, String blackUserId);
+    boolean removeBlackList(int userId, int blackUserId);
 
 }

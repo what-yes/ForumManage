@@ -1,33 +1,27 @@
 package com.ssdut.forum.service.impl;
 
+import com.ssdut.forum.dao.PostDao;
+import com.ssdut.forum.dao.impl.PostDaoImpl;
 import com.ssdut.forum.entity.Post;
 import com.ssdut.forum.service.PostService;
 
 import java.util.List;
 
 public class PostServiceImpl implements PostService {
+    PostDao pd= new PostDaoImpl();
+
     @Override
     public List<Post> getAllPost(int boardId) {
-        return null;
+        return pd.queryReplyByPostID(boardId);
     }
 
     @Override
     public boolean deletePost(int postId) {
-        return false;
+        return pd.deletePost(postId) > 0;
     }
 
     @Override
     public List<Post> getAllReplyByPostId(int postId) {
-        return null;
-    }
-
-    @Override
-    public boolean deleteAllReplyByPostId(int postId) {
-        return false;
-    }
-
-    @Override
-    public int countByBoardId(int boardId) {
-        return 0;
+        return pd.queryReplyByPostID(postId);
     }
 }

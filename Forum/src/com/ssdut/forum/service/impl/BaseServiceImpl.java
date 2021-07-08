@@ -1,5 +1,7 @@
 package com.ssdut.forum.service.impl;
 
+import com.ssdut.forum.dao.PostDao;
+import com.ssdut.forum.dao.impl.PostDaoImpl;
 import com.ssdut.forum.dao.impl.UserDaoImpl;
 import com.ssdut.forum.entity.Post;
 import com.ssdut.forum.entity.User;
@@ -8,6 +10,8 @@ import com.ssdut.forum.service.BaseService;
 public class BaseServiceImpl implements BaseService {
 
     UserDaoImpl udi = new UserDaoImpl();
+    PostDao pd=new PostDaoImpl();
+
     @Override
     public User checkLogin(String userName, String password) {
         User user = udi.queryByNameAndPass(userName, password);
