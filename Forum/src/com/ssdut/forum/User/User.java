@@ -1,4 +1,4 @@
-package com.ssdut.forum.role;
+package com.ssdut.forum.User;
 
 /**
  * ClassName: user
@@ -9,5 +9,5 @@ package com.ssdut.forum.role;
  * @version 1.0
  * @since JDK 1.8
  */
-public class Role {
+public class User {
 }
