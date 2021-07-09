@@ -138,22 +138,22 @@ public final class JdbcUtil {
         return num;
     }
 
-    public static void main(String[] args) {
-        Connection conn=null;
-        System.out.println(conn=getConnection());
-        PreparedStatement pstmt=null; //sql语句
-        String preparedSql="select * from post";
-        try{
-            conn=getConnection();
-            pstmt=conn.prepareStatement(preparedSql);
-            ResultSet rs=pstmt.executeQuery();
-            while (rs.next()){
-                System.out.println(rs.getString("content"));
-            }
-        }catch (SQLException e){
-            e.printStackTrace();
-        } finally {
-            closeAll(null,pstmt,conn);
-        }
-    }
+//    public static void main(String[] args) {
+//        Connection conn=null;
+//        System.out.println(conn=getConnection());
+//        PreparedStatement pstmt=null; //sql语句
+//        String preparedSql="select * from post";
+//        try{
+//            conn=getConnection();
+//            pstmt=conn.prepareStatement(preparedSql);
+//            ResultSet rs=pstmt.executeQuery();
+//            while (rs.next()){
+//                System.out.println(rs.getString("content"));
+//            }
+//        }catch (SQLException e){
+//            e.printStackTrace();
+//        } finally {
+//            closeAll(null,pstmt,conn);
+//        }
+//    }
 }

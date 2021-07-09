@@ -27,11 +27,13 @@ public interface PostDao {
     List<Post> queryPostByBoardID(int boardId,int ownerId);
 
     /**
-     * 根据主帖号显示跟帖
+     * 根据主帖号显示跟帖 (注：不会显示主帖，只显示他的跟帖)
      * @param postId
      * @return
      */
     List<Post>  queryReplyByPostID(int postId,int ownerId);
+
+    boolean ChangeField(int postId, String field, String newValue);
 //    /**
 //     * 根据回帖查看主帖是否存在
 //     * @param postId

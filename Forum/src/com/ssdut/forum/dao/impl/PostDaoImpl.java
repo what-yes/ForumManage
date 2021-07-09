@@ -22,7 +22,7 @@ public class PostDaoImpl implements PostDao{
         int affectedRow = 0;
         try {
             conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("insert into table post(postId, title, content, userId, boardId, replyTo, belongTo) values(?,?,?,?,?,?,?)");
+            st = conn.prepareStatement("insert into table post(postId, title, content, userId, boardId, replyTo, belongTo, stick) values(?,?,?,?,?,?,?,?)");
             st.setInt(1, post.getPostId());
             st.setString(2, post.getTitle());
             st.setString(3, post.getContent());
@@ -30,6 +30,7 @@ public class PostDaoImpl implements PostDao{
             st.setInt(5, post.getBoardId());
             st.setInt(6, post.getReplyTo());
             st.setInt(7, post.getBelongTo());
+            st.setInt(8, post.getStick());
             affectedRow = st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -41,15 +42,22 @@ public class PostDaoImpl implements PostDao{
 
     @Override
     public int deletePost(int postId) {
-        //TODO delete   1. belongto=postid  2.postid=postid
+
         Post post = null;
         List<Post> list = new ArrayList<>();
         int affectedRow = 0;
         try {
             conn = JdbcUtil.getConnection();
             conn.setAutoCommit(false);
-            st = conn.prepareStatement("select * from post where tid = ?");
+            rs = st.executeQuery();
+            st = conn.prepareStatement("delete from post where belongTo=?");
             st.setInt(1, postId);
+            affectedRow += st.executeUpdate();
+            st = conn.prepareStatement("delete from post where postId=?");
+            st.setInt(1, postId);
+            affectedRow += st.executeUpdate();
+            conn.commit();
+
         } catch (SQLException e){
             e.printStackTrace();
             try {
@@ -57,7 +65,6 @@ public class PostDaoImpl implements PostDao{
             } catch (SQLException e1){
                 e1.printStackTrace();
             }
-
         } finally {
             JdbcUtil.closeAll(rs, st, conn);
         }
@@ -70,13 +77,13 @@ public class PostDaoImpl implements PostDao{
         Post post;
         try{
             conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("SELECT *\n" +
-                    "FROM post\n" +
-                    "WHERE boardId=? AND userId NOT IN(\n" +
-                    "\tSELECT blackUserId\n" +
-                    "\tFROM blacklist\n" +
-                    "\tWHERE userId=?\n" +
-                    ")");
+            st = conn.prepareStatement("SELECT * " +
+                    "FROM post " +
+                    "WHERE boardId=? AND belongTo is NULL AND userId NOT IN( " +
+                    "SELECT blackUserId " +
+                    "FROM blacklist " +
+                    "WHERE userId=?) " +
+                    "ORDER BY stick DESC");
             st.setInt(1, boardId);
             st.setInt(2,ownerId);
             rs = st.executeQuery();
@@ -89,6 +96,7 @@ public class PostDaoImpl implements PostDao{
                 post.setBoardId(rs.getInt("boardId"));
                 post.setReplyTo(rs.getInt("replyTo"));
                 post.setBelongTo(rs.getInt("belongTo"));
+
                 list.add(post);
             }
         } catch (SQLException e){
@@ -105,13 +113,12 @@ public class PostDaoImpl implements PostDao{
         Post post;
         try{
             conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("SELECT *\n" +
-                    "FROM post\n" +
-                    "WHERE belongTo=? AND userId NOT IN(\n" +
-                    "\tSELECT blackUserId\n" +
-                    "\tFROM blacklist\n" +
-                    "\tWHERE userId=?\n" +
-                    ")");
+            st = conn.prepareStatement("SELECT * " +
+                    "FROM post " +
+                    "WHERE belongTo=? AND userId NOT IN( " +
+                    "SELECT blackUserId " +
+                    "FROM blacklist " +
+                    "WHERE userId=?)");
             st.setInt(1, postId);
             st.setInt(2,ownerId);
             rs = st.executeQuery();
@@ -133,6 +140,33 @@ public class PostDaoImpl implements PostDao{
         }
         return list;
     }
+
+    @Override
+    public boolean ChangeField(int postId, String field, String newValue) {
+        try{
+            conn = JdbcUtil.getConnection();
+            st = conn.prepareStatement("select * from post where postId = ?");
+            st.setInt(1, postId);
+            rs = st.executeQuery();
+            switch (field) {
+                case "title":
+                    break;
+                case "content":
+                    break;
+                case "boardId":
+                    break;
+                case "stick":
+                    break;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        } finally {
+
+        }
+        return false;
+    }
+
+
 
 //    @Override
 //    public boolean isExistPost(int postId) {

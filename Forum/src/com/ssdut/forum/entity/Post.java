@@ -11,6 +11,15 @@ public class Post {
     private int replyTo;  //假设这是一个回给A的帖，replyTo表示A的贴号
     private int replyToUser; //表示发A贴的人的Id
     private int belongTo; //所属的主贴Id
+    private int stick;  //置顶状态
+
+    public int getStick() {
+        return stick;
+    }
+
+    public void setStick(int stick) {
+        this.stick = stick;
+    }
 
     public int getReplyTo() {
         return replyTo;

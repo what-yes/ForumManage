@@ -33,4 +33,7 @@ public interface PostService {
      * @return List<Post>
      */
     List<Post> getAllReplyByPostId(int postId,int ownerId);
+
+
+    boolean StickPost(Post post);
 }

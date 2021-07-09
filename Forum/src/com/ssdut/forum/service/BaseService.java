@@ -35,11 +35,11 @@ public interface BaseService {
     boolean register(User user);
 
     /**
-     * @desription 发帖
+     * @desription 发帖/回帖
      * @param post
      * @return
      */
-    boolean post(Post post);
+    boolean addPost(Post post);
 
     /**
      * @description 删帖
@@ -47,13 +47,6 @@ public interface BaseService {
      * @return
      */
     boolean deletePost(int postId);
-
-    /**
-     * 回帖
-     * @param post
-     * @return
-     */
-    boolean replyPost(Post post);
 
     /**
      * 添加用户到黑名单
@@ -78,6 +71,4 @@ public interface BaseService {
      * @return
      */
     public List<User> getBlackList(int userId);
-
-
 }

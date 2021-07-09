@@ -22,11 +22,13 @@ public class BaseServiceImpl implements BaseService {
 
     @Override
     public boolean register(User user) {
+        // TODO 注册重名问题   udi.queryByName(user.getUserName())
+
         return udi.saveUser(user) > 0;
     }
 
     @Override
-    public boolean post(Post post) {
+    public boolean addPost(Post post) {
         return pd.savePost(post) > 0;
     }
 
@@ -36,8 +38,18 @@ public class BaseServiceImpl implements BaseService {
     }
 
     @Override
-    public boolean replyPost(Post post) {
-        return pd.savePost(post) > 0;
+    public boolean AddIntoBlackList(int userId, int blackUserId) {
+        return false;
+    }
+
+    @Override
+    public boolean MoveOutBlackList(int userId, int blackUserId) {
+        return false;
+    }
+
+    @Override
+    public List<User> getBlackList(int userId) {
+        return null;
     }
 
     @Override
