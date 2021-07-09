@@ -229,6 +229,35 @@ public class UserDaoImpl implements UserDao {
         return (affectedRow == 1);
     }
 
+    @Override
+    public List<User> listBlackList(int userId) {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        User user = null;
+        List<User> list = new ArrayList<>();
+        try {
+            conn = JdbcUtil.getConnection();
+            st = conn.prepareStatement(
+                    "select us.userId, us.userName, from blacklist bl join user us where bl.blackUserId = us.userId");
+            rs = st.executeQuery();
+            ResultSetPrintUtil.printResultSet(rs);
+            //我在想上面这句话会不会改变rs的指向而导致下面的语句出错
+            while(rs.next()){
+                user = new User();
+                user.setUserId(rs.getInt("userId"));
+                user.setUserName(rs.getString("userName"));
+
+                list.add(user);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            JdbcUtil.closeAll(rs,st,conn);
+        }
+        return list;
+    }
+
     public User getUserById(int userId){
         Connection conn = null;
         PreparedStatement st = null;

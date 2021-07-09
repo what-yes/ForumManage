@@ -5,6 +5,9 @@ import com.ssdut.forum.dao.impl.BoardDaoImpl;
 import com.ssdut.forum.dao.impl.UserDaoImpl;
 import com.ssdut.forum.entity.Post;
 import com.ssdut.forum.entity.User;
+
+import java.util.List;
+
 /**
  * ClassName: PostService
  * Description: 用户基础操作
@@ -51,5 +54,30 @@ public interface BaseService {
      * @return
      */
     boolean replyPost(Post post);
+
+    /**
+     * 添加用户到黑名单
+     * @param userId
+     * @param blackUserId
+     * @return
+     */
+    public boolean AddIntoBlackList(int userId,int blackUserId);
+
+    /**
+     * 将用户移除黑名单
+     * @param userId
+     * @param userId
+     * @param blackUserId
+     * @return
+     */
+    public boolean MoveOutBlackList(int userId,int blackUserId);
+
+    /**
+     * 获得黑名单
+     * @param userId
+     * @return
+     */
+    public List<User> getBlackList(int userId);
+
 
 }
