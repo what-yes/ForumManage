@@ -64,4 +64,11 @@ public interface UserDao {
      */
     boolean removeBlackList(int userId, int blackUserId);
 
+    /**
+     * 列出某个用户的黑名单列表
+     * @param userId
+     * @return
+     */
+    List<User> listBlackList(int userId);
+
 }
