@@ -22,6 +22,8 @@ public class BaseServiceImpl implements BaseService {
 
     @Override
     public boolean register(User user) {
+        // TODO 注册重名问题   udi.queryByName(user.getUserName())
+
         return udi.saveUser(user) > 0;
     }
 
