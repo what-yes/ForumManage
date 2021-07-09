@@ -42,8 +42,11 @@ public class Main {
                     while(!bLogin){
                         User u=null;
                         if((u=login(user))!=null){
+                            // 登录成功
                             user=u;
                             bLogin=true;
+                            // 进入主界面
+                            
                         }else{
                             System.out.println("账户或密码错误！请重新输入：");
                         }
@@ -51,7 +54,15 @@ public class Main {
                     break;
                 case 2:
                     //注册
-
+                    boolean bRegister=false;//注册是否成功
+                    while(!bRegister){
+                        if(register(user)){
+                            bRegister=true;
+                            System.out.println("注册成功！");
+                        }else{
+                            System.out.println("注册失败！请重新注册：");
+                        }
+                    }
                     break;
                 case 3:
                     //退出系统
@@ -77,5 +88,17 @@ public class Main {
         user.setPassWord(input.next());
 
         return user.login(user.getUserName(), user.getPassWord());
+    }
+
+    private static boolean register(User user){
+        Scanner input=new Scanner(System.in);
+
+        System.out.println("-----------注册用户-----------");
+        System.out.println("用户名：");
+        user.setUserName(input.next());
+        System.out.println("密码：");
+        user.setPassWord(input.next());
+
+        return user.register(user);
     }
 }
