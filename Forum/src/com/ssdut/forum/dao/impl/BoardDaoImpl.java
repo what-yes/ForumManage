@@ -11,11 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BoardDaoImpl implements BoardDao {
+    Connection conn = null;
+    PreparedStatement st = null;
+    ResultSet rs = null;
     @Override
     public int saveBoard(String boardName) {
-        Connection conn = null;
-        PreparedStatement st = null;
-        ResultSet rs = null;
+
         int affectedRow = 0;
         try{
             conn = JdbcUtil.getConnection();
@@ -33,9 +34,6 @@ public class BoardDaoImpl implements BoardDao {
 
     @Override
     public int saveBoard(Board board) {
-        Connection conn = null;
-        PreparedStatement st = null;
-        ResultSet rs = null;
         int affectedRow = 0;
         try{
             conn = JdbcUtil.getConnection();
@@ -63,9 +61,6 @@ public class BoardDaoImpl implements BoardDao {
 
     @Override
     public int deleteBoard(int boardId) {
-        Connection conn = null;
-        PreparedStatement st = null;
-        ResultSet rs = null;
         int affectedRow = 0;
         try{
             conn = JdbcUtil.getConnection();
@@ -83,9 +78,6 @@ public class BoardDaoImpl implements BoardDao {
 
     @Override
     public List<Board> ListBoard() {
-        Connection conn = null;
-        PreparedStatement st = null;
-        ResultSet rs = null;
         List<Board> list = new ArrayList<>();
         Board board = null;
 
@@ -105,5 +97,39 @@ public class BoardDaoImpl implements BoardDao {
             JdbcUtil.closeAll(rs, st, conn);
         }
         return list;
+    }
+
+    @Override
+    public boolean setBoardMgr(int userId, int boardId) {
+        boolean isChanged = false;
+        try{
+            conn = JdbcUtil.getConnection();
+            st = conn.prepareStatement("update Board set boardMgrId = ? where boardId = ?");
+            st.setInt(1, userId);
+            st.setInt(2, boardId);
+
+            isChanged = st.executeUpdate()>0;
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            JdbcUtil.closeAll(rs, st, conn);
+        }
+        return isChanged;
+    }
+
+    @Override
+    public boolean deleteBoardMgr(int boardId) {
+        boolean isChanged = false;
+        try{
+            conn = JdbcUtil.getConnection();
+            st = conn.prepareStatement("update Board set boardMgrId = null where boardId = ?");
+            st.setInt(1, boardId);
+            isChanged = st.executeUpdate()>0;
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            JdbcUtil.closeAll(rs, st, conn);
+        }
+        return isChanged;
     }
 }

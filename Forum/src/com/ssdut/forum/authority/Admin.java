@@ -9,17 +9,18 @@ import com.ssdut.forum.entity.User;
 public interface Admin {
     /**
      * 添加管理员权限
-     * @param user
+     * @param userId
+     * @param boardId
      * @return
      */
-    public boolean addBoardMgr(User user);
+    public boolean setBoardMgr(int userId, int boardId);
 
     /**
      * 取消管理员权限
-     * @param user
+     * @param boardId
      * @return
      */
-    public boolean deleteBoardMgr(User user);
+    public boolean deleteBoardMgr(int boardId);
 
     /**
      * 添加版块
@@ -30,8 +31,8 @@ public interface Admin {
 
     /**
      * 删除板块
-     * @param board
+     * @param boardId
      * @return
      */
-    public boolean deleteBoard(Board board);
+    public boolean deleteBoard(int boardId);
 }

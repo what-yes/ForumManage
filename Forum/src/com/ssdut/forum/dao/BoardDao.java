@@ -29,4 +29,19 @@ public interface BoardDao {
      * @return
      */
     List<Board> ListBoard();
+
+    /**
+     * 设置板块管理员
+     * @param userId
+     * @param boardId
+     * @return
+     */
+    boolean setBoardMgr(int userId, int boardId);
+
+    /**
+     * 取消板块管理员
+     * @param boardId
+     * @return
+     */
+    boolean deleteBoardMgr(int boardId);
 }

@@ -34,4 +34,18 @@ public interface UserService {
      * @return
      */
     boolean setUserState(int userId,int state);
+
+    /**
+     * 设置版主
+     * @param userId
+     * @return
+     */
+    boolean setBoardMgr(int userId, int boardId);
+
+    /**
+     * 取消版主
+     * @param boardId
+     * @return
+     */
+    boolean deleteBoardMgr(int boardId);
 }

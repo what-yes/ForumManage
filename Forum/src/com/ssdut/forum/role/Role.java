@@ -244,10 +244,11 @@ public class Role {
 
     /**
      * 添加管理员权限
-     * @param user
+     * @param userId
+     * @param boardId
      * @return
      */
-    public boolean addBoardMgr(User user){
+    public boolean setBoardMgr(int userId, int boardId){
         boolean flag=false;
 
         if(normal==null){
@@ -255,17 +256,17 @@ public class Role {
         }else if(admin==null){
             System.out.println("抱歉，您不具备该权限");
         }
-        flag=admin.addBoardMgr(user);
+        flag=admin.setBoardMgr(userId, boardId);
 
         return flag;
     }
 
     /**
      * 取消管理员权限
-     * @param user
+     * @param boardId
      * @return
      */
-    public boolean deleteBoardMgr(User user){
+    public boolean deleteBoardMgr(int boardId){
         boolean flag=false;
 
         if(normal==null){
@@ -273,8 +274,7 @@ public class Role {
         }else if(admin==null){
             System.out.println("抱歉，您不具备该权限");
         }
-        flag=admin.deleteBoardMgr(user);
-
+        flag=admin.deleteBoardMgr(boardId);
         return flag;
     }
 
@@ -298,10 +298,10 @@ public class Role {
 
     /**
      * 删除板块
-     * @param board
+     * @param boardId
      * @return
      */
-    public boolean deleteBoard(Board board){
+    public boolean deleteBoard(int boardId){
         boolean flag=false;
 
         if(normal==null){
@@ -309,7 +309,7 @@ public class Role {
         }else if(admin==null){
             System.out.println("抱歉，您不具备该权限");
         }
-        flag=admin.deleteBoard(board);
+        flag=admin.deleteBoard(boardId);
 
         return flag;
     }
