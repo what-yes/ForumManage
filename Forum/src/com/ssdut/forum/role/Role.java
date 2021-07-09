@@ -172,10 +172,10 @@ public class Role {
 
     /**
      * 置顶帖子
-     * @param post
+     * @param postId
      * @return
      */
-    public boolean StickPost(Post post){
+    public boolean StickPost(int postId){
         boolean flag=false;
 
         if(normal==null){
@@ -183,7 +183,7 @@ public class Role {
         }else if(admin==null&&boardMgr==null){
             System.out.println("抱歉，您不具备该权限");
         }else{
-            flag=boardMgr.StickPost(post);
+            flag=boardMgr.StickPost(postId);
         }
 
         return flag;
@@ -191,10 +191,10 @@ public class Role {
 
     /**
      * 取消置顶
-     * @param post
+     * @param postId
      * @return
      */
-    public boolean CancelStick(Post post){
+    public boolean CancelStick(int postId){
         boolean flag=false;
 
         if(normal==null){
@@ -202,18 +202,17 @@ public class Role {
         }else if(admin==null&&boardMgr==null){
             System.out.println("抱歉，您不具备该权限");
         }else{
-            flag=boardMgr.CancelStick(post);
+            flag=boardMgr.CancelStick(postId);
         }
-
         return flag;
     }
 
     /**
      * 禁用用户
-     * @param user
+     * @param userId
      * @return
      */
-    public boolean DisableUser(User user){
+    public boolean DisableUser(int userId){
         boolean flag=false;
 
         if(normal==null){
@@ -221,9 +220,25 @@ public class Role {
         }else if(admin==null&&boardMgr==null){
             System.out.println("抱歉，您不具备该权限");
         }else{
-            flag=boardMgr.DisableUser(user);
+            flag=boardMgr.DisableUser(userId);
         }
+        return flag;
+    }
 
+    /**
+     * 取消禁用
+     * @param userId
+     * @return
+     */
+    public boolean CancelDisable(int userId){
+        boolean flag=false;
+        if(normal==null){
+            System.out.println("您还没有登录，请登陆后再操作");
+        }else if(admin==null&&boardMgr==null){
+            System.out.println("抱歉，您不具备该权限");
+        }else{
+            flag=boardMgr.CancelDisable(userId);
+        }
         return flag;
     }
 

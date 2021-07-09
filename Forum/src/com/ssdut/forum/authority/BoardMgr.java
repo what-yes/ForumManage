@@ -9,17 +9,17 @@ import com.ssdut.forum.entity.User;
 public interface BoardMgr {
     /**
      * 置顶帖子
-     * @param post
+     * @param postId
      * @return
      */
-    public boolean StickPost(Post post);
+    public boolean StickPost(int postId);
 
     /**
      * 取消置顶
-     * @param post
+     * @param postId
      * @return
      */
-    public boolean CancelStick(Post post);
+    public boolean CancelStick(int postId);
 
     /**
      * 删除帖子  可删除所有帖子
@@ -30,9 +30,16 @@ public interface BoardMgr {
 
     /**
      * 禁用用户
-     * @param user
+     * @param userId
      * @return
      */
-    public boolean DisableUser(User user);
+    public boolean DisableUser(int userId);
+
+    /**
+     * 取消禁用
+     * @param userId
+     * @return
+     */
+    public boolean CancelDisable(int userId);
 
 }
