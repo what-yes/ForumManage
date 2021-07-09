@@ -86,7 +86,7 @@ public class PostDaoImpl implements PostDao{
                     "ORDER BY stick DESC");
             st.setInt(1, boardId);
             st.setInt(2,ownerId);
-            rs = st.executeQuery();
+            st.executeQuery();
             while(rs.next()) {
                 post = new Post();
                 post.setPostId(rs.getInt("postId"));
@@ -142,28 +142,24 @@ public class PostDaoImpl implements PostDao{
     }
 
     @Override
-    public boolean ChangeField(int postId, String field, String newValue) {
+    public boolean ChangeField(int postId, String field, Object newValue) {
+        boolean isChanged = false;
         try{
             conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("select * from post where postId = ?");
-            st.setInt(1, postId);
-            rs = st.executeQuery();
-            switch (field) {
-                case "title":
-                    break;
-                case "content":
-                    break;
-                case "boardId":
-                    break;
-                case "stick":
-                    break;
-            }
+            st = conn.prepareStatement("update post " +
+                    "set ?=? " +
+                    "where postId = ?");
+            st.setObject(1, field);
+            st.setObject(2, newValue);
+            st.setInt(3, postId);
+            isChanged = st.executeUpdate()>0;
+
         }catch (SQLException e){
             e.printStackTrace();
         } finally {
-
+            JdbcUtil.closeAll(rs, st, conn);
         }
-        return false;
+        return isChanged;
     }
 
 

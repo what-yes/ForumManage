@@ -26,8 +26,13 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public boolean StickPost(Post post) {
-        //return pd.ChangeField(post);
-        return false;
+    public boolean StickPost(int postId) {
+        return pd.ChangeField(postId, "stick", 1);
     }
+
+    @Override
+    public boolean CancelStick(int postId) {
+        return pd.ChangeField(postId, "stick", 0);
+    }
+
 }

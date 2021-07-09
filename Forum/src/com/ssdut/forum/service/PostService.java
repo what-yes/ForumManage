@@ -34,6 +34,17 @@ public interface PostService {
      */
     List<Post> getAllReplyByPostId(int postId,int ownerId);
 
+    /**
+     * 根据帖Id置顶帖子
+     * @param postId
+     * @return
+     */
+    boolean StickPost(int postId);
 
-    boolean StickPost(Post post);
+    /**
+     * 根据帖Id取消置顶
+     * @param postId
+     * @return
+     */
+    boolean CancelStick(int postId);
 }

@@ -33,7 +33,14 @@ public interface PostDao {
      */
     List<Post>  queryReplyByPostID(int postId,int ownerId);
 
-    boolean ChangeField(int postId, String field, String newValue);
+    /**
+     * 更改各种字段内容，用于修改内容或置顶等
+     * @param postId
+     * @param field
+     * @param newValue
+     * @return
+     */
+    boolean ChangeField(int postId, String field, Object newValue);
 //    /**
 //     * 根据回帖查看主帖是否存在
 //     * @param postId
