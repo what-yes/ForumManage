@@ -22,15 +22,14 @@ public class PostDaoImpl implements PostDao{
         int affectedRow = 0;
         try {
             conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("insert into table post(postId, title, content, userId, boardId, replyTo, belongTo, stick) values(?,?,?,?,?,?,?,?)");
-            st.setInt(1, post.getPostId());
-            st.setString(2, post.getTitle());
-            st.setString(3, post.getContent());
-            st.setInt(4, post.getUserId());
-            st.setInt(5, post.getBoardId());
-            st.setInt(6, post.getReplyTo());
-            st.setInt(7, post.getBelongTo());
-            st.setInt(8, post.getStick());
+            st = conn.prepareStatement("insert into table post(title, content, userId, boardId, replyTo, belongTo) values(?,?,?,?,?,?)");
+
+            st.setString(1, post.getTitle());
+            st.setString(2, post.getContent());
+            st.setInt(3, post.getUserId());
+            st.setInt(4, post.getBoardId());
+            st.setInt(5, post.getReplyTo());
+            st.setInt(6, post.getBelongTo());
             affectedRow = st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -96,7 +95,7 @@ public class PostDaoImpl implements PostDao{
                 post.setBoardId(rs.getInt("boardId"));
                 post.setReplyTo(rs.getInt("replyTo"));
                 post.setBelongTo(rs.getInt("belongTo"));
-
+                post.setStick(rs.getInt("stick"));
                 list.add(post);
             }
         } catch (SQLException e){
@@ -131,6 +130,7 @@ public class PostDaoImpl implements PostDao{
                 post.setBoardId(rs.getInt("boardId"));
                 post.setReplyTo(rs.getInt("replyTo"));
                 post.setBelongTo(rs.getInt("belongTo"));
+                post.setStick(rs.getInt("stick"));
                 list.add(post);
             }
         } catch (SQLException e){
@@ -161,25 +161,4 @@ public class PostDaoImpl implements PostDao{
         }
         return isChanged;
     }
-
-
-
-//    @Override
-//    public boolean isExistPost(int postId) {
-//        boolean flag=false;
-//        try {
-//            conn = JdbcUtil.getConnection();
-//            st = conn.prepareStatement("select * from post where tid=?");
-//            st.setInt(1, postId);
-//            rs=st.executeQuery();
-//            while(rs.next()) {
-//                flag=true;
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            JdbcUtil.closeAll(rs, st, conn);
-//        }
-//        return flag;
-//    }
 }

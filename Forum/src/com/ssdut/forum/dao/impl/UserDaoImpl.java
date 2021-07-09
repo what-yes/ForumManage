@@ -51,7 +51,7 @@ public class UserDaoImpl implements UserDao {
         int affectedrow = 0;
         try {
             conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("insert into user values(?,?,0，1)");
+            st = conn.prepareStatement("insert into user values(null,?,?,0,1)");
             st.setString(1,user.getUserName());
             st.setString(2,user.getPassWord());
             affectedrow = st.executeUpdate();
