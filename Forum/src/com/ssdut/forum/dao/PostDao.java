@@ -32,6 +32,8 @@ public interface PostDao {
      * @return
      */
     List<Post>  queryReplyByPostID(int postId,int ownerId);
+
+    boolean ChangeField(int postId, String field, String newValue);
 //    /**
 //     * 根据回帖查看主帖是否存在
 //     * @param postId

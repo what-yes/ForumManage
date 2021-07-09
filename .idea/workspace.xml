@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="122c5597-6eaf-43e1-9944-58dd4bb97da0" name="Default Changelist" comment="">
+    <list default="true" id="122c5597-6eaf-43e1-9944-58dd4bb97da0" name="Default Changelist" comment="完善Delete">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/authority/impl/DefaultBoardMgr.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/authority/impl/DefaultBoardMgr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/authority/impl/DefaultUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/authority/impl/DefaultUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/PostDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/PostDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/impl/PostDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/impl/PostDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/role/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/role/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/entity/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/entity/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/service/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/service/impl/PostServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/service/impl/PostServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +53,14 @@
       <option name="presentableId" value="Default" />
       <updated>1625752493393</updated>
     </task>
+    <task id="LOCAL-00001" summary="完善Delete">
+      <created>1625793079116</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1625793079116</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -61,5 +74,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="完善Delete" />
+    <option name="LAST_COMMIT_MESSAGE" value="完善Delete" />
   </component>
 </project>

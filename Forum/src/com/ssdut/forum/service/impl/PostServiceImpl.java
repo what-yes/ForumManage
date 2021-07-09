@@ -24,4 +24,10 @@ public class PostServiceImpl implements PostService {
     public List<Post> getAllReplyByPostId(int postId,int ownerId) {
         return pd.queryReplyByPostID(postId,ownerId);
     }
+
+    @Override
+    public boolean StickPost(Post post) {
+        //return pd.ChangeField(post);
+        return false;
+    }
 }

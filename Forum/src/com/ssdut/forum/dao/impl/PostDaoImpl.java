@@ -22,7 +22,7 @@ public class PostDaoImpl implements PostDao{
         int affectedRow = 0;
         try {
             conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("insert into table post(postId, title, content, userId, boardId, replyTo, belongTo) values(?,?,?,?,?,?,?)");
+            st = conn.prepareStatement("insert into table post(postId, title, content, userId, boardId, replyTo, belongTo, stick) values(?,?,?,?,?,?,?,?)");
             st.setInt(1, post.getPostId());
             st.setString(2, post.getTitle());
             st.setString(3, post.getContent());
@@ -30,6 +30,7 @@ public class PostDaoImpl implements PostDao{
             st.setInt(5, post.getBoardId());
             st.setInt(6, post.getReplyTo());
             st.setInt(7, post.getBelongTo());
+            st.setInt(8, post.getStick());
             affectedRow = st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -95,6 +96,7 @@ public class PostDaoImpl implements PostDao{
                 post.setBoardId(rs.getInt("boardId"));
                 post.setReplyTo(rs.getInt("replyTo"));
                 post.setBelongTo(rs.getInt("belongTo"));
+
                 list.add(post);
             }
         } catch (SQLException e){
@@ -139,6 +141,33 @@ public class PostDaoImpl implements PostDao{
         }
         return list;
     }
+
+    @Override
+    public boolean ChangeField(int postId, String field, String newValue) {
+        try{
+            conn = JdbcUtil.getConnection();
+            st = conn.prepareStatement("select * from post where postId = ?");
+            st.setInt(1, postId);
+            rs = st.executeQuery();
+            switch (field) {
+                case "title":
+                    break;
+                case "content":
+                    break;
+                case "boardId":
+                    break;
+                case "stick":
+                    break;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        } finally {
+
+        }
+        return false;
+    }
+
+
 
 //    @Override
 //    public boolean isExistPost(int postId) {
