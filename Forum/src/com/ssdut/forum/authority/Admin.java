@@ -1,7 +1,8 @@
 package com.ssdut.forum.authority;
 
 import com.ssdut.forum.entity.Board;
-import com.ssdut.forum.user.User;
+import com.ssdut.forum.entity.User;
+
 /**
  * 总管理员权限
  */

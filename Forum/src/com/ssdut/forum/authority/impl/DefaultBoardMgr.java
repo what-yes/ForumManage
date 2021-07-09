@@ -13,7 +13,7 @@ public class DefaultBoardMgr implements BoardMgr {
 
     @Override
     public boolean StickPost(Post post) {
-        return postService.;
+        return false;
     }
 
     @Override

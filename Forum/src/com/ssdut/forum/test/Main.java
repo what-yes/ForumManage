@@ -1,6 +1,7 @@
 package com.ssdut.forum.test;
 
-import com.ssdut.forum.user.User;
+
+import com.ssdut.forum.entity.User;
 
 import java.util.Scanner;
 
