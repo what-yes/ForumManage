@@ -247,7 +247,7 @@ public class Role {
      * @param user
      * @return
      */
-    public boolean addBoardMgr(com.ssdut.forum.user.User user){
+    public boolean addBoardMgr(User user){
         boolean flag=false;
 
         if(normal==null){
@@ -265,7 +265,7 @@ public class Role {
      * @param user
      * @return
      */
-    public boolean deleteBoardMgr(com.ssdut.forum.user.User user){
+    public boolean deleteBoardMgr(User user){
         boolean flag=false;
 
         if(normal==null){

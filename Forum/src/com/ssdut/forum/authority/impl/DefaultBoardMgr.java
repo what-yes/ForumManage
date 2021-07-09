@@ -12,6 +12,7 @@ public class DefaultBoardMgr implements BoardMgr {
     PostService postService = new PostServiceImpl();
     UserService userService = new UserServiceImpl();
     @Override
+
     public boolean StickPost(int postId) {
         return postService.StickPost(postId);
     }

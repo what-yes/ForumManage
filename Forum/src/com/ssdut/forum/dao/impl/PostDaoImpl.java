@@ -77,13 +77,13 @@ public class PostDaoImpl implements PostDao{
         Post post;
         try{
             conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("SELECT *\n" +
-                    "FROM post\n" +
-                    "WHERE boardId=? AND userId NOT IN(\n" +
-                    "\tSELECT blackUserId\n" +
-                    "\tFROM blacklist\n" +
-                    "\tWHERE userId=?\n" +
-                    ")");
+            st = conn.prepareStatement("SELECT * " +
+                    "FROM post " +
+                    "WHERE boardId=? AND belongTo is NULL AND userId NOT IN( " +
+                    "SELECT blackUserId " +
+                    "FROM blacklist " +
+                    "WHERE userId=?) " +
+                    "ORDER BY stick DESC");
             st.setInt(1, boardId);
             st.setInt(2,ownerId);
             st.executeQuery();
@@ -113,13 +113,12 @@ public class PostDaoImpl implements PostDao{
         Post post;
         try{
             conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("SELECT *\n" +
-                    "FROM post\n" +
-                    "WHERE belongTo=? AND userId NOT IN(\n" +
-                    "\tSELECT blackUserId\n" +
-                    "\tFROM blacklist\n" +
-                    "\tWHERE userId=?\n" +
-                    ")");
+            st = conn.prepareStatement("SELECT * " +
+                    "FROM post " +
+                    "WHERE belongTo=? AND userId NOT IN( " +
+                    "SELECT blackUserId " +
+                    "FROM blacklist " +
+                    "WHERE userId=?)");
             st.setInt(1, postId);
             st.setInt(2,ownerId);
             rs = st.executeQuery();

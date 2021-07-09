@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="f55d72a5-5d99-4c5b-9bb7-2fed31ba7344" name="Default Changelist" comment="" />
+=======
+    <list default="true" id="122c5597-6eaf-43e1-9944-58dd4bb97da0" name="Default Changelist" comment="完善Delete">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/authority/impl/DefaultBoardMgr.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/authority/impl/DefaultBoardMgr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/authority/impl/DefaultUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/authority/impl/DefaultUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/PostDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/PostDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/impl/PostDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/impl/PostDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/entity/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/entity/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/service/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/service/impl/PostServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/service/impl/PostServiceImpl.java" afterDir="false" />
+    </list>
+>>>>>>> 3cad803d028351d91ffb0f4993f11662bbfb2446
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+<<<<<<< HEAD
+  <component name="ProjectId" id="1uxnuiRCVc59MCJxlXEiHlFGYLu" />
+=======
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1v2FtJiM5ArbBehMNTTqrfzoFUu" />
+>>>>>>> 3cad803d028351d91ffb0f4993f11662bbfb2446
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+<<<<<<< HEAD
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+=======
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../课程备份/大二下/JAVA程序设计/BookManage" />
+>>>>>>> 3cad803d028351d91ffb0f4993f11662bbfb2446
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+<<<<<<< HEAD
+      <changelist id="f55d72a5-5d99-4c5b-9bb7-2fed31ba7344" name="Default Changelist" comment="" />
+      <created>1625616331500</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1625616331500</updated>
+    </task>
+=======
+      <changelist id="122c5597-6eaf-43e1-9944-58dd4bb97da0" name="Default Changelist" comment="" />
+      <created>1625752493393</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1625752493393</updated>
+    </task>
+    <task id="LOCAL-00001" summary="完善Delete">
+      <created>1625793079116</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1625793079116</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+>>>>>>> 3cad803d028351d91ffb0f4993f11662bbfb2446
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+<<<<<<< HEAD
+  <component name="WindowStateProjectService">
+    <state x="0" y="89" key="#com.intellij.ide.util.MemberChooser" timestamp="1625705239850">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="0" y="89" key="#com.intellij.ide.util.MemberChooser/0.0.1280.720@0.0.1280.720" timestamp="1625705239850" />
+    <state x="421" y="101" key="FileChooserDialogImpl" timestamp="1625659431291">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="421" y="101" key="FileChooserDialogImpl/0.0.1280.720@0.0.1280.720" timestamp="1625659431291" />
+    <state x="99" y="0" key="SettingsEditor" timestamp="1625659441852">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="99" y="0" key="SettingsEditor/0.0.1280.720@0.0.1280.720" timestamp="1625659441852" />
+    <state x="28" y="0" key="new project wizard" timestamp="1625616493082">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="28" y="0" key="new project wizard/0.0.1280.720@0.0.1280.720" timestamp="1625616493082" />
+    <state x="570" y="41" width="672" height="678" key="search.everywhere.popup" timestamp="1625659614540">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="570" y="41" width="672" height="678" key="search.everywhere.popup/0.0.1280.720@0.0.1280.720" timestamp="1625659614540" />
+=======
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="完善Delete" />
+    <option name="LAST_COMMIT_MESSAGE" value="完善Delete" />
+>>>>>>> 3cad803d028351d91ffb0f4993f11662bbfb2446
+  </component>
+</project>

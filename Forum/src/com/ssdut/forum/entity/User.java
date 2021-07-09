@@ -1,5 +1,7 @@
 package com.ssdut.forum.entity;
 
+import com.ssdut.forum.role.Role;
+
 import java.util.LinkedList;
 
 public class User {
@@ -64,5 +66,13 @@ public class User {
         this.blacklist = blacklist;
     }
 
+    private Role role = null;
 
+
+    //TODO login
+//    public boolean login(String username, String password){
+//
+//    }
+
+    //TODO register
 }
