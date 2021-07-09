@@ -41,15 +41,22 @@ public class PostDaoImpl implements PostDao{
 
     @Override
     public int deletePost(int postId) {
-        //TODO delete   1. belongto=postid  2.postid=postid
+
         Post post = null;
         List<Post> list = new ArrayList<>();
         int affectedRow = 0;
         try {
             conn = JdbcUtil.getConnection();
             conn.setAutoCommit(false);
-            st = conn.prepareStatement("select * from post where tid = ?");
+            rs = st.executeQuery();
+            st = conn.prepareStatement("delete from post where belongTo=?");
             st.setInt(1, postId);
+            affectedRow += st.executeUpdate();
+            st = conn.prepareStatement("delete from post where postId=?");
+            st.setInt(1, postId);
+            affectedRow += st.executeUpdate();
+            conn.commit();
+
         } catch (SQLException e){
             e.printStackTrace();
             try {
@@ -57,7 +64,6 @@ public class PostDaoImpl implements PostDao{
             } catch (SQLException e1){
                 e1.printStackTrace();
             }
-
         } finally {
             JdbcUtil.closeAll(rs, st, conn);
         }

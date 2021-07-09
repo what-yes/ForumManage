@@ -17,6 +17,7 @@ public class Role {
     private Admin admin = null;
 
 
+
     public String getDescription() {
         return description;
     }
