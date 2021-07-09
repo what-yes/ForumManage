@@ -26,6 +26,26 @@ public class User {
      * 黑名单列表
      */
     private LinkedList<String> blacklist;
+    /**
+     * 权限
+     */
+    private int authority;
+
+    public int getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(int authority) {
+        this.authority = authority;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public int getUserId() {
         return userId;
@@ -69,13 +89,14 @@ public class User {
 
     private Role role = null;
 
+    public String getRoleDescription() {
+        return role.getDescription();
+    }
 
-    //TODO login
     public User login(String username, String password){
         return new BaseServiceImpl().checkLogin(userName, password);
     }
 
-    //TODO register
     public boolean register(User user){
         return new BaseServiceImpl().register(user);
     }

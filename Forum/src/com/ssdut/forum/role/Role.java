@@ -16,7 +16,12 @@ public class Role {
     private BoardMgr boardMgr = null;
     private Admin admin = null;
 
-
+    public Role(String description,Normal normal,BoardMgr boardMgr,Admin admin){
+        this.description=description;
+        this.normal=normal;
+        this.boardMgr=boardMgr;
+        this.admin=admin;
+    }
 
     public String getDescription() {
         return description;

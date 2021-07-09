@@ -132,4 +132,26 @@ public class BoardDaoImpl implements BoardDao {
         }
         return isChanged;
     }
+
+    @Override
+    public boolean isBoardMgr(int userId, int boarId) {
+        boolean isBoardMgr=false;
+
+        try{
+            conn = JdbcUtil.getConnection();
+            st=conn.prepareStatement("SELECT * FROM board WHERE boardId=? AND boardMgrId=?");
+            st.setInt(1,boarId);
+            st.setInt(2,userId);
+            rs = st.executeQuery();
+            if(rs.next()){
+                isBoardMgr=true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            JdbcUtil.closeAll(rs,st,conn);
+        }
+
+        return isBoardMgr;
+    }
 }

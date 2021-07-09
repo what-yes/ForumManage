@@ -44,4 +44,12 @@ public interface BoardDao {
      * @return
      */
     boolean deleteBoardMgr(int boardId);
+
+    /**
+     * 判断userId是否是版块的管理员
+     * @param userId
+     * @param boarId
+     * @return
+     */
+    boolean isBoardMgr(int userId,int boarId);
 }
