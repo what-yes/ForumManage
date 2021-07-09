@@ -1,6 +1,7 @@
 package com.ssdut.forum.entity;
 
 import com.ssdut.forum.role.Role;
+import com.ssdut.forum.service.impl.BaseServiceImpl;
 
 import java.util.LinkedList;
 
@@ -71,11 +72,11 @@ public class User {
 
     //TODO login
     public User login(String username, String password){
-        return null;
+        return new BaseServiceImpl().checkLogin(userName, password);
     }
 
     //TODO register
     public boolean register(User user){
-        return false;
+        return new BaseServiceImpl().register(user);
     }
 }
