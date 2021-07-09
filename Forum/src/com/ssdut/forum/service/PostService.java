@@ -18,7 +18,7 @@ public interface PostService {
      * 显示版块下所有主帖
      * @return List<Post>
      */
-    List<Post> getAllPost(int boardId);
+    List<Post> getAllPost(int boardId,int ownerId);
 
     /**
      * 根据帖Id删除帖
@@ -32,5 +32,5 @@ public interface PostService {
      * @param postId
      * @return List<Post>
      */
-    List<Post> getAllReplyByPostId(int postId);
+    List<Post> getAllReplyByPostId(int postId,int ownerId);
 }

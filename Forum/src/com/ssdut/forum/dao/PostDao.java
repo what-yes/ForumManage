@@ -24,19 +24,20 @@ public interface PostDao {
      * @param boardId
      * @return
      */
-    List<Post> queryPostByBoardID(int boardId);
+    List<Post> queryPostByBoardID(int boardId,int ownerId);
 
     /**
      * 根据主帖号显示跟帖
      * @param postId
      * @return
      */
-    List<Post>  queryReplyByPostID(int postId);
-    /**
-     * 根据回帖查看主帖是否存在
-     * @param postId
-     * @return
-     */
-    boolean isExistPost(int postId);
+    List<Post>  queryReplyByPostID(int postId,int ownerId);
+//    /**
+//     * 根据回帖查看主帖是否存在
+//     * @param postId
+//     * @return
+//     */
+//    boolean isExistPost(int postId);
+
 
 }

@@ -11,8 +11,8 @@ public class PostServiceImpl implements PostService {
     PostDao pd= new PostDaoImpl();
 
     @Override
-    public List<Post> getAllPost(int boardId) {
-        return pd.queryReplyByPostID(boardId);
+    public List<Post> getAllPost(int boardId,int ownerId) {
+        return pd.queryReplyByPostID(boardId,ownerId);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> getAllReplyByPostId(int postId) {
-        return pd.queryReplyByPostID(postId);
+    public List<Post> getAllReplyByPostId(int postId,int ownerId) {
+        return pd.queryReplyByPostID(postId,ownerId);
     }
 }
