@@ -71,4 +71,5 @@ public interface UserDao {
      */
     List<User> listBlackList(int userId);
 
+    boolean queryByName(String userName);
 }

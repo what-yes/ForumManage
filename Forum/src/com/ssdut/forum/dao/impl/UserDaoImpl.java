@@ -51,7 +51,7 @@ public class UserDaoImpl implements UserDao {
         int affectedrow = 0;
         try {
             conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("insert into user values(?,?,0)");
+            st = conn.prepareStatement("insert into user values(?,?,0，1)");
             st.setString(1,user.getUserName());
             st.setString(2,user.getPassWord());
             affectedrow = st.executeUpdate();
@@ -241,8 +241,6 @@ public class UserDaoImpl implements UserDao {
             st = conn.prepareStatement(
                     "select us.userId, us.userName, from blacklist bl join user us where bl.blackUserId = us.userId");
             rs = st.executeQuery();
-            ResultSetPrintUtil.printResultSet(rs);
-            //我在想上面这句话会不会改变rs的指向而导致下面的语句出错
             while(rs.next()){
                 user = new User();
                 user.setUserId(rs.getInt("userId"));
@@ -256,6 +254,27 @@ public class UserDaoImpl implements UserDao {
             JdbcUtil.closeAll(rs,st,conn);
         }
         return list;
+    }
+
+
+    @Override
+    public boolean queryByName(String userName) {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        List<User> list = new ArrayList<>();
+        try {
+            conn = JdbcUtil.getConnection();
+            st = conn.prepareStatement("select * from user where userName=?");
+            st.setString(1,userName);
+            rs = st.executeQuery();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            JdbcUtil.closeAll(rs,st,conn);
+        }
+        return !(rs==null);
     }
 
     public User getUserById(int userId){
