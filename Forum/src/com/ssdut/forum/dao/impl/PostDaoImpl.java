@@ -70,9 +70,15 @@ public class PostDaoImpl implements PostDao{
         Post post;
         try{
             conn = JdbcUtil.getConnection();
-            // TODO 黑名单的帖子不显示
-            st = conn.prepareStatement("select * from post where belongTo is null and boardId =?");
+            st = conn.prepareStatement("SELECT *\n" +
+                    "FROM post\n" +
+                    "WHERE boardId=? AND userId NOT IN(\n" +
+                    "\tSELECT blackUserId\n" +
+                    "\tFROM blacklist\n" +
+                    "\tWHERE userId=?\n" +
+                    ")");
             st.setInt(1, boardId);
+            st.setInt(2,ownerId);
             rs = st.executeQuery();
             while(rs.next()) {
                 post = new Post();
@@ -99,8 +105,15 @@ public class PostDaoImpl implements PostDao{
         Post post;
         try{
             conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("select * from post where belongTo =?");
+            st = conn.prepareStatement("SELECT *\n" +
+                    "FROM post\n" +
+                    "WHERE belongTo=? AND userId NOT IN(\n" +
+                    "\tSELECT blackUserId\n" +
+                    "\tFROM blacklist\n" +
+                    "\tWHERE userId=?\n" +
+                    ")");
             st.setInt(1, postId);
+            st.setInt(2,ownerId);
             rs = st.executeQuery();
             while(rs.next()) {
                 post = new Post();
@@ -127,7 +140,7 @@ public class PostDaoImpl implements PostDao{
 //        try {
 //            conn = JdbcUtil.getConnection();
 //            st = conn.prepareStatement("select * from post where tid=?");
-//            st.setInt(1, postId);  //TODO
+//            st.setInt(1, postId);
 //            rs=st.executeQuery();
 //            while(rs.next()) {
 //                flag=true;
