@@ -1,8 +1,5 @@
 package com.ssdut.forum.service;
 
-import com.ssdut.forum.dao.BoardDao;
-import com.ssdut.forum.dao.impl.BoardDaoImpl;
-import com.ssdut.forum.dao.impl.UserDaoImpl;
 import com.ssdut.forum.entity.Post;
 import com.ssdut.forum.entity.User;
 

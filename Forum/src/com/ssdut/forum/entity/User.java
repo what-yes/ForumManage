@@ -70,9 +70,12 @@ public class User {
 
 
     //TODO login
-//    public boolean login(String username, String password){
-//
-//    }
+    public User login(String username, String password){
+        return null;
+    }
 
     //TODO register
+    public boolean register(User user){
+        return false;
+    }
 }

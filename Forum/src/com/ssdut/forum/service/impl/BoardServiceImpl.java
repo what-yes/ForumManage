@@ -3,7 +3,6 @@ package com.ssdut.forum.service.impl;
 import com.ssdut.forum.dao.impl.BoardDaoImpl;
 import com.ssdut.forum.entity.Board;
 import com.ssdut.forum.service.BoardService;
-import com.ssdut.forum.util.ResultSetPrintUtil;
 
 import java.util.List;
 

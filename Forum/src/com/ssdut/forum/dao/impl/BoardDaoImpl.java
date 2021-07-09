@@ -40,12 +40,12 @@ public class BoardDaoImpl implements BoardDao {
         try{
             conn = JdbcUtil.getConnection();
 
-            //Èç¹û°å¿éÒÑ¾­´æÔÚ
+            //å¦‚æœæ¿å—å·²ç»å­˜åœ¨
             st = conn.prepareStatement("select * from board where boardName=?");
             st.setString(1, board.getBoardName());
             rs = st.executeQuery();
             if(rs.next()){
-                // System.out.println("'"+board.getBoardName()+"'"+"°å¿éÒÑ´æÔÚ");
+                // System.out.println("'"+board.getBoardName()+"'"+"æ¿å—å·²å­˜åœ¨");
                 return affectedRow;
             }
 

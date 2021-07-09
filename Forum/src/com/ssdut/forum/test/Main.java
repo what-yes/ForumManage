@@ -26,7 +26,7 @@ public class Main {
     private static void startForumSys(){
         System.out.println("------------论坛------------");
         boolean bBegin=true;
-        User user=null; // 登录的角色
+        User user=new User(); // 登录的角色
         Scanner input=new Scanner(System.in);
         int nBegin=0;
         while (bBegin){
@@ -40,7 +40,13 @@ public class Main {
                     // 登录操作
                     boolean bLogin=false;//登录是否成功
                     while(!bLogin){
-                        login();
+                        User u=null;
+                        if((u=login(user))!=null){
+                            user=u;
+                            bLogin=true;
+                        }else{
+                            System.out.println("账户或密码错误！请重新输入：");
+                        }
                     }
                     break;
                 case 2:
@@ -59,16 +65,17 @@ public class Main {
     }
 
     /**
-     * 登录信息
+     * 登录
      * @return
      */
-    private static User login(){
+    private static User login(User user){
         Scanner input=new Scanner(System.in);
-        System.out.print("用户名：");
-        String username=input.next();
-        System.out.print("密码：");
-        String password=input.next();
 
-        return null;
+        System.out.print("用户名：");
+        user.setUserName(input.next());
+        System.out.print("密码：");
+        user.setPassWord(input.next());
+
+        return user.login(user.getUserName(), user.getPassWord());
     }
 }
