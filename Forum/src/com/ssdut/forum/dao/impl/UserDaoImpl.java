@@ -126,7 +126,6 @@ public class UserDaoImpl implements UserDao {
             st = conn.prepareStatement("select * from user where state=?");
             st.setInt(1,state);
             rs = st.executeQuery();
-            ResultSetPrintUtil.printResultSet(rs);
             //我在想上面这句话会不会改变rs的指向而导致下面的语句出错
             while(rs.next()){
                 user = new User();
@@ -156,7 +155,6 @@ public class UserDaoImpl implements UserDao {
             conn = JdbcUtil.getConnection();
             st = conn.prepareStatement("select * from user");
             rs = st.executeQuery();
-            ResultSetPrintUtil.printResultSet(rs);
             //我在想上面这句话会不会改变rs的指向而导致下面的语句出错
             while(rs.next()){
                 user = new User();

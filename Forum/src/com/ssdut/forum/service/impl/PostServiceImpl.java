@@ -12,7 +12,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> getAllPost(int boardId,int ownerId) {
-        return pd.queryReplyByPostID(boardId,ownerId);
+        return pd.queryPostByBoardID(boardId,ownerId);
     }
 
     @Override

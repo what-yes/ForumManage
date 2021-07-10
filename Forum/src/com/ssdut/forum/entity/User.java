@@ -4,6 +4,7 @@ import com.ssdut.forum.role.Role;
 import com.ssdut.forum.service.impl.BaseServiceImpl;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class User {
     /**
@@ -93,11 +94,27 @@ public class User {
         return role.getDescription();
     }
 
-    public User login(String username, String password){
+    public User login(String username, String password) {
         return new BaseServiceImpl().checkLogin(userName, password);
     }
 
-    public boolean register(User user){
+    public boolean register(User user) {
         return new BaseServiceImpl().register(user);
+    }
+
+    /**
+     * 查询所有板块信息
+     * @return List<Board>
+     */
+    public List<Board> getBoards(){
+        return role.getBoard();
+    }
+
+    /**
+     * 显示版块下所有主帖
+     * @return List<Post>
+     */
+    public List<Post> getAllPost(int boardId,int ownerId){
+        return role.getAllPost(boardId,ownerId);
     }
 }

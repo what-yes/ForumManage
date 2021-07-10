@@ -19,9 +19,9 @@ public class ResultPrintUtil {
         state.put(0,"正常");
         state.put(1,"禁用");
 
-        System.out.println("用户ID\t\t用户名\t\t用户身份\t\t用户状态");
+        System.out.println("用户ID\t\t用户名\t\t用户身份\t\t用户状态\n");
         for(User user : list){
-            System.out.printf("%8d|%8s|%4s",user.getUserId(),user.getUserName(),state.get(user.getState()));
+            System.out.printf("%-8d|%-8s|%-4s\n",user.getUserId(),user.getUserName(),state.get(user.getState()));
         }
 
     }
@@ -39,22 +39,19 @@ public class ResultPrintUtil {
         Map<Integer,String> stick = new HashMap<>();
         stick.put(0,"非置顶");
         stick.put(1,"置顶");
-        System.out.printf("帖子编号\t帖子标题\t帖子内容\t用户名\t所属板块\t置顶状态");
+        System.out.printf("帖子编号\t帖子标题\t帖子内容\t用户名\t置顶状态\n");
         for(Post post : list){
             String content = post.getContent().substring(0,5) + "...";
-            System.out.printf("%3d|%6s|%10s|%8s|%4s|%3s",post.getPostId(),post.getTitle(),content,post.getUserName(),post.getBoardName(),stick.get(post.getStick()));
+            System.out.printf("%-3d|%-6s|%-10s|%-8s|%-3s\n",post.getPostId(),post.getTitle(),content,post.getUserName(),stick.get(post.getStick()));
         }
     }
 
     /**
-     *
+     * 打印所有版块
      */
     public static void printBoards(List<Board> list){
         for(Board board : list){
-            System.out.printf("%4d",board.getBoardId());
-        }
-        for(Board board : list){
-            System.out.printf("%4s",board.getBoardName());
+            System.out.printf("%-4d%-4s\n",board.getBoardId(),board.getBoardName());
         }
     }
 

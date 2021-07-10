@@ -76,22 +76,23 @@ public class PostDaoImpl implements PostDao{
         Post post;
         try{
             conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("SELECT * " +
-                    "FROM post " +
-                    "WHERE boardId=? AND belongTo is NULL AND userId NOT IN( " +
+            st = conn.prepareStatement("SELECT post.*,userName " +
+                    "FROM post JOIN `user` ON post.userId=`user`.userId " +
+                    "WHERE boardId=? AND belongTo is NULL AND post.userId NOT IN( " +
                     "SELECT blackUserId " +
                     "FROM blacklist " +
                     "WHERE userId=?) " +
                     "ORDER BY stick DESC");
             st.setInt(1, boardId);
-            st.setInt(2,ownerId);
-            st.executeQuery();
+            st.setInt(2, ownerId);
+            rs = st.executeQuery();
             while(rs.next()) {
                 post = new Post();
                 post.setPostId(rs.getInt("postId"));
                 post.setTitle(rs.getString("title"));
                 post.setContent(rs.getString("content"));
                 post.setUserId(rs.getInt("userId"));
+                post.setUserName(rs.getString("userName"));
                 post.setBoardId(rs.getInt("boardId"));
                 post.setReplyTo(rs.getInt("replyTo"));
                 post.setBelongTo(rs.getInt("belongTo"));

@@ -4,10 +4,15 @@ package com.ssdut.forum.test;
 import com.ssdut.forum.authority.impl.DefaultAdmin;
 import com.ssdut.forum.authority.impl.DefaultBoardMgr;
 import com.ssdut.forum.authority.impl.DefaultUser;
+import com.ssdut.forum.entity.Board;
 import com.ssdut.forum.entity.User;
 import com.ssdut.forum.role.Role;
 
+import java.util.List;
 import java.util.Scanner;
+
+import static com.ssdut.forum.util.ResultPrintUtil.printBoards;
+import static com.ssdut.forum.util.ResultPrintUtil.printPosts;
 
 /**
  * ClassName: Main
@@ -274,10 +279,33 @@ public class Main {
      * @param user
      */
     private static void boardScreen(User user){
-        //TODO 显示所有版块
+        while(true){
+            //显示所有版块
+            List<Board> boardList=user.getBoards();
+            printBoards(boardList);
+            //选择进入哪个版块
+            System.out.println("请选择进入哪一个版块：(输入0返回主界面)");
+            int boardId=input.nextInt();
+            boolean haveBoardId=false;
+            if(boardId==0){
+                return;
+            }
+            for (Board b:boardList){
+                if(b.getBoardId()==boardId)
+                {
+                    haveBoardId=true;
+                    break;
+                }
+            }
+            if(!haveBoardId){
+                System.out.println("并无此版块，请重新输入：");
+            }else {
+                //TODO boardContentScreen()   显示版块下内容并进行相应操作
+                printPosts(user.getAllPost(boardId,user.getUserId()));
 
-        //TODO 进入哪个版块
-        //TODO boardContentScreen()   显示版块下内容并进行相应操作
+
+            }
+        }
     }
 
     /**

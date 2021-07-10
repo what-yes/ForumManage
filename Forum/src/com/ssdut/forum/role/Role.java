@@ -94,7 +94,7 @@ public class Role {
      * 查询所有板块信息
      * @return List<Board>
      */
-    List<Board> getBoard(){
+    public List<Board> getBoard(){
         if(normal==null){
             System.out.println("您还没有登录，请登陆后再操作");
             return null;
@@ -107,7 +107,7 @@ public class Role {
      * 显示版块下所有主帖
      * @return List<Post>
      */
-    List<Post> getAllPost(int boardId,int ownerId){
+    public List<Post> getAllPost(int boardId,int ownerId){
         if(normal==null){
             System.out.println("您还没有登录，请登陆后再操作");
             return null;
@@ -121,7 +121,7 @@ public class Role {
      * @param postId
      * @return List<Post>
      */
-    List<Post> getAllReplyByPostId(int postId,int ownerId){
+    public List<Post> getAllReplyByPostId(int postId,int ownerId){
         if(normal==null){
             System.out.println("您还没有登录，请登陆后再操作");
             return null;
