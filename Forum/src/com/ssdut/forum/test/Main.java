@@ -275,6 +275,7 @@ public class Main {
      */
     private static void boardScreen(User user){
         //TODO 显示所有版块
+
         //TODO 进入哪个版块
         //TODO boardContentScreen()   显示版块下内容并进行相应操作
     }

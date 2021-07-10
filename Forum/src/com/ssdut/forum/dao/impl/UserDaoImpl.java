@@ -3,7 +3,6 @@ package com.ssdut.forum.dao.impl;
 import com.ssdut.forum.dao.UserDao;
 import com.ssdut.forum.entity.User;
 import com.ssdut.forum.util.JdbcUtil;
-import com.ssdut.forum.util.ResultSetPrintUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
