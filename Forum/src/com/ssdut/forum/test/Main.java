@@ -54,6 +54,7 @@ public class Main {
                         User u=null;
                         if((u=login(user))!=null){
                             // 登录成功
+                            System.out.println("登录成功！");
                             user=u;
                             bLogin=true;
                             // 进入主界面
@@ -62,17 +63,17 @@ public class Main {
                                 user.setRole(new Role("管理员",new DefaultUser(),
                                         new DefaultBoardMgr(),new DefaultAdmin()));
                                 //打开管理员页面
-                                adminScreen(user);
+                                homeScreen(user);
                             }else if(roleAuthority==2){
                                 user.setRole(new Role("版主",new DefaultUser(),
                                         new DefaultBoardMgr(),null));
                                 //打开版主页面
-                                boardMgrScreen(user);
+                                homeScreen(user);
                             }else if(roleAuthority==1){
                                 user.setRole(new Role("用户",new DefaultUser(),
                                         null,null));
                                 //打开用户页面
-                                userScreen(user);
+                                homeScreen(user);
                             }else {
                                 System.out.println("未知用户权限！");
                             }
@@ -134,109 +135,18 @@ public class Main {
     }
 
     /**
-     * 用户页面
+     * 主页面
      * @param user
      */
-    private static void userScreen(User user){
-        boolean bHome=false;
-
-        while(!bHome){
-            System.out.println("-----------主页面-----------");
-            System.out.println("1.查看版块");
-            System.out.println("2.查看已发帖");
-            System.out.println("3.拉黑管理");
-            System.out.println("4.退出系统");
-            System.out.println("请输入对应编号进行操作：");
-            int iSelect=input.nextInt();
-            switch (iSelect){
-                case 1:
-                    //查看版块
-                    boardScreen(user);
-                    break;
-                case 2:
-                    //查看已发帖
-                    userPostScreen(user);
-                    break;
-                case 3:
-                    //拉黑管理
-                    blackListScreen(user);
-                    break;
-                case 4:
-                    //退出系统
-                    bHome=true;
-                    break;
-                default:
-                    System.out.println("无此操作，请重新选择！");
-                    break;
-            }
-        }
-    }
-
-    /**
-     * 版主页面
-     * @param user
-     */
-    private static void boardMgrScreen(User user){
-        boolean bHome=false;
-
-        while(!bHome){
-            System.out.println("-----------主页面-----------");
-            System.out.println("1.查看版块");
-            System.out.println("2.查看已发帖");
-            System.out.println("3.拉黑管理");
-            System.out.println("4.用户管理");
-            System.out.println("5.版块管理");
-            System.out.println("6.退出系统");
-            System.out.println("请输入对应编号进行操作：");
-            int iSelect=input.nextInt();
-            switch (iSelect){
-                case 1:
-                    //查看版块
-                    boardScreen(user);
-                    break;
-                case 2:
-                    //查看已发帖
-                    userPostScreen(user);
-                    break;
-                case 3:
-                    //拉黑管理
-                    blackListScreen(user);
-                    break;
-                case 4:
-                    //管理用户
-                    mgrUserScreen(user);
-                    break;
-                case 5:
-                    //管理版块
-                    mgrBoardScreen(user);
-                    break;
-                case 6:
-                    //退出系统
-                    bHome=true;
-                    break;
-                default:
-                    System.out.println("无此操作，请重新选择！");
-                    break;
-            }
-        }
-    }
-
-    /**
-     * 管理员页面
-     * @param user
-     */
-    private static void  adminScreen(User user) {
+    private static void  homeScreen(User user) {
         boolean bHome = false;
 
         while (!bHome) {
             System.out.println("-----------主页面-----------");
             System.out.println("1.查看版块");
             System.out.println("2.查看已发帖");
-            System.out.println("3.拉黑管理");
-            System.out.println("4.用户管理");
-            System.out.println("5.版块管理");
-            System.out.println("6.管理员管理");
-            System.out.println("7.退出系统");
+            System.out.println("3.用户管理");
+            System.out.println("4.退出系统");
             System.out.println("请输入对应编号进行操作：");
             int iSelect = input.nextInt();
             switch (iSelect) {
@@ -249,27 +159,15 @@ public class Main {
                     userPostScreen(user);
                     break;
                 case 3:
-                    //拉黑管理
-                    blackListScreen(user);
-                    break;
-                case 4:
                     //管理用户
                     mgrUserScreen(user);
                     break;
-                case 5:
-                    //管理版块
-                    mgrBoardScreen(user);
-                    break;
-                case 6:
-                    //管理员管理
-                    mgrMgrScreen(user);
-                    break;
-                case 7:
+                case 4:
                     //退出系统
                     bHome = true;
                     break;
                 default:
-                    System.out.println("无此操作，请重新选择！");
+                    System.out.println("无此功能，敬请期待！请重新选择其他功能：");
                     break;
             }
         }
@@ -287,6 +185,7 @@ public class Main {
             //选择进入哪个版块
             System.out.println("请选择进入哪一个版块：(输入0返回主界面)");
             int boardId=input.nextInt();
+            Board board=null;
             boolean haveBoardId=false;
             if(boardId==0){
                 return;
@@ -295,20 +194,32 @@ public class Main {
                 if(b.getBoardId()==boardId)
                 {
                     haveBoardId=true;
+                    board=b;
                     break;
                 }
             }
             if(!haveBoardId){
                 System.out.println("并无此版块，请重新输入：");
             }else {
-                //TODO boardContentScreen()   显示版块下内容并进行相应操作
-                printPosts(user.getAllPost(boardId,user.getUserId()));
-
-
+                //显示版块下内容并进行相应操作
+                boardContentScreen(board,user);
             }
         }
     }
 
+    /**
+     * 显示版块下内容并进行相应操作
+     * @param user
+     */
+    private static void boardContentScreen(Board board,User user){
+        //显示版块内容
+        System.out.println("--------版块："+board.getBoardName()+"--------");
+        printPosts(user.getAllPost(board.getBoardId(),user.getUserId()));
+        System.out.println("可进行操作：");
+        System.out.println("1.");
+        //如果是版块管理员 显示管理员操作
+
+    }
     /**
      * 查看已发帖
      * @param user
@@ -339,22 +250,6 @@ public class Main {
      * @param user
      */
     private static void mgrUserScreen(User user){
-
-    }
-
-    /**
-     * 管理版块
-     * @param user
-     */
-    private static void mgrBoardScreen(User user){
-
-    }
-
-    /**
-     * 管理员管理
-     * @param user
-     */
-    private static void mgrMgrScreen(User user){
 
     }
 }
