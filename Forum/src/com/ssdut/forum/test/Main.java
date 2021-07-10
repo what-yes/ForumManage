@@ -203,6 +203,8 @@ public class Main {
             }else {
                 //显示版块下内容并进行相应操作
                 boardContentScreen(board,user);
+                //回到主界面
+                return;
             }
         }
     }
@@ -212,12 +214,100 @@ public class Main {
      * @param user
      */
     private static void boardContentScreen(Board board,User user){
-        //显示版块内容
-        System.out.println("--------版块："+board.getBoardName()+"--------");
-        printPosts(user.getAllPost(board.getBoardId(),user.getUserId()));
-        System.out.println("可进行操作：");
-        System.out.println("1.");
-        //如果是版块管理员 显示管理员操作
+        while(true){
+            //显示版块内容
+            System.out.println("--------版块："+board.getBoardName()+"--------");
+            printPosts(user.getAllPost(board.getBoardId(),user.getUserId()));
+            System.out.println("可进行操作：");
+            System.out.println("0.退回主界面");
+            System.out.println("1.切换版块");
+            System.out.println("2.查看帖子");
+            System.out.println("3.发主题帖");
+            System.out.println("4.删除帖子");
+            //如果是版主或管理员 显示额外操作
+            if((user.getAuthority()==2 && board.getBoardMgrId()==user.getUserId())
+                    ||user.getAuthority()==3){
+                System.out.println("5.置顶帖子");
+                System.out.println("6.取消置顶");
+            }
+            int iSelect=input.nextInt();
+            switch (iSelect){
+                case 0:
+                    //回到主界面
+                    return;
+                case 1:
+                    //切换版块
+                    boardScreen(user);
+                    return; //不能使用break
+                case 2:
+                    //查看帖子
+                    showPost(user);
+                    return;
+                case 3:
+                    //发主题帖
+                    addPost(user);
+                    return;
+                case 4:
+                    //删除帖子
+                    deletePost(user);
+                    return;
+                default:
+                    break;
+            }
+            //如果是版主或管理员 进行额外操作
+            if((user.getAuthority()==2 && board.getBoardMgrId()==user.getUserId())
+                    ||user.getAuthority()==3){
+                if(iSelect==5){
+                    //置顶帖子
+                    addStick(user);
+                    return;
+                }else  if(iSelect==6) {
+                    //取消置顶
+                    cancelStick(user);
+                    return;
+                }
+            }
+            System.out.println("无此功能，敬请期待！请重新选择其他功能：");
+        }
+    }
+
+    /**
+     * 显示主题帖以及其回帖
+     * @param user
+     */
+    private static void showPost(User user){
+
+    }
+
+    /**
+     * 发帖
+     * @param user
+     */
+    private static void addPost(User user){
+
+    }
+
+    /**
+     * 删除帖子
+     * @param user
+     */
+    private static void deletePost(User user){
+
+    }
+
+    /**
+     * 添加置顶
+     * @param user
+     */
+    private static void addStick(User user){
+
+    }
+
+    /**
+     * 删除置顶
+     * @param user
+     */
+    private static void cancelStick(User user){
 
     }
     /**
