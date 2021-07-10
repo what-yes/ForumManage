@@ -89,6 +89,7 @@ public class BoardDaoImpl implements BoardDao {
                 board = new Board();
                 board.setBoardId(rs.getInt("boardId"));
                 board.setBoardName(rs.getString("boardName"));
+                board.setBoardMgrId(rs.getInt("boardMgrId"));
                 list.add(board);
             }
         }catch(Exception e){
