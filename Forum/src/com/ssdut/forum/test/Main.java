@@ -310,6 +310,7 @@ public class Main {
     private static void cancelStick(User user){
 
     }
+
     /**
      * 查看已发帖
      * @param user
@@ -328,18 +329,155 @@ public class Main {
     }
 
     /**
-     * 拉黑管理
+     * 用户管理
      * @param user
      */
-    private static void blackListScreen(User user){
+    private static void mgrUserScreen(User user){
+        while(true){
+            System.out.println("--------用户管理--------");
+            System.out.println("可进行操作：");
+            System.out.println("0.退回主界面");
+            System.out.println("1.查看黑名单");
+            System.out.println("2.拉黑用户");
+            System.out.println("3.取消拉黑用户");
+            //如果是版主或管理员 显示禁用操作
+            if(user.getAuthority()==2 || user.getAuthority()==3){
+                System.out.println("4.查看禁用用户列表");
+                System.out.println("5.禁用用户");
+                System.out.println("6.取消禁用用户");
+            }
+            //如果是管理员   显示任免版主功能
+            if(user.getAuthority()==3){
+                System.out.println("7.查看版主信息");
+                System.out.println("8.添加版主"); //需设置管理的版块对象
+                System.out.println("9.取消版主"); //如用户已无管理的版块  则取消版主身份
+            }
+            int iSelect=input.nextInt();
+            switch (iSelect){
+                case 0:
+                    //回到主界面
+                    return;
+                case 1:
+                    //查看黑名单
+                    showBlackList(user);
+                    return; //不能使用break
+                case 2:
+                    //拉黑用户
+                    addIntoBlackList(user);
+                    return;
+                case 3:
+                    //取消拉黑用户
+                    moveOutBlackList(user);
+                    return;
+                default:
+                    break;
+            }
+            //如果是版主或管理员 进行额外操作
+            if(user.getAuthority()==2 ||user.getAuthority()==3){
+                switch (iSelect){
+                    case 4:
+                        //查看禁用用户列表
+                        showDisableUserList(user);
+                        return;
+                    case 5:
+                        //禁用用户
+                        addDisableUser(user);
+                        return; //不能使用break
+                    case 6:
+                        //取消禁用用户
+                        CancelDisableUser(user);
+                        return;
+                    default:
+                        break;
+                }
+            }
+            //如果是管理员 进行额外操作
+            if(user.getAuthority()==3){
+                switch (iSelect){
+                    case 7:
+                        //查看版主信息
+                        showBoardMgrList(user);
+                        return;
+                    case 8:
+                        //添加版主
+                        addBoardMgr(user);
+                        return; //不能使用break
+                    case 9:
+                        //取消版主
+                        cancelBoardMgr(user);
+                        return;
+                    default:
+                        break;
+                }
+            }
+            System.out.println("无此功能，敬请期待！请重新选择其他功能：");
+        }
+    }
+
+    /**
+     * 查看黑名单
+     */
+    private static void showBlackList(User user) {
+
+    }
+    /**
+     * 拉黑用户
+     */
+    private static void addIntoBlackList(User user) {
+
+    }
+    /**
+     * 取消拉黑用户
+     */
+    private static void moveOutBlackList(User user) {
 
     }
 
     /**
-     * 管理用户
+     * 查看禁用用户列表
      * @param user
      */
-    private static void mgrUserScreen(User user){
+    private static void showDisableUserList(User user) {
+
+    }
+
+    /**
+     * 禁用用户
+     * @param user
+     */
+    private static void addDisableUser(User user) {
+
+    }
+
+    /**
+     * 取消禁用用户
+     * @param user
+     */
+    private static void CancelDisableUser(User user) {
+
+    }
+
+    /**
+     * 查看版主信息
+     * @param user
+     */
+    private static void showBoardMgrList(User user) {
+
+    }
+
+    /**
+     * 添加版主
+     * @param user
+     */
+    private static void addBoardMgr(User user) {
+
+    }
+
+    /**
+     * 取消版主
+     * @param user
+     */
+    private static void cancelBoardMgr(User user) {
 
     }
 }
