@@ -47,4 +47,6 @@ public interface PostService {
      * @return
      */
     boolean CancelStick(int postId);
+
+    List<Post> queryUserPost(int userId);
 }

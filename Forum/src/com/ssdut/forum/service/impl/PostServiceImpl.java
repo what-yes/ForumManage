@@ -35,4 +35,9 @@ public class PostServiceImpl implements PostService {
         return pd.ChangeField(postId, "stick", 0);
     }
 
+    @Override
+    public List<Post> queryUserPost(int userId) {
+        return pd.queryUserPost(userId);
+    }
+
 }

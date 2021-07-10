@@ -102,4 +102,10 @@ public class DefaultUser implements Normal {
     public List<User> getBlackList(int userId) {
         return baseService.getBlackList(userId);
     }
+
+    @Override
+    public List<Post> queryUserPost(int userId) {
+        return postService.queryUserPost(userId);
+    }
+
 }

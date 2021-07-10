@@ -2,15 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="122c5597-6eaf-43e1-9944-58dd4bb97da0" name="Default Changelist" comment="完善Authority/DAO/RenameUSER">
-      <change beforePath="$PROJECT_DIR$/.idea/ForumManage.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ForumManage.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/authority/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/authority/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/authority/impl/DefaultAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/authority/impl/DefaultAdmin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/BoardDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/BoardDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/impl/BoardDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/impl/BoardDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/authority/Normal.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/authority/Normal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/authority/impl/DefaultUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/authority/impl/DefaultUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/PostDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/PostDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/impl/PostDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/impl/PostDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/entity/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/role/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/role/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/service/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/service/impl/PostServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/service/impl/PostServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/test/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +52,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../课程备份/大二下/JAVA程序设计/BookManage" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />

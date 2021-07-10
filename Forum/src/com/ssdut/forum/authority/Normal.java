@@ -69,4 +69,6 @@ public interface Normal {
      * @return
      */
     public List<User> getBlackList(int userId);
+
+    List<Post> queryUserPost(int userId);
 }

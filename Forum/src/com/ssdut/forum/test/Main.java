@@ -6,6 +6,7 @@ import com.ssdut.forum.authority.impl.DefaultBoardMgr;
 import com.ssdut.forum.authority.impl.DefaultUser;
 import com.ssdut.forum.entity.Board;
 import com.ssdut.forum.entity.User;
+import com.ssdut.forum.entity.Post;
 import com.ssdut.forum.role.Role;
 
 import java.util.List;
@@ -313,7 +314,16 @@ public class Main {
      * @param user
      */
     private static void userPostScreen(User user){
-
+        while(true){
+            List<Post> postList = user.queryUserPost(user.getUserId());
+            printPosts(postList);
+            System.out.println("输入0返回主界面");
+            int inputNumber = input.nextInt();
+            if(inputNumber == 0){
+                return;
+            }
+            //TODO 输入帖号查看已发贴所在主帖
+        }
     }
 
     /**

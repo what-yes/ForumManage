@@ -117,4 +117,8 @@ public class User {
     public List<Post> getAllPost(int boardId,int ownerId){
         return role.getAllPost(boardId,ownerId);
     }
+
+    public List<Post> queryUserPost(int userId){
+        return role.queryUserPost(userId);
+    }
 }

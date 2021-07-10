@@ -162,4 +162,34 @@ public class PostDaoImpl implements PostDao{
         }
         return isChanged;
     }
+
+    @Override
+    public List<Post> queryUserPost(int userId) {
+        List<Post> list = new ArrayList<>();
+        Post post;
+        try{
+            conn = JdbcUtil.getConnection();
+            st = conn.prepareStatement("select * from post where userId=?");
+            st.setInt(1, userId);
+            rs = st.executeQuery();
+            while(rs.next()){
+                post = new Post();
+                post.setPostId(rs.getInt("postId"));
+                post.setTitle(rs.getString("title"));
+                post.setContent(rs.getString("content"));
+                post.setUserId(rs.getInt("userId"));
+                post.setUserName(rs.getString("userName"));
+                post.setBoardId(rs.getInt("boardId"));
+                post.setReplyTo(rs.getInt("replyTo"));
+                post.setBelongTo(rs.getInt("belongTo"));
+                post.setStick(rs.getInt("stick"));
+                list.add(post);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            JdbcUtil.closeAll(rs, st, conn);
+        }
+        return list;
+    }
 }
