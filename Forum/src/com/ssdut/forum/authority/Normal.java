@@ -70,5 +70,10 @@ public interface Normal {
      */
     public List<User> getBlackList(int userId);
 
+    /**
+     * 查看已发贴
+     * @param userId
+     * @return
+     */
     List<Post> queryUserPost(int userId);
 }

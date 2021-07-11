@@ -323,6 +323,11 @@ public class Role {
         return flag;
     }
 
+    /**
+     * 查看已发帖
+     * @param userId
+     * @return
+     */
     public List<Post> queryUserPost(int userId){
         if(normal==null){
             System.out.println("您还没有登录，请登陆后再操作");
