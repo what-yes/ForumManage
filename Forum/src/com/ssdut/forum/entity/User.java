@@ -121,4 +121,18 @@ public class User {
     public List<Post> queryUserPost(int userId){
         return role.queryUserPost(userId);
     }
+
+    public boolean MoveOutBlackList(int userId, int blackId){
+        return role.MoveOutBlackList(userId, blackId);
+    }
+
+    public boolean AddIntoBlackList(int userId, int blackId){
+        return role.MoveOutBlackList(userId, blackId);
+    }
+
+    public void showDisableUserList(){
+        role.showDisableUserList();
+    }
+
+
 }

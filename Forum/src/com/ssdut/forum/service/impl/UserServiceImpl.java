@@ -6,6 +6,8 @@ import com.ssdut.forum.dao.impl.BoardDaoImpl;
 import com.ssdut.forum.dao.impl.UserDaoImpl;
 import com.ssdut.forum.entity.User;
 import com.ssdut.forum.service.UserService;
+import com.ssdut.forum.util.JdbcUtil;
+import com.ssdut.forum.util.ResultPrintUtil;
 
 import java.util.List;
 
@@ -42,4 +44,6 @@ public class UserServiceImpl implements UserService {
     public boolean deleteBoardMgr(int boardId) {
         return bdi.deleteBoardMgr(boardId);
     }
+
+
 }

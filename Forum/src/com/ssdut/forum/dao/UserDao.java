@@ -71,5 +71,10 @@ public interface UserDao {
      */
     List<User> listBlackList(int userId);
 
+    /**
+     * 根据用户名查找是否存在该用户
+     * @param userName
+     * @return true表示找到了 false表示没找到
+     */
     boolean queryByName(String userName);
 }

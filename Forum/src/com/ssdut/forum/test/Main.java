@@ -8,6 +8,7 @@ import com.ssdut.forum.entity.Board;
 import com.ssdut.forum.entity.User;
 import com.ssdut.forum.entity.Post;
 import com.ssdut.forum.role.Role;
+import com.ssdut.forum.util.ResultPrintUtil;
 
 import java.util.List;
 import java.util.Scanner;
@@ -130,7 +131,6 @@ public class Main {
         user.setUserName(input.next());
         System.out.println("密码：");
         user.setPassWord(input.next());
-
         return user.register(user);
     }
 
@@ -418,18 +418,31 @@ public class Main {
      * 查看黑名单
      */
     private static void showBlackList(User user) {
-
+        ResultPrintUtil.printBlackList(user.getRole().getBlackList(user.getUserId()));
     }
     /**
      * 拉黑用户
      */
     private static void addIntoBlackList(User user) {
-
+        showBlackList(user);
+        System.out.print("请输入你想拉黑的ID：");
+        int newAdd = input.nextInt();
+        while(user.AddIntoBlackList(user.getUserId(), newAdd) != true){
+            System.out.print("请重新输入你想拉黑的ID：");
+            newAdd = input.nextInt();
+        }
     }
     /**
      * 取消拉黑用户
      */
     private static void moveOutBlackList(User user) {
+        showBlackList(user);
+        System.out.print("请输入你想移除拉黑的ID：");
+        int newAdd = input.nextInt();
+        while(user.getRole().MoveOutBlackList(user.getUserId(), newAdd) != true){
+            System.out.print("请重新输入你想移除拉黑的ID：");
+            newAdd = input.nextInt();
+        }
 
     }
 
@@ -438,7 +451,7 @@ public class Main {
      * @param user
      */
     private static void showDisableUserList(User user) {
-
+        user.showDisableUserList();
     }
 
     /**
@@ -446,7 +459,6 @@ public class Main {
      * @param user
      */
     private static void addDisableUser(User user) {
-
     }
 
     /**

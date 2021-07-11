@@ -42,4 +42,6 @@ public interface BoardMgr {
      */
     public boolean CancelDisable(int userId);
 
+    public void showDisableUserList();
+
 }

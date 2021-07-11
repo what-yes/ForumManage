@@ -5,6 +5,7 @@ import com.ssdut.forum.entity.Post;
 import com.ssdut.forum.entity.User;
 import com.ssdut.forum.service.*;
 import com.ssdut.forum.service.impl.*;
+import com.ssdut.forum.util.ResultPrintUtil;
 
 
 public class DefaultBoardMgr implements BoardMgr {
@@ -35,6 +36,11 @@ public class DefaultBoardMgr implements BoardMgr {
     @Override
     public boolean CancelDisable(int userId) {
         return userService.setUserState(userId, 0);
+    }
+
+    @Override
+    public void showDisableUserList() {
+        ResultPrintUtil.printBlackList(userService.getAllUsersByState(1));
     }
 
 }

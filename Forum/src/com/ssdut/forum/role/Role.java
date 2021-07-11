@@ -326,4 +326,8 @@ public class Role {
         }
         return normal.queryUserPost(userId);
     }
+
+    public void showDisableUserList(){
+        boardMgr.showDisableUserList();
+    }
 }

@@ -39,16 +39,16 @@ public class BaseServiceImpl implements BaseService {
 
     @Override
     public boolean AddIntoBlackList(int userId, int blackUserId) {
-        return false;
+        return udi.addBlackList(userId, blackUserId);
     }
 
     @Override
     public boolean MoveOutBlackList(int userId, int blackUserId) {
-        return false;
+        return udi.removeBlackList(userId, blackUserId);
     }
 
     @Override
     public List<User> getBlackList(int userId) {
-        return null;
+        return udi.listBlackList(userId);
     }
 }

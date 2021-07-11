@@ -48,4 +48,5 @@ public interface UserService {
      * @return
      */
     boolean deleteBoardMgr(int boardId);
+
 }

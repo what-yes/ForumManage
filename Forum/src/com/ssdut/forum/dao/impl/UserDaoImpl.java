@@ -45,6 +45,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public int saveUser(User user) {
+        if(queryByName(user.getUserName()))
+            return 0;
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -131,7 +133,6 @@ public class UserDaoImpl implements UserDao {
                 user = new User();
                 user.setUserId(rs.getInt("userId"));
                 user.setUserName(rs.getString("userName"));
-                user.setPassWord(rs.getString("password"));
                 user.setState(rs.getInt("state"));
 
                 list.add(user);

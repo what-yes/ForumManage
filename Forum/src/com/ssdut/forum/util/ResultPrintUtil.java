@@ -19,9 +19,14 @@ public class ResultPrintUtil {
         state.put(0,"正常");
         state.put(1,"禁用");
 
+        Map<Integer, String> authority = new HashMap<>();
+        authority.put(1,"普通用户");
+        authority.put(2,"版主");
+        authority.put(1,"管理员");
+
         System.out.println("用户ID\t\t用户名\t\t用户身份\t\t用户状态\n");
         for(User user : list){
-            System.out.printf("%-8d|%-8s|%-4s\n",user.getUserId(),user.getUserName(),state.get(user.getState()));
+            System.out.printf("%-8d|%-8s|%-4s\n",user.getUserId(),user.getUserName(),authority.get(user.getAuthority()),state.get(user.getState()));
         }
 
     }
@@ -29,7 +34,12 @@ public class ResultPrintUtil {
     /**
      * （用户）显示自己的黑名单
      */
-    public static void printBlackList(){}
+    public static void printBlackList(List<User> list){
+        System.out.println("用户ID\t\t用户名\n");
+        for(User user : list){
+            System.out.printf("%-8d|%-8s\n",user.getUserId(),user.getUserName());
+        }
+    }
 
     /**
      * 打印帖子内容

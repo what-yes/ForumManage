@@ -35,4 +35,5 @@ public interface Admin {
      * @return
      */
     public boolean deleteBoard(int boardId);
+
 }
