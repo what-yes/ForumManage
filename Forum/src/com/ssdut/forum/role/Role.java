@@ -283,6 +283,10 @@ public class Role {
         return flag;
     }
 
+    public void showBoardMgrList(){
+        admin.showBoardMgrList();
+    }
+
     /**
      * 添加版块
      * @param board

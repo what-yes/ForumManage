@@ -36,4 +36,6 @@ public interface Admin {
      */
     public boolean deleteBoard(int boardId);
 
+    public void showBoardMgrList();
+
 }

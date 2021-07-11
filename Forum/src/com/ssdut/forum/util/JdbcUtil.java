@@ -8,10 +8,11 @@ import java.util.Properties;
 
 public final class JdbcUtil {
     private static String DRIVER = null;
-    private static String URL= null;
+    private static String URL = null;
     private static String USER = null;//自己数据库的账号密码
     private static String PASSWORD = null;//自己数据库的密码
-    Connection conn=null;
+    Connection conn = null;
+
     //private static ThreadLocal<Connection> threadLocal = new ThreadLocal<>();
     static {
         init();
@@ -20,26 +21,27 @@ public final class JdbcUtil {
     /**
      * 通过配置文件实现属性初始化
      */
-    public static void init(){
-        Properties params=new Properties();
-        String config="database.properties";
-        InputStream is= JdbcUtil.class.getClassLoader().getResourceAsStream(config);
-        try{
+    public static void init() {
+        Properties params = new Properties();
+        String config = "database.properties";
+        InputStream is = JdbcUtil.class.getClassLoader().getResourceAsStream(config);
+        try {
             params.load(is);
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        DRIVER=params.getProperty("driver");
-        URL=params.getProperty("url");
-        USER=params.getProperty("user");
-        PASSWORD=params.getProperty("password");
+        DRIVER = params.getProperty("driver");
+        URL = params.getProperty("url");
+        USER = params.getProperty("user");
+        PASSWORD = params.getProperty("password");
     }
 
     /**
      * 数据库链接
+     *
      * @return
      */
-    public static Connection getConnection()  {
+    public static Connection getConnection() {
 	/*	Connection conn = threadLocal.get();
 		if(conn == null) {
 			try {
@@ -52,10 +54,10 @@ public final class JdbcUtil {
 		}
 
 		return conn;*/
-        Connection conn =null;
+        Connection conn = null;
         try {
             Class.forName(DRIVER);
-            conn=DriverManager.getConnection(URL,USER,PASSWORD);
+            conn = DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -65,6 +67,7 @@ public final class JdbcUtil {
 
     /**
      * 释放资源
+     *
      * @param rs
      * @param st
      * @param conn
@@ -90,6 +93,7 @@ public final class JdbcUtil {
             e.printStackTrace();
         }
     }
+
     public static void closeStatement(Statement st) {
         try {
             if (st != null)
@@ -98,9 +102,10 @@ public final class JdbcUtil {
             e.printStackTrace();
         }
     }
+
     public static void closeConnection() {
         Connection conn = getConnection();
-        if(conn != null) {
+        if (conn != null) {
             try {
                 conn.close();
             } catch (SQLException e) {
@@ -112,31 +117,33 @@ public final class JdbcUtil {
 
     /**
      * 执行增删改操作
+     *
      * @param preparedSql
      * @param param
      * @return
      */
-    public static int executeSQL(String preparedSql, Object[] param){
-        Connection conn=null; //数据库链接
-        PreparedStatement pstmt=null; //sql语句
-        int num=0; //操作的行数
-        try{
-            conn=getConnection();
-            pstmt=conn.prepareStatement(preparedSql);
-            if(param!=null){
-                for (int i=0;i< param.length;i++){
-                    pstmt.setObject(i+1,param[i]);
+    public static int executeSQL(String preparedSql, Object[] param) {
+        Connection conn = null; //数据库链接
+        PreparedStatement pstmt = null; //sql语句
+        int num = 0; //操作的行数
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(preparedSql);
+            if (param != null) {
+                for (int i = 0; i < param.length; i++) {
+                    pstmt.setObject(i + 1, param[i]);
                 }
             }
-            num=pstmt.executeUpdate();
-        } catch (SQLException e){
+            num = pstmt.executeUpdate();
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            closeAll(null,pstmt,conn);
+            closeAll(null, pstmt, conn);
         }
 
         return num;
     }
+}
 
 //    public static void main(String[] args) {
 //        Connection conn=null;
@@ -156,4 +163,6 @@ public final class JdbcUtil {
 //            closeAll(null,pstmt,conn);
 //        }
 //    }
-}
+//}
+
+

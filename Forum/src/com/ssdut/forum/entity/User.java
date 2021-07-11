@@ -127,7 +127,7 @@ public class User {
     }
 
     public boolean AddIntoBlackList(int userId, int blackId){
-        return role.MoveOutBlackList(userId, blackId);
+        return role.AddIntoBlackList(userId, blackId);
     }
 
     public void showDisableUserList(){

@@ -77,4 +77,9 @@ public interface UserDao {
      * @return true表示找到了 false表示没找到
      */
     boolean queryByName(String userName);
+
+    /**
+     * 显示板块管理员信息
+     */
+    void showBoardMgrList();
 }

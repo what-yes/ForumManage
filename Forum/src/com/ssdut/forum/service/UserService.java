@@ -49,4 +49,10 @@ public interface UserService {
      */
     boolean deleteBoardMgr(int boardId);
 
+    /**
+     * 显示板块管理员信息
+     * @return
+     */
+    void showBoardMgrList();
+
 }

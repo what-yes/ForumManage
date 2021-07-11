@@ -459,6 +459,7 @@ public class Main {
      * @param user
      */
     private static void addDisableUser(User user) {
+        user.getRole().DisableUser(user.getUserId());
     }
 
     /**
@@ -466,7 +467,7 @@ public class Main {
      * @param user
      */
     private static void CancelDisableUser(User user) {
-
+        user.getRole().CancelDisable(user.getUserId());
     }
 
     /**
@@ -474,7 +475,7 @@ public class Main {
      * @param user
      */
     private static void showBoardMgrList(User user) {
-
+        user.getRole().showBoardMgrList();
     }
 
     /**
@@ -482,7 +483,6 @@ public class Main {
      * @param user
      */
     private static void addBoardMgr(User user) {
-
     }
 
     /**

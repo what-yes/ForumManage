@@ -29,4 +29,9 @@ public class DefaultAdmin implements Admin {
     public boolean deleteBoard(int boardId) {
         return boardService.deleteBoard(boardId);
     }
+
+    @Override
+    public void showBoardMgrList() {
+        userService.showBoardMgrList();
+    }
 }

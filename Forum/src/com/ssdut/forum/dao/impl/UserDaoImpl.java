@@ -9,7 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserDaoImpl implements UserDao {
     @Override
@@ -190,7 +192,7 @@ public class UserDaoImpl implements UserDao {
                 System.out.println("添加失败。原因：该用户已在您的黑名单中");
             }
             else{
-                System.out.println("用户"+getUserById(blackUserId). getUserName()+"(ID"+blackUserId+")" +"已被添加至您的黑名单");
+                System.out.println("用户"+getUserById(blackUserId).getUserName()+"(ID:"+blackUserId+")" +"已被添加至您的黑名单");
             }
 
         }catch(Exception e){
@@ -238,7 +240,8 @@ public class UserDaoImpl implements UserDao {
         try {
             conn = JdbcUtil.getConnection();
             st = conn.prepareStatement(
-                    "select us.userId, us.userName, from blacklist bl join user us where bl.blackUserId = us.userId");
+                    "select us.userId, us.userName from blacklist bl join user us where bl.blackUserId = us.userId and bl.userId=?");
+            st.setInt(1,userId);
             rs = st.executeQuery();
             while(rs.next()){
                 user = new User();
@@ -276,6 +279,33 @@ public class UserDaoImpl implements UserDao {
         return !(rs==null);
     }
 
+    @Override
+    public void showBoardMgrList() {
+        Map<Integer, String> state = new HashMap<>();
+        state.put(0,"正常");
+        state.put(1,"禁用");
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        User user = null;
+        List<User> list = new ArrayList<>();
+        try {
+            conn = JdbcUtil.getConnection();
+            st = conn.prepareStatement("select us.userId,us.userName,us.state,bd.boardId,bd.boardName from user us join board bd where us.userId = bd.boardMgrId");
+            rs = st.executeQuery();
+            //我在想上面这句话会不会改变rs的指向而导致下面的语句出错
+            System.out.println("用户ID\t用户名\t用户状态\t板块ID\t板块名");
+            while(rs.next()){
+                System.out.printf("%-4d%-4s%-4d%-4d%-4s",rs.getInt("userId"),rs.getString("userName"),state.get(rs.getInt("state")),rs.getInt("boardId"),rs.getString("boardName"));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            JdbcUtil.closeAll(rs,st,conn);
+        }
+
+    }
+
     public User getUserById(int userId){
         Connection conn = null;
         PreparedStatement st = null;
@@ -287,11 +317,14 @@ public class UserDaoImpl implements UserDao {
             st = conn.prepareStatement("select * from user where userId=?");
             st.setInt(1,userId);
             rs = st.executeQuery();
-            user = new User();
-            user.setUserId(rs.getInt("userId"));
-            user.setUserName(rs.getString("userName"));
-            user.setPassWord(rs.getString("password"));
-            user.setState(rs.getInt("state"));
+            if(rs.next()){
+                user = new User();
+                user.setUserId(rs.getInt("userId"));
+                user.setUserName(rs.getString("userName"));
+                user.setPassWord(rs.getString("password"));
+                user.setState(rs.getInt("state"));
+            }
+
 
         }catch(Exception e){
             e.printStackTrace();

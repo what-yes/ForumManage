@@ -31,4 +31,14 @@ public interface BoardService {
      * @return 成功返回true
      */
     boolean deleteBoard(int boardId);
+
+    /**
+     * 设置板块管理员
+     * @param userId
+     * @param boardId
+     * @return
+     */
+    boolean setBoardMgr(int userId, int boardId);
+
+    boolean cancelBoardMgr(int userId, int boardId);
 }

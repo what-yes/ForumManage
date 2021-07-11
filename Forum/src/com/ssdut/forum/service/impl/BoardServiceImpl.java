@@ -24,4 +24,14 @@ public class BoardServiceImpl implements BoardService {
     public boolean deleteBoard(int boardId) {
         return bdi.deleteBoard(boardId) > 0;
     }
+
+    @Override
+    public boolean setBoardMgr(int userId, int boardId){
+        return bdi.setBoardMgr(userId, boardId);
+    }
+
+    @Override
+    public boolean cancelBoardMgr(int userId, int boardId) {
+        return bdi.setBoardMgr(userId, boardId);
+    }
 }

@@ -45,5 +45,9 @@ public class UserServiceImpl implements UserService {
         return bdi.deleteBoardMgr(boardId);
     }
 
+    @Override
+    public void showBoardMgrList() {
+        udi.showBoardMgrList();
+    }
 
 }
