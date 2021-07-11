@@ -118,6 +118,11 @@ public class User {
         return role.getAllPost(boardId,ownerId);
     }
 
+    /**
+     * 查看已发贴
+     * @param userId
+     * @return
+     */
     public List<Post> queryUserPost(int userId){
         return role.queryUserPost(userId);
     }

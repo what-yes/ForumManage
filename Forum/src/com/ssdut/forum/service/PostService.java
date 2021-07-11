@@ -48,5 +48,10 @@ public interface PostService {
      */
     boolean CancelStick(int postId);
 
+    /**
+     * 根据用户Id查看已发贴
+     * @param userId
+     * @return
+     */
     List<Post> queryUserPost(int userId);
 }
