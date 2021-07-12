@@ -24,9 +24,9 @@ public class ResultPrintUtil {
         authority.put(2,"版主");
         authority.put(3,"管理员");
 
-        System.out.println("用户ID\t\t用户名\t\t用户身份\t\t用户状态\n");
+        System.out.printf("%-8s|%-8s|%-4s%-4s\n","用户ID","用户名","用户身份","用户状态");
         for(User user : list){
-            System.out.printf("%-8d|%-8s|%-4s\n",user.getUserId(),user.getUserName(),authority.get(user.getAuthority()),state.get(user.getState()));
+            System.out.printf("%-8d%-8s%-4s%-3d\n",user.getUserId(),user.getUserName(),authority.get(user.getAuthority()),state.get(user.getState()));
         }
 
     }
@@ -35,9 +35,9 @@ public class ResultPrintUtil {
      * （用户）显示自己的黑名单
      */
     public static void printBlackList(List<User> list){
-        System.out.println("用户ID\t\t用户名\n");
+        System.out.printf("%-6s%-5s\n","用户ID","用户名");
         for(User user : list){
-            System.out.printf("%-8d|%-8s\n",user.getUserId(),user.getUserName());
+            System.out.printf("%-8d%-5s\n",user.getUserId(),user.getUserName());
         }
     }
 
@@ -49,10 +49,10 @@ public class ResultPrintUtil {
         Map<Integer,String> stick = new HashMap<>();
         stick.put(0,"非置顶");
         stick.put(1,"置顶");
-        System.out.printf("帖子编号\t帖子标题\t帖子内容\t用户名\t置顶状态\n");
+        System.out.printf("%-10s%-10s%-11s%-10s\n","帖子编号","帖子标题","帖子内容","置顶状态" );
         for(Post post : list){
             String content = post.getContent().substring(0,5) + "...";
-            System.out.printf("%-3d|%-6s|%-10s|%-8s|%-3s\n",post.getPostId(),post.getTitle(),content,post.getUserName(),stick.get(post.getStick()));
+            System.out.printf("%-13s%-11s%-12s%-10s\n",Integer.toString(post.getPostId()),post.getTitle(),content,stick.get(post.getStick()));
         }
     }
 
@@ -60,8 +60,9 @@ public class ResultPrintUtil {
      * 打印所有版块
      */
     public static void printBoards(List<Board> list){
+        System.out.println("板块号 板块名");
         for(Board board : list){
-            System.out.printf("%-4d%-4s\n",board.getBoardId(),board.getBoardName());
+            System.out.printf("%-6d%-4s\n",board.getBoardId(),board.getBoardName());
         }
     }
 
