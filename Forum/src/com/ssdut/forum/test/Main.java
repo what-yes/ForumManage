@@ -215,6 +215,7 @@ public class Main {
      * @param user
      */
     private static void boardContentScreen(Board board,User user){
+        boolean selectTrue=false; //是否选择正确
         while(true){
             //TODO 分页查看
             //显示版块内容
@@ -243,33 +244,43 @@ public class Main {
                     return; //不能使用break
                 case 2:
                     //查看帖子
+                    selectTrue=true;
                     showPost(user, board);
-                    return;
+                    break;
                 case 3:
                     //发主题帖
+                    selectTrue=true;
                     addPost(user);
-                    return;
+                    break;
                 case 4:
                     //删除帖子
+                    selectTrue=true;
                     deletePost(user);
-                    return;
+                    break;
                 default:
+                    if(user.getAuthority()==1){
+                        selectTrue=false;
+                    }
                     break;
             }
             //如果是版主或管理员 进行额外操作
-            if((user.getAuthority()==2 && board.getBoardMgrId()==user.getUserId())
+            if((iSelect>3||iSelect<0)&&(user.getAuthority()==2 && board.getBoardMgrId()==user.getUserId())
                     ||user.getAuthority()==3){
                 if(iSelect==5){
                     //置顶帖子
+                    selectTrue=true;
                     addStick(user);
-                    return;
                 }else  if(iSelect==6) {
                     //取消置顶
+                    selectTrue=true;
                     cancelStick(user);
-                    return;
+                }else {
+                    selectTrue=false;
                 }
             }
-            System.out.println("无此功能，敬请期待！请重新选择其他功能：");
+            if(!selectTrue){
+                System.out.println("无此功能，敬请期待！请重新选择其他功能：");
+            }
         }
     }
 
@@ -355,6 +366,7 @@ public class Main {
      * @param user
      */
     private static void mgrUserScreen(User user){
+        boolean selectTrue=false;
         while(true){
             System.out.println("--------用户管理--------");
             System.out.println("可进行操作：");
@@ -381,58 +393,76 @@ public class Main {
                     return;
                 case 1:
                     //查看黑名单
+                    selectTrue=true;
                     showBlackList(user);
-                    return; //不能使用break
+                    break; //不能使用break
                 case 2:
                     //拉黑用户
+                    selectTrue=true;
                     addIntoBlackList(user);
-                    return;
+                    break;
                 case 3:
                     //取消拉黑用户
+                    selectTrue=true;
                     moveOutBlackList(user);
-                    return;
+                    break;
                 default:
+                    if(user.getAuthority()==1){
+                        selectTrue=false;
+                    }
                     break;
             }
             //如果是版主或管理员 进行额外操作
-            if(user.getAuthority()==2 ||user.getAuthority()==3){
+            if((user.getAuthority()==2 ||user.getAuthority()==3)&&(iSelect>3||iSelect<0)){
                 switch (iSelect){
                     case 4:
+                        selectTrue=true;
                         //查看禁用用户列表
                         showDisableUserList(user);
-                        return;
+                        break;
                     case 5:
+                        selectTrue=true;
                         //禁用用户
                         addDisableUser(user);
-                        return; //不能使用break
+                        break; //不能使用break
                     case 6:
+                        selectTrue=true;
                         //取消禁用用户
                         CancelDisableUser(user);
-                        return;
+                        break;
                     default:
+                        if(user.getAuthority()==2){
+                            selectTrue=false;
+                        }
                         break;
                 }
             }
             //如果是管理员 进行额外操作
-            if(user.getAuthority()==3){
+            if((user.getAuthority()==3)&&(iSelect>6||iSelect<0)){
                 switch (iSelect){
                     case 7:
+                        selectTrue=true;
                         //查看版主信息
                         showBoardMgrList(user);
-                        return;
+                        break;
                     case 8:
+                        selectTrue=true;
                         //添加版主
                         addBoardMgr(user);
-                        return; //不能使用break
+                        break; //不能使用break
                     case 9:
+                        selectTrue=true;
                         //取消版主
                         cancelBoardMgr(user);
-                        return;
+                        break;
                     default:
+                        selectTrue=false;
                         break;
                 }
             }
-            System.out.println("无此功能，敬请期待！请重新选择其他功能：");
+            if(!selectTrue){
+                System.out.println("无此功能，敬请期待！请重新选择其他功能：");
+            }
         }
     }
 
@@ -512,6 +542,9 @@ public class Main {
      * @param user
      */
     private static void cancelBoardMgr(User user) {
+        //输入删除的版块id
+
+        //版块管理员进行判断是否已经没有管理的版块
 
     }
 }
