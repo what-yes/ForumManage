@@ -10,6 +10,7 @@ import com.ssdut.forum.entity.Post;
 import com.ssdut.forum.role.Role;
 import com.ssdut.forum.util.ResultPrintUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -215,6 +216,7 @@ public class Main {
      */
     private static void boardContentScreen(Board board,User user){
         while(true){
+            //TODO 分页查看
             //显示版块内容
             System.out.println("--------版块："+board.getBoardName()+"--------");
             printPosts(user.getAllPost(board.getBoardId(),user.getUserId()));
@@ -276,7 +278,20 @@ public class Main {
      * @param user
      */
     private static void showPost(User user){
-
+        while (true){
+            System.out.print("请输入主帖号查看相应帖子（输入0返回）：");
+            int inputNumber = input.nextInt();
+            if(inputNumber == 0){
+                return;
+            }
+            List<Post> postList = user.getAllReplyByPostId(inputNumber, user.getUserId());
+            if(postList==null){
+                System.out.print("帖号不合法！");
+                System.out.println("");
+            }else{
+                printPosts(postList);
+            }
+        }
     }
 
     /**

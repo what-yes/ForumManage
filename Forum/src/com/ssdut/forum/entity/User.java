@@ -127,6 +127,16 @@ public class User {
         return role.queryUserPost(userId);
     }
 
+    /**
+     * 查看主帖及回帖
+     * @param postId
+     * @param ownerId
+     * @return
+     */
+    public List<Post> getAllReplyByPostId(int postId, int ownerId) {
+        return role.getAllReplyByPostId(postId, ownerId);
+    }
+
     public boolean MoveOutBlackList(int userId, int blackId){
         return role.MoveOutBlackList(userId, blackId);
     }
