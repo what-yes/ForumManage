@@ -82,4 +82,11 @@ public interface UserDao {
      * 显示板块管理员信息
      */
     void showBoardMgrList();
+
+    /**
+     * 根据用户ID查用户
+     * @param userId
+     * @return
+     */
+    User getUserById(int userId);
 }

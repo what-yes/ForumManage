@@ -55,4 +55,11 @@ public interface UserService {
      */
     void showBoardMgrList();
 
+    /**
+     * 根据ID判断用户是否存在
+     * @param userId
+     * @return
+     */
+    boolean getUserById(int userId);
+
 }

@@ -333,6 +333,7 @@ public class Main {
      * @param user
      */
     private static void addStick(User user){
+        int postId;
 
     }
 
@@ -448,8 +449,13 @@ public class Main {
                     case 8:
                         selectTrue=true;
                         //添加版主
+<<<<<<< Updated upstream
                         addBoardMgr(user);
                         break; //不能使用break
+=======
+                        addBoardMgr(user,board);
+                        return; //不能使用break
+>>>>>>> Stashed changes
                     case 9:
                         selectTrue=true;
                         //取消版主
@@ -511,7 +517,17 @@ public class Main {
      * @param user
      */
     private static void addDisableUser(User user) {
-        user.getRole().DisableUser(user.getUserId());
+        //user.getRole().DisableUser(user.getUserId());
+        System.out.println("请输入你想禁用的用户ID：(输入-1退出)");
+        int userId = input.nextInt();
+        if(userId == -1)
+            return ;
+        while(user.getRole().DisableUser(userId) == false){
+            System.out.println("请重新输入");
+            userId = input.nextInt();
+            if(userId == -1)
+                return;
+        }
     }
 
     /**
@@ -519,7 +535,14 @@ public class Main {
      * @param user
      */
     private static void CancelDisableUser(User user) {
-        user.getRole().CancelDisable(user.getUserId());
+        showDisableUserList(user);
+        System.out.println("请输入你想取消禁用的用户ID：");
+        int userId = input.nextInt();
+        while(user.getRole().CancelDisable(userId) == false){
+            System.out.println("请重新输入");
+            userId = input.nextInt();
+        }
+
     }
 
     /**
@@ -534,7 +557,19 @@ public class Main {
      * 添加版主
      * @param user
      */
-    private static void addBoardMgr(User user) {
+    private static void addBoardMgr(User user, Board board) {
+
+        System.out.println("请输入你想设为管理员的用户ID：");
+        int userId = input.nextInt();
+        if(userId == -1)
+            return ;
+        while(user.getRole().getUserById(userId) == false){
+            System.out.println("请重新输入");
+            userId = input.nextInt();
+            if(userId == -1)
+                return ;
+        }
+        user.getRole().setBoardMgr(userId,board.getBoardId());
     }
 
     /**

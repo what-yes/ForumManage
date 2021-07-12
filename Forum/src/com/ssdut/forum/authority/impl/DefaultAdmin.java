@@ -34,4 +34,6 @@ public class DefaultAdmin implements Admin {
     public void showBoardMgrList() {
         userService.showBoardMgrList();
     }
+
+    public boolean getUserById(int useId){ return userService.getUserById(useId); }
 }

@@ -104,6 +104,7 @@ public class BoardDaoImpl implements BoardDao {
     public boolean setBoardMgr(int userId, int boardId) {
         boolean isChanged = false;
         try{
+
             conn = JdbcUtil.getConnection();
             st = conn.prepareStatement("update Board set boardMgrId = ? where boardId = ?");
             st.setInt(1, userId);
