@@ -2,6 +2,7 @@ package com.ssdut.forum.dao.impl;
 
 import com.ssdut.forum.dao.BoardDao;
 import com.ssdut.forum.entity.Board;
+import com.ssdut.forum.entity.User;
 import com.ssdut.forum.util.JdbcUtil;
 
 import java.sql.Connection;
@@ -104,13 +105,26 @@ public class BoardDaoImpl implements BoardDao {
     public boolean setBoardMgr(int userId, int boardId) {
         boolean isChanged = false;
         try{
-
             conn = JdbcUtil.getConnection();
             st = conn.prepareStatement("update Board set boardMgrId = ? where boardId = ?");
             st.setInt(1, userId);
             st.setInt(2, boardId);
 
             isChanged = st.executeUpdate()>0;
+            //如果本来是普通用户，则设置为管理员
+            st = conn.prepareStatement("select * from user where userId=?");
+            st.setInt(1,userId);
+            rs = st.executeQuery();
+            int authority=1;
+            if(rs.next()){
+                authority=rs.getInt("authority");
+            }
+            if(isChanged && authority==1){
+                //设置版主权限值
+                st = conn.prepareStatement("update user set authority = 2 where userId = ?");
+                st.setInt(1, userId);
+                isChanged = st.executeUpdate()>0;
+            }
         }catch (Exception e){
             e.printStackTrace();
         }finally {
@@ -120,13 +134,27 @@ public class BoardDaoImpl implements BoardDao {
     }
 
     @Override
-    public boolean deleteBoardMgr(int boardId) {
+    public boolean deleteBoardMgr(Board board) {
         boolean isChanged = false;
+        int boardAgedMgrId=board.getBoardMgrId(); //原来的管理者Id
+
         try{
             conn = JdbcUtil.getConnection();
+            //改变版块的管理者为null
             st = conn.prepareStatement("update Board set boardMgrId = null where boardId = ?");
-            st.setInt(1, boardId);
+            st.setInt(1, board.getBoardId());
             isChanged = st.executeUpdate()>0;
+
+            //判断原来的管理者是否变成普通用户
+            st=conn.prepareStatement("select * from board where boardMgrId=?");
+            st.setInt(1,boardAgedMgrId);
+            //如果变为普通用户  改变其权限
+            rs=st.executeQuery();
+            if(!rs.next()){
+                st = conn.prepareStatement("update user set authority = 1 where userId = ?");
+                st.setInt(1, boardAgedMgrId);
+                isChanged=st.executeUpdate()>0;
+            }
         }catch (Exception e){
             e.printStackTrace();
         }finally {

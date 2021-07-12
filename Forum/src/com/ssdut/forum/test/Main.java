@@ -54,7 +54,7 @@ public class Main {
                     boolean bLogin=false;//登录是否成功
                     while(!bLogin){
                         User u=null;
-                        if((u=login(user))!=null){
+                        if((u=login(user))!=null&&u.getState()!=1){
                             // 登录成功
                             System.out.println("登录成功！");
                             user=u;
@@ -79,7 +79,9 @@ public class Main {
                             }else {
                                 System.out.println("未知用户权限！");
                             }
-                        }else{
+                        }else if(u!=null&&u.getState()==1) {
+                            System.out.println("该账户已被禁用！");
+                        }else {
                             System.out.println("账户或密码错误！请重新输入：");
                         }
                     }
@@ -264,8 +266,8 @@ public class Main {
                     break;
             }
             //如果是版主或管理员 进行额外操作
-            if((iSelect>3||iSelect<0)&&(user.getAuthority()==2 && board.getBoardMgrId()==user.getUserId())
-                    ||user.getAuthority()==3){
+            if((iSelect>3||iSelect<0)&&((user.getAuthority()==2 && board.getBoardMgrId()==user.getUserId())
+                    ||user.getAuthority()==3)){
                 if(iSelect==5){
                     //置顶帖子
                     selectTrue=true;
@@ -407,7 +409,6 @@ public class Main {
             if(inputNumber == 0){
                 return;
             }
-            //TODO 输入帖号查看已发贴所在主帖
         }
     }
 
@@ -561,7 +562,17 @@ public class Main {
      * @param user
      */
     private static void addDisableUser(User user) {
-        user.getRole().DisableUser(user.getUserId());
+        //user.getRole().DisableUser(user.getUserId());
+        System.out.println("请输入你想禁用的用户ID(输入0返回)：");
+        int userId = input.nextInt();
+        if(userId == 0)
+            return ;
+        while(user.getRole().DisableUser(userId) == false){
+            System.out.println("请重新输入");
+            userId = input.nextInt();
+            if(userId == 0)
+                return;
+        }
     }
 
     /**
@@ -569,7 +580,18 @@ public class Main {
      * @param user
      */
     private static void CancelDisableUser(User user) {
-        user.getRole().CancelDisable(user.getUserId());
+        showDisableUserList(user);
+        System.out.println("请输入你想取消禁用的用户ID(输入0返回)：");
+        int userId = input.nextInt();
+        if(userId == 0)
+            return ;
+        while(user.getRole().CancelDisable(userId) == false){
+            System.out.println("请重新输入");
+            userId = input.nextInt();
+            if(userId == 0)
+                return ;
+        }
+
     }
 
     /**
@@ -585,6 +607,63 @@ public class Main {
      * @param user
      */
     private static void addBoardMgr(User user) {
+        int boardId=0;
+        int boardMgrId=0;
+        while(true){
+            System.out.println("请输入要设置的版块Id(输入0返回)：");
+            boardId=input.nextInt();
+            if(boardId==0){
+                return;
+            }
+            List<Board> boards= user.getBoards();
+            boolean boardExist=false;
+            Board board=null;
+            for (Board b:boards){
+                if (b.getBoardId() == boardId) {
+                    boardExist = true;
+                    board=b;
+                    break;
+                }
+            }
+            //判断是否存在该版块
+            while (!boardExist){
+                if(boardId==0){
+                    return;
+                }
+                System.out.println("不存在该版块，请重新输入(输入0返回)：");
+                boardId= input.nextInt();
+                for (Board b:boards){
+                    if (b.getBoardId() == boardId) {
+                        boardExist = true;
+                        board=b;
+                        break;
+                    }
+                }
+            }
+            System.out.println("请输入要设置的版主Id(输入0返回)");
+            boardMgrId=input.nextInt();
+            if(boardMgrId==0){
+                return;
+            }
+            //判断是否存在该用户Id
+            User user1=user.getUserById(boardMgrId);
+            while (user1==null||user1.getAuthority()==3){
+                if(boardMgrId==0){
+                    return;
+                }
+                System.out.println("该用户不存在或者其身份为admin，不可设置为管理员，请重新输入(输入0返回)：");
+                boardMgrId= input.nextInt();
+                user1=user.getUserById(boardMgrId);
+            }
+            //取消掉原来的版主，实际为了实现被取消管理版块的原版主的可能发生的权限更改
+            user.cancelBoardMgr(board);
+            if(user.setBoardMgr(boardMgrId,boardId)){
+                System.out.println("设置版主成功！");
+                break;
+            }else {
+                System.out.println("设置失败请重新设置");
+            }
+        }
     }
 
     /**
@@ -592,9 +671,45 @@ public class Main {
      * @param user
      */
     private static void cancelBoardMgr(User user) {
-        //输入删除的版块id
-
-        //版块管理员进行判断是否已经没有管理的版块
-
+        int boardId=0;
+        while(true){
+            System.out.println("请输入要取消版主的版块Id(输入0返回)：");
+            boardId=input.nextInt();
+            if(boardId==0){
+                return;
+            }
+            List<Board> boards= user.getBoards();
+            boolean boardExist=false;
+            Board board=null;
+            for (Board b:boards){
+                if (b.getBoardId() == boardId) {
+                    boardExist = true;
+                    board=b;
+                    break;
+                }
+            }
+            //判断是否存在该版块
+            while (!boardExist){
+                if(boardId==0){
+                    return;
+                }
+                System.out.println("不存在该版块，请重新输入(输入0返回)：");
+                boardId= input.nextInt();
+                for (Board b:boards){
+                    if (b.getBoardId() == boardId) {
+                        boardExist = true;
+                        board=b;
+                        break;
+                    }
+                }
+            }
+            //取消掉原来的版主，实际为了实现被取消管理版块的原版主的可能发生的权限更改
+            if(user.cancelBoardMgr(board)){
+                System.out.println("取消版主成功！");
+                break;
+            }else {
+                System.out.println("设置失败请重新设置");
+            }
+        }
     }
 }

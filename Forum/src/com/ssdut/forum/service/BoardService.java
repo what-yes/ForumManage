@@ -40,5 +40,5 @@ public interface BoardService {
      */
     boolean setBoardMgr(int userId, int boardId);
 
-    boolean cancelBoardMgr(int userId, int boardId);
+    boolean cancelBoardMgr(Board board);
 }

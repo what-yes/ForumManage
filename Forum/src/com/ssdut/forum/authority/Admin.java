@@ -16,13 +16,6 @@ public interface Admin {
     public boolean setBoardMgr(int userId, int boardId);
 
     /**
-     * 取消管理员权限
-     * @param boardId
-     * @return
-     */
-    public boolean deleteBoardMgr(int boardId);
-
-    /**
      * 添加版块
      * @param board
      * @return
@@ -38,6 +31,12 @@ public interface Admin {
 
     public void showBoardMgrList();
 
-    public boolean getUserById(int userId);
+    public User getUserById(int userId);
 
+    /**
+     * 根据boardId取消版主
+     * @param board
+     * @return
+     */
+    public boolean cancelBoardMgr(Board board);
 }

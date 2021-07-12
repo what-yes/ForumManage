@@ -164,4 +164,32 @@ public class User {
     public void cancelStick(int postId){
         role.CancelStick(postId);
     }
+
+    /**
+     * 添加管理员权限
+     * @param userId
+     * @param boardId
+     * @return
+     */
+    public boolean setBoardMgr(int userId, int boardId){
+        return role.setBoardMgr(userId,boardId);
+    }
+
+    /**
+     * 根据userId查询用户
+     * @param userId
+     * @return
+     */
+    public User getUserById(int userId){
+        return role.getUserById(userId);
+    }
+
+    /**
+     * 根据board取消版主
+     * @param board
+     * @return
+     */
+    public boolean cancelBoardMgr(Board board){
+        return role.cancelBoardMgr(board);
+    }
 }
