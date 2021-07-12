@@ -75,15 +75,18 @@ public class UserDaoImpl implements UserDao {
         ResultSet rs = null;
         int affectedRow = 0;
         try{
-            conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("update user set state=1 where userId=?");
-            st.setInt(1,userId);
-            affectedRow = st.executeUpdate();
-            if(affectedRow == 1)
-                System.out.println("该用户已是被禁状态，操作无效");
-            else
-                System.out.println("Id为" + userId +"的用户已被禁止登录");
-
+            if(getUserById(userId) != null) {
+                conn = JdbcUtil.getConnection();
+                st = conn.prepareStatement("update user set state=1 where userId=?");
+                st.setInt(1, userId);
+                affectedRow = st.executeUpdate();
+                if (affectedRow == 0)
+                    System.out.println("该用户已是被禁状态，操作无效");
+                else
+                    System.out.println("Id为" + userId + "的用户已被禁止登录");
+            }else{
+                System.out.println("该用户不存在！");
+            }
         }catch(Exception e){
             e.printStackTrace();
         }finally {
@@ -99,16 +102,19 @@ public class UserDaoImpl implements UserDao {
         ResultSet rs = null;
         int affectedRow = 0;
         try{
-            conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("update user set state=1 where userId=?");
-            st.setInt(1, userId);
-            affectedRow = st.executeUpdate();
-
-            //这种输出信息似乎都应该在工厂模式中
-            if(affectedRow == 0)
-                System.out.println("该用户已是正常状态，操作无效");
-            else
-                System.out.println("Id为" + userId +"的用户已被允许登录");
+            if(getUserById(userId) != null) {
+                conn = JdbcUtil.getConnection();
+                st = conn.prepareStatement("update user set state=0 where userId=?");
+                st.setInt(1, userId);
+                affectedRow = st.executeUpdate();
+                //这种输出信息似乎都应该在工厂模式中
+                if (affectedRow == 0)
+                    System.out.println("该用户已是正常状态，操作无效");
+                else
+                    System.out.println("Id为" + userId + "的用户已被允许登录");
+            }else{
+                System.out.println("该用户不存在");
+            }
 
         }catch(Exception e){
             e.printStackTrace();
@@ -184,16 +190,25 @@ public class UserDaoImpl implements UserDao {
         int affectedRow = 0;
         try{
             conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("insert into blacklist values(?,?)");
-            st.setInt(1,userId);
-            st.setInt(2,blackUserId);
-            affectedRow = st.executeUpdate();
-            if(affectedRow == 0){
-                System.out.println("添加失败。原因：该用户已在您的黑名单中");
+            User user = null;
+            if(getUserById(blackUserId) != null){
+                st = conn.prepareStatement("insert into blacklist values(?,?)");
+                st.setInt(1,userId);
+                st.setInt(2,blackUserId);
+                affectedRow = st.executeUpdate();
+                if(affectedRow == 0){
+                    System.out.println("添加失败。原因：该用户已在您的黑名单中");
+                }
+                else{
+                    System.out.println("用户"+getUserById(blackUserId).getUserName()+"(ID:"+blackUserId+")" +"已被添加至您的黑名单");
+                }
             }
             else{
-                System.out.println("用户"+getUserById(blackUserId).getUserName()+"(ID:"+blackUserId+")" +"已被添加至您的黑名单");
+                System.out.println("您想拉黑的用户不存在");
+                return false;
             }
+
+
 
         }catch(Exception e){
             e.printStackTrace();
@@ -210,16 +225,20 @@ public class UserDaoImpl implements UserDao {
         ResultSet rs = null;
         int affectedRow = 0;
         try{
-            conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("delete from blacklist where userId=? and blackUserId=?");
-            st.setInt(1,userId);
-            st.setInt(2,blackUserId);
-            affectedRow = st.executeUpdate();
-            if(affectedRow == 0){
-                System.out.println("移除失败。原因：该用户不在您的黑名单中");
-            }
-            else{
-                System.out.println("用户"+getUserById(blackUserId). getUserName()+"(ID"+blackUserId+")" +"已从您的黑名单中移除");
+            if(getUserById(blackUserId) != null){
+                conn = JdbcUtil.getConnection();
+                st = conn.prepareStatement("delete from blacklist where userId=? and blackUserId=?");
+                st.setInt(1,userId);
+                st.setInt(2,blackUserId);
+                affectedRow = st.executeUpdate();
+                if(affectedRow == 0){
+                    System.out.println("移除失败。原因：该用户不在您的黑名单中");
+                }
+                else{
+                    System.out.println("用户"+getUserById(blackUserId). getUserName()+"(ID"+blackUserId+")" +"已从您的黑名单中移除");
+                }
+            }else{
+                System.out.println("您想取消拉黑的用户不存在");
             }
 
         }catch(Exception e){
@@ -305,6 +324,8 @@ public class UserDaoImpl implements UserDao {
         }
 
     }
+
+
 
     public User getUserById(int userId){
         Connection conn = null;

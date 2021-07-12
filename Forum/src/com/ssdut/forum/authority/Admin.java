@@ -38,4 +38,6 @@ public interface Admin {
 
     public void showBoardMgrList();
 
+    public boolean getUserById(int userId);
+
 }

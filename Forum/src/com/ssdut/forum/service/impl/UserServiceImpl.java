@@ -50,4 +50,10 @@ public class UserServiceImpl implements UserService {
         udi.showBoardMgrList();
     }
 
+    @Override
+    public boolean getUserById(int userId) {
+        return (udi.getUserById(userId) != null);
+    }
+
+
 }

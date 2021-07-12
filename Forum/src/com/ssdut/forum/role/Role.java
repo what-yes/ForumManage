@@ -338,4 +338,6 @@ public class Role {
     public void showDisableUserList(){
         boardMgr.showDisableUserList();
     }
+
+    public boolean getUserById(int userId){ return admin.getUserById(userId); }
 }

@@ -22,7 +22,7 @@ public class ResultPrintUtil {
         Map<Integer, String> authority = new HashMap<>();
         authority.put(1,"普通用户");
         authority.put(2,"版主");
-        authority.put(1,"管理员");
+        authority.put(3,"管理员");
 
         System.out.println("用户ID\t\t用户名\t\t用户身份\t\t用户状态\n");
         for(User user : list){
