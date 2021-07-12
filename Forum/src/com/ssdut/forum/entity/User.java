@@ -149,5 +149,19 @@ public class User {
         role.showDisableUserList();
     }
 
+    /**
+     * 添加置顶
+     * @param postId
+     */
+    public void addStick(int postId){
+        role.StickPost(postId);
+    }
 
+    /**
+     * 删除置顶
+     * @param postId
+     */
+    public void cancelStick(int postId){
+        role.CancelStick(postId);
+    }
 }

@@ -269,11 +269,11 @@ public class Main {
                 if(iSelect==5){
                     //置顶帖子
                     selectTrue=true;
-                    addStick(user);
+                    addStick(user,board);
                 }else  if(iSelect==6) {
                     //取消置顶
                     selectTrue=true;
-                    cancelStick(user);
+                    cancelStick(user,board);
                 }else {
                     selectTrue=false;
                 }
@@ -332,16 +332,66 @@ public class Main {
      * 添加置顶
      * @param user
      */
-    private static void addStick(User user){
-
+    private static void addStick(User user,Board board){
+        System.out.println("请输入您要置顶的帖子ID(输入0返回)：");
+        int postid=0;
+        while (true){
+            postid=input.nextInt();
+            if(postid == 0){
+                return;
+            }
+            boolean isExist= user.getAllReplyByPostId(postid, user.getUserId()) != null;
+            if(isExist){
+                List<Post> AvailablePostList = user.getAllPost(board.getBoardId(), user.getUserId());
+                boolean isInBoard = false;
+                for(Post post:AvailablePostList){
+                    if(post.getPostId()==postid){
+                        isInBoard = true;
+                    }
+                }
+                isExist=isInBoard;
+            }
+            if(isExist){
+                user.addStick(postid);
+                System.out.println("置顶成功！");
+                return;
+            }else {
+                System.out.println("无此帖子，请重新输入(输入0返回)：");
+            }
+        }
     }
 
     /**
      * 删除置顶
      * @param user
      */
-    private static void cancelStick(User user){
-
+    private static void cancelStick(User user,Board board){
+        System.out.println("请输入您要取消置顶的帖子ID(输入0返回)：");
+        int postid=0;
+        while (true){
+            postid=input.nextInt();
+            if(postid == 0){
+                return;
+            }
+            boolean isExist= user.getAllReplyByPostId(postid, user.getUserId()) != null;
+            if(isExist){
+                List<Post> AvailablePostList = user.getAllPost(board.getBoardId(), user.getUserId());
+                boolean isInBoard = false;
+                for(Post post:AvailablePostList){
+                    if(post.getPostId()==postid){
+                        isInBoard = true;
+                    }
+                }
+                isExist=isInBoard;
+            }
+            if(isExist){
+                user.cancelStick(postid);
+                System.out.println("取消置顶成功！");
+                return;
+            }else {
+                System.out.println("无此帖子，请重新输入(输入0返回)：");
+            }
+        }
     }
 
     /**

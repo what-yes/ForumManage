@@ -166,11 +166,11 @@ public class PostDaoImpl implements PostDao{
         try{
             conn = JdbcUtil.getConnection();
             st = conn.prepareStatement("update post " +
-                    "set ?=? " +
+                    "set " + field +" =? " +
                     "where postId = ?");
-            st.setObject(1, field);
-            st.setObject(2, newValue);
-            st.setInt(3, postId);
+            //st.setString(1, field);
+            st.setObject(1, newValue);
+            st.setInt(2, postId);
             isChanged = st.executeUpdate()>0;
 
         }catch (SQLException e){
