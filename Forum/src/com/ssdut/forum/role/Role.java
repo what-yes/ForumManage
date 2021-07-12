@@ -67,7 +67,6 @@ public class Role {
             return false;
         }
         flag=normal.addPost(post);
-
         return flag;
     }
 
