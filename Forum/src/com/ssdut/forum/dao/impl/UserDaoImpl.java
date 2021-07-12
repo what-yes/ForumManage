@@ -282,19 +282,21 @@ public class UserDaoImpl implements UserDao {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
+        boolean find = false;
         List<User> list = new ArrayList<>();
         try {
             conn = JdbcUtil.getConnection();
             st = conn.prepareStatement("select * from user where userName=?");
             st.setString(1,userName);
             rs = st.executeQuery();
-
+            if(rs.next())
+                find = true;
         }catch(Exception e){
             e.printStackTrace();
         }finally {
             JdbcUtil.closeAll(rs,st,conn);
         }
-        return !(rs==null);
+        return find;
     }
 
     @Override

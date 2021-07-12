@@ -32,12 +32,13 @@ public class DefaultUser implements Normal {
 
     /**
      * 重写删帖
+     * @param userId
      * @param postId
      * @return
      */
     @Override
-    public boolean deletePost(int postId) {
-        return baseService.deletePost(postId);
+    public boolean deletePost(int userId,int postId) {
+        return postService.deletePost(userId,postId);
     }
 
     /**

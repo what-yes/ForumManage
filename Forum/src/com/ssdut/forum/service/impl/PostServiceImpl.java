@@ -15,9 +15,25 @@ public class PostServiceImpl implements PostService {
         return pd.queryPostByBoardID(boardId,ownerId);
     }
 
+    /**
+     * 管理员删帖
+     * @param postId
+     * @return
+     */
     @Override
     public boolean deletePost(int postId) {
         return pd.deletePost(postId) > 0;
+    }
+
+    /**
+     * 用户删帖
+     * @param userId
+     * @param postId
+     * @return
+     */
+    @Override
+    public boolean deletePost(int userId,int postId) {
+        return pd.deletePost(userId,postId) > 0;
     }
 
     @Override

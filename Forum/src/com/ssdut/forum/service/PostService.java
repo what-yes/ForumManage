@@ -21,11 +21,19 @@ public interface PostService {
     List<Post> getAllPost(int boardId,int ownerId);
 
     /**
-     * 根据帖Id删除帖
+     * 管理员根据帖Id删除帖
      * @param postId
      * @return
      */
     boolean deletePost(int postId);
+
+    /**
+     * 用户根据帖Id删除帖
+     * @param userId
+     * @param postId
+     * @return
+     */
+    boolean deletePost(int userId,int postId);
 
     /**
      * 根据帖Id查询所有回帖

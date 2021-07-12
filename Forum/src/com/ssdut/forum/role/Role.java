@@ -75,14 +75,14 @@ public class Role {
      * @param postId
      * @return
      */
-    public boolean deletePost(int postId){
+    public boolean deletePost(int userId,int postId){
         boolean flag;
 
         if(normal==null){
             System.out.println("您还没有登录，请登陆后再操作");
             return false;
         }else if(admin==null&&boardMgr==null){
-            flag=normal.deletePost(postId);
+            flag=normal.deletePost(userId,postId);
         }else{
             flag=boardMgr.DeletePost(postId);
         }

@@ -266,7 +266,7 @@ public class Main {
                     break;
             }
             //如果是版主或管理员 进行额外操作
-            if((iSelect>3||iSelect<0)&&((user.getAuthority()==2 && board.getBoardMgrId()==user.getUserId())
+            if((iSelect>4||iSelect<0)&&((user.getAuthority()==2 && board.getBoardMgrId()==user.getUserId())
                     ||user.getAuthority()==3)){
                 if(iSelect==5){
                     //置顶帖子
@@ -327,7 +327,16 @@ public class Main {
      * @param user
      */
     private static void deletePost(User user){
-
+        System.out.println("请输入您想删除的帖子Id(输入0退出):");
+        int postId=input.nextInt();
+        if(postId==0){
+            return;
+        }
+        if(!user.deletePost(user.getUserId(),postId)){
+            System.out.println("删除失败！");
+        }else {
+            System.out.println("删除成功！");
+        }
     }
 
     /**

@@ -137,6 +137,16 @@ public class User {
         return role.getAllReplyByPostId(postId, ownerId);
     }
 
+    /**
+     * 删帖
+     * @param userId
+     * @param postId
+     * @return
+     */
+    public boolean deletePost(int userId,int postId){
+        return role.deletePost(userId,postId);
+    }
+
     public boolean MoveOutBlackList(int userId, int blackId){
         return role.MoveOutBlackList(userId, blackId);
     }

@@ -39,6 +39,42 @@ public class PostDaoImpl implements PostDao{
         return affectedRow;
     }
 
+    /**
+     * 普通用户删帖
+     * @param userId
+     * @param postId 帖子编号
+     * @return
+     */
+    @Override
+    public int deletePost(int userId,int postId) {
+
+        Post post = null;
+        List<Post> list = new ArrayList<>();
+        int affectedRow = 0;
+        try {
+            conn = JdbcUtil.getConnection();
+            st = conn.prepareStatement("delete from post where userId=? and belongTo=?");
+            st.setInt(1, userId);
+            st.setInt(2, postId);
+            affectedRow += st.executeUpdate();
+            st = conn.prepareStatement("delete from post where userId=? and postId=?");
+            st.setInt(1, userId);
+            st.setInt(2, postId);
+            affectedRow += st.executeUpdate();
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        } finally {
+            JdbcUtil.closeAll(rs, st, conn);
+        }
+        return affectedRow;
+    }
+
+    /**
+     * 管理员删帖
+     * @param postId
+     * @return
+     */
     @Override
     public int deletePost(int postId) {
 
@@ -47,23 +83,15 @@ public class PostDaoImpl implements PostDao{
         int affectedRow = 0;
         try {
             conn = JdbcUtil.getConnection();
-            conn.setAutoCommit(false);
-            rs = st.executeQuery();
             st = conn.prepareStatement("delete from post where belongTo=?");
             st.setInt(1, postId);
             affectedRow += st.executeUpdate();
             st = conn.prepareStatement("delete from post where postId=?");
             st.setInt(1, postId);
             affectedRow += st.executeUpdate();
-            conn.commit();
 
         } catch (SQLException e){
             e.printStackTrace();
-            try {
-                conn.rollback();
-            } catch (SQLException e1){
-                e1.printStackTrace();
-            }
         } finally {
             JdbcUtil.closeAll(rs, st, conn);
         }
@@ -187,7 +215,7 @@ public class PostDaoImpl implements PostDao{
         Post post;
         try{
             conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("select * from post where userId=?");
+            st = conn.prepareStatement("select post.*,user.userName from post join user on post.userId=user.userId where post.userId=?");
             st.setInt(1, userId);
             rs = st.executeQuery();
             while(rs.next()){
