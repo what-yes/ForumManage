@@ -4,9 +4,22 @@
     <list default="true" id="122c5597-6eaf-43e1-9944-58dd4bb97da0" name="Default Changelist" comment="完善Authority/DAO/RenameUSER">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/impl/PostDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/impl/PostDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/role/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/role/Role.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/test/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/database.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/mysql-connector-java-8.0.25.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/authority/Admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/authority/Admin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/authority/impl/DefaultAdmin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/authority/impl/DefaultAdmin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/dao/UserDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/dao/UserDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/dao/impl/PostDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/dao/impl/PostDaoImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/dao/impl/UserDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/dao/impl/UserDaoImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/entity/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/role/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/role/Role.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/service/BoardService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/service/BoardService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/service/impl/BoardServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/service/impl/BoardServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/service/impl/UserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/test/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/test/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/util/JdbcUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/util/JdbcUtil.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -243,7 +243,7 @@ public class Main {
                     return; //不能使用break
                 case 2:
                     //查看帖子
-                    showPost(user);
+                    showPost(user, board);
                     return;
                 case 3:
                     //发主题帖
@@ -277,15 +277,22 @@ public class Main {
      * 显示主题帖以及其回帖
      * @param user
      */
-    private static void showPost(User user){
+    private static void showPost(User user, Board board){
         while (true){
             System.out.print("请输入主帖号查看相应帖子（输入0返回）：");
             int inputNumber = input.nextInt();
             if(inputNumber == 0){
                 return;
             }
+            List<Post> AvailablePostList = user.getAllPost(board.getBoardId(), user.getUserId());
+            boolean isInBoard = false;
+            for(Post post:AvailablePostList){
+                if(post.getPostId()==inputNumber){
+                    isInBoard = true;
+                }
+            }
             List<Post> postList = user.getAllReplyByPostId(inputNumber, user.getUserId());
-            if(postList==null){
+            if(postList==null||isInBoard==false){
                 System.out.print("帖号不合法！");
                 System.out.println("");
             }else{

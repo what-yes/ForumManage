@@ -128,11 +128,11 @@ public class PostDaoImpl implements PostDao{
 //            list.add(post);
 
             st = conn.prepareStatement("SELECT * " +
-                    "FROM post " +
-                    "WHERE (postId = ? and belongTo is null) or belongTo=? AND userId NOT IN( " +
+                    "FROM post JOIN `user` ON post.userId=`user`.userId " +
+                    "WHERE (postId = ? and belongTo is null) or (belongTo=? AND post.userId NOT IN( " +
                     "SELECT blackUserId " +
                     "FROM blacklist " +
-                    "WHERE userId=?) " +
+                    "WHERE userId=?)) " +
                     "order by belongTo");
             st.setInt(1, postId);
             st.setInt(2, postId);
@@ -145,6 +145,7 @@ public class PostDaoImpl implements PostDao{
                 post.setTitle(rs.getString("title"));
                 post.setContent(rs.getString("content"));
                 post.setUserId(rs.getInt("userId"));
+                post.setUserName(rs.getString("userName"));
                 post.setBoardId(rs.getInt("boardId"));
                 post.setReplyTo(rs.getInt("replyTo"));
                 post.setBelongTo(rs.getInt("belongTo"));
