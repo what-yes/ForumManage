@@ -322,6 +322,12 @@ public class Main {
             }else{
                 printPosts(postList);
             }
+            System.out.println("回复请按1，退出该贴请按0");
+            int inputNumber2 = input.nextInt();
+            if(inputNumber2 == 0){
+                return;
+            }
+            addPost(user, board, inputNumber);
         }
     }
 
@@ -344,6 +350,46 @@ public class Main {
         inputString = input.next();
         System.out.println(inputString);
         newPost.setContent(sensitiveWordFilterUtil.replaceSensitiveWord(inputString, 1, "*"));
+        user.addPost(newPost);
+    }
+
+    /**
+     * 回复帖
+     * @param user
+     * @param board
+     * @param postId
+     */
+    private static void addPost(User user, Board board, int postId){
+        Post newPost = new Post();
+        newPost.setUserId(user.getUserId());
+        newPost.setBoardId(board.getBoardId());
+        newPost.setBelongTo(postId);
+        String inputString;
+        System.out.println("是否回复其他跟帖？输入postId：回复相应跟帖；输入0：回复主帖");
+        int inputNumber = input.nextInt();
+        if(inputNumber == 0){
+            System.out.println("请输入回复内容：");
+            inputString = input.next();
+            newPost.setContent(sensitiveWordFilterUtil.replaceSensitiveWord(inputString, 1, "*"));
+        }else{
+            List<Post> AvailablePostList = user.getAllReplyByPostId(postId, user.getUserId());
+            boolean isInPost = false;
+            for(Post post:AvailablePostList){
+                if(post.getPostId()==inputNumber){
+                    isInPost = true;
+                }
+            }
+            if(isInPost==false){
+                System.out.print("帖号不合法！");
+                System.out.println("");
+            }else{
+                newPost.setReplyTo(inputNumber);
+
+                System.out.println("请输入回复内容：");
+                inputString = input.next();
+                newPost.setContent(sensitiveWordFilterUtil.replaceSensitiveWord(inputString, 1, "*"));
+            }
+        }
         user.addPost(newPost);
     }
 

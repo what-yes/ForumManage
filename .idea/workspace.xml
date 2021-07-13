@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="122c5597-6eaf-43e1-9944-58dd4bb97da0" name="Default Changelist" comment="完善Authority/DAO/RenameUSER">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/impl/PostDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/impl/PostDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/entity/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/test/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/test/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/test/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ForumManage/database.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
