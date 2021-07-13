@@ -22,7 +22,7 @@ public class PostDaoImpl implements PostDao{
         int affectedRow = 0;
         try {
             conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("insert into table post(title, content, userId, boardId, replyTo, belongTo) values(?,?,?,?,?,?)");
+            st = conn.prepareStatement("insert into table post(title, content, userId, boardId, replyTo, belongTo, stick) values(?,?,?,?,?,?,?)");
 
             st.setString(1, post.getTitle());
             st.setString(2, post.getContent());
@@ -30,6 +30,7 @@ public class PostDaoImpl implements PostDao{
             st.setInt(4, post.getBoardId());
             st.setInt(5, post.getReplyTo());
             st.setInt(6, post.getBelongTo());
+            st.setInt(7, 0);
             affectedRow = st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

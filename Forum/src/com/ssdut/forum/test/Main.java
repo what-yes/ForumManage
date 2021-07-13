@@ -9,10 +9,12 @@ import com.ssdut.forum.entity.User;
 import com.ssdut.forum.entity.Post;
 import com.ssdut.forum.role.Role;
 import com.ssdut.forum.util.ResultPrintUtil;
+import com.ssdut.forum.util.SensitiveWordFilterUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import static com.ssdut.forum.util.ResultPrintUtil.printBoards;
 import static com.ssdut.forum.util.ResultPrintUtil.printPosts;
@@ -28,16 +30,16 @@ import static com.ssdut.forum.util.ResultPrintUtil.printPosts;
  */
 public class Main {
     private static Scanner input=new Scanner(System.in);
-
+    private static SensitiveWordFilterUtil sensitiveWordFilterUtil = new SensitiveWordFilterUtil();
     /**
      * 系统入口方法
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Main.startForumSys();
     }
 
-    private static void startForumSys(){
+    private static void startForumSys() throws InterruptedException {
         System.out.println("------------论坛------------");
         boolean bBegin=true;
         User user=new User(); // 登录的角色
@@ -48,6 +50,7 @@ public class Main {
             System.out.println("2. 注册");
             System.out.println("3. 退出");
             nBegin= input.nextInt();
+
             switch (nBegin){
                 case 1:
                     // 登录操作
@@ -141,7 +144,12 @@ public class Main {
      * 主页面
      * @param user
      */
-    private static void  homeScreen(User user) {
+    private static void  homeScreen(User user) throws InterruptedException {
+
+        //敏感词屏蔽初始化
+        SensitiveWordFilterUtil swfu= new SensitiveWordFilterUtil();
+        swfu.FilterInit();
+
         boolean bHome = false;
 
         while (!bHome) {
@@ -180,7 +188,7 @@ public class Main {
      * 查看版块
      * @param user
      */
-    private static void boardScreen(User user){
+    private static void boardScreen(User user) throws InterruptedException {
         while(true){
             //显示所有版块
             List<Board> boardList=user.getBoards();
@@ -216,7 +224,10 @@ public class Main {
      * 显示版块下内容并进行相应操作
      * @param user
      */
-    private static void boardContentScreen(Board board,User user){
+    private static void boardContentScreen(Board board,User user) throws InterruptedException {
+
+
+
         boolean selectTrue=false; //是否选择正确
         while(true){
             //TODO 分页查看
@@ -252,7 +263,7 @@ public class Main {
                 case 3:
                     //发主题帖
                     selectTrue=true;
-                    addPost(user);
+                    addPost(user, board);
                     break;
                 case 4:
                     //删除帖子
@@ -318,8 +329,22 @@ public class Main {
      * 发帖
      * @param user
      */
-    private static void addPost(User user){
-
+    private static void addPost(User user, Board board){
+        Post newPost = new Post();
+        newPost.setUserId(user.getUserId());
+        newPost.setBoardId(board.getBoardId());
+        String inputString;
+        System.out.println("请输入帖子标题：");
+        inputString = input.next();
+        System.out.println(inputString);
+        String newString = sensitiveWordFilterUtil.replaceSensitiveWord(inputString, 1, "*");
+        System.out.println(newString);
+        newPost.setTitle(newString);
+        System.out.println("请输入帖子内容：");
+        inputString = input.next();
+        System.out.println(inputString);
+        newPost.setContent(sensitiveWordFilterUtil.replaceSensitiveWord(inputString, 1, "*"));
+        user.addPost(newPost);
     }
 
     /**

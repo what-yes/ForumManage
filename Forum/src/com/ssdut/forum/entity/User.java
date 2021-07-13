@@ -137,6 +137,9 @@ public class User {
         return role.getAllReplyByPostId(postId, ownerId);
     }
 
+    public boolean addPost(Post post){
+        return role.addPost(post);
+    }
     /**
      * 删帖
      * @param userId
