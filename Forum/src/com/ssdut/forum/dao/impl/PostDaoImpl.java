@@ -3,10 +3,7 @@ import com.ssdut.forum.dao.PostDao;
 import com.ssdut.forum.entity.Post;
 import com.ssdut.forum.util.JdbcUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,14 +19,22 @@ public class PostDaoImpl implements PostDao{
         int affectedRow = 0;
         try {
             conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("insert into table post(title, content, userId, boardId, replyTo, belongTo, stick) values(?,?,?,?,?,?,?)");
+            st = conn.prepareStatement("insert into post(title, content, userId, boardId, replyTo, belongTo, stick) values(?,?,?,?,?,?,?)");
 
             st.setString(1, post.getTitle());
             st.setString(2, post.getContent());
             st.setInt(3, post.getUserId());
             st.setInt(4, post.getBoardId());
-            st.setInt(5, post.getReplyTo());
-            st.setInt(6, post.getBelongTo());
+            if(post.getReplyTo() == 0){
+                st.setNull(5, Types.INTEGER);
+            }else{
+                st.setInt(5, post.getReplyTo());
+            }
+            if(post.getBelongTo() == 0){
+                st.setNull(6, Types.INTEGER);
+            }else{
+                st.setInt(6, post.getBelongTo());
+            }
             st.setInt(7, 0);
             affectedRow = st.executeUpdate();
         } catch (SQLException e) {

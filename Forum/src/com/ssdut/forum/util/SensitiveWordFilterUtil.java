@@ -27,7 +27,7 @@ public class SensitiveWordFilterUtil {
     public void FilterInit() throws InterruptedException {
         SensitiveWordFilterUtil swfu= new SensitiveWordFilterUtil();
         swfu.ReadFileToSet();
-        TimeUnit.MILLISECONDS.sleep(10);
+        TimeUnit.MILLISECONDS.sleep(50);
         sensitiveWordSet = fileThreadUtil.getReadOutSet();
         swfu.addSensitiveWordToHashMap(sensitiveWordSet);
     }

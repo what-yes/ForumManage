@@ -51,7 +51,7 @@ public class ResultPrintUtil {
         stick.put(1,"置顶");
         System.out.printf("%-10s%-10s%-11s%-10s\n","帖子编号","帖子标题","帖子内容","置顶状态" );
         for(Post post : list){
-            String content = post.getContent().substring(0,5) + "...";
+            String content = post.getContent().length()>=5 ? post.getContent().substring(0,5) + "..." :post.getContent();
             System.out.printf("%-13s%-11s%-12s%-10s\n",Integer.toString(post.getPostId()),post.getTitle(),content,stick.get(post.getStick()));
         }
     }

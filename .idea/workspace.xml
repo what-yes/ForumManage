@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="122c5597-6eaf-43e1-9944-58dd4bb97da0" name="Default Changelist" comment="完善Authority/DAO/RenameUSER">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB/bbs.sql" beforeDir="false" afterPath="$PROJECT_DIR$/DB/bbs.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/impl/PostDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/dao/impl/PostDaoImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/test/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/util/ResultPrintUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/util/ResultPrintUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/util/SensitiveWordFilterUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/util/SensitiveWordFilterUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +48,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Workspace/Java/SensitiveWord" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -112,5 +116,16 @@
     <MESSAGE value="完善Delete" />
     <MESSAGE value="完善Authority/DAO/RenameUSER" />
     <option name="LAST_COMMIT_MESSAGE" value="完善Authority/DAO/RenameUSER" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Forum/src/com/ssdut/forum/util/SensitiveWordFilterUtil.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

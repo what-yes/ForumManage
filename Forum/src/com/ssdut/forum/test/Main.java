@@ -319,6 +319,7 @@ public class Main {
             if(postList==null||isInBoard==false){
                 System.out.print("帖号不合法！");
                 System.out.println("");
+                continue;
             }else{
                 printPosts(postList);
             }
@@ -382,6 +383,7 @@ public class Main {
             if(isInPost==false){
                 System.out.print("帖号不合法！");
                 System.out.println("");
+                return;
             }else{
                 newPost.setReplyTo(inputNumber);
 
