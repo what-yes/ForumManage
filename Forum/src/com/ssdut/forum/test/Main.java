@@ -610,11 +610,15 @@ public class Main {
      */
     private static void addIntoBlackList(User user) {
         showBlackList(user);
-        System.out.print("请输入你想拉黑的ID：");
+        System.out.print("请输入你想拉黑的ID：(输入0退出)");
         int newAdd = input.nextInt();
+        if(newAdd == 0)
+            return;
         while(user.AddIntoBlackList(user.getUserId(), newAdd) != true){
-            System.out.print("请重新输入你想拉黑的ID：");
+            System.out.print("请重新输入你想拉黑的ID：(输入0退出)");
             newAdd = input.nextInt();
+            if(newAdd == 0)
+                return;
         }
     }
     /**
@@ -622,11 +626,15 @@ public class Main {
      */
     private static void moveOutBlackList(User user) {
         showBlackList(user);
-        System.out.print("请输入你想移除拉黑的ID：");
+        System.out.print("请输入你想移除拉黑的ID:(输入0返回):");
         int newAdd = input.nextInt();
+        if(newAdd == 0)
+            return;
         while(user.getRole().MoveOutBlackList(user.getUserId(), newAdd) != true){
-            System.out.print("请重新输入你想移除拉黑的ID：");
+            System.out.print("请重新输入你想移除拉黑的ID：(输入0退出)");
             newAdd = input.nextInt();
+            if(newAdd == 0)
+                return;
         }
 
     }
@@ -650,7 +658,7 @@ public class Main {
         if(userId == 0)
             return ;
         while(user.getRole().DisableUser(userId) == false){
-            System.out.println("请重新输入");
+            System.out.println("请重新输入:(输入0返回):");
             userId = input.nextInt();
             if(userId == 0)
                 return;
@@ -663,12 +671,12 @@ public class Main {
      */
     private static void CancelDisableUser(User user) {
         showDisableUserList(user);
-        System.out.println("请输入你想取消禁用的用户ID(输入0返回)：");
+        System.out.println("请输入你想取消禁用的用户ID:(输入0返回):");
         int userId = input.nextInt();
         if(userId == 0)
             return ;
         while(user.getRole().CancelDisable(userId) == false){
-            System.out.println("请重新输入");
+            System.out.println("请重新输入:(输入0返回):");
             userId = input.nextInt();
             if(userId == 0)
                 return ;
