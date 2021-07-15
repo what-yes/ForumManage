@@ -152,7 +152,7 @@ public class Main {
 
         while (!bHome) {
             System.out.println("-----------主页面-----------");
-            System.out.println("1.查看版块");
+            System.out.println("1.版块管理");
             System.out.println("2.查看已发帖");
             System.out.println("3.用户管理");
             System.out.println("4.退出系统");
