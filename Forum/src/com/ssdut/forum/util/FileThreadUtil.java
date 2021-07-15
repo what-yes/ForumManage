@@ -19,7 +19,7 @@ public class FileThreadUtil extends Thread{
     private List<String> fList;  //目录下的文件名List
     private static Set<String> readOutSet = new HashSet<>();    //读出的敏感词Set
 
-    private static String filePath = "Forum\\sensitive-words\\";
+    private static String filePath = "sensitive-words\\";
 
     public void setFileIndex(int fileIndex) {
         this.fileIndex = fileIndex;

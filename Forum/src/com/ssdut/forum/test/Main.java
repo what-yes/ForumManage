@@ -11,10 +11,8 @@ import com.ssdut.forum.role.Role;
 import com.ssdut.forum.util.ResultPrintUtil;
 import com.ssdut.forum.util.SensitiveWordFilterUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 import static com.ssdut.forum.util.ResultPrintUtil.printBoards;
 import static com.ssdut.forum.util.ResultPrintUtil.printPosts;
@@ -162,7 +160,7 @@ public class Main {
             int iSelect = input.nextInt();
             switch (iSelect) {
                 case 1:
-                    //查看版块
+                    //版块管理
                     boardScreen(user);
                     break;
                 case 2:
@@ -183,12 +181,63 @@ public class Main {
             }
         }
     }
+    /**
+     * 显示版块下内容并进行相应操作
+     * @param user
+     */
+    private static void boardScreen(User user) throws InterruptedException {
+
+        boolean selectTrue=false; //是否选择正确
+        while(true){
+            System.out.println("----------版块管理----------");
+            System.out.println("0.退回主界面");
+            System.out.println("1.查看版块");
+            //如果是版主 显示额外操作
+            if(user.getAuthority()==3){
+                System.out.println("2.添加版块");
+                System.out.println("3.删除版块");
+            }
+            int iSelect=input.nextInt();
+            switch (iSelect){
+                case 0:
+                    //回到主界面
+                    return;
+                case 1:
+                    //查看版块
+                    selectTrue=true;
+                    boardShow(user);
+                    break;
+                default:
+                    if(user.getAuthority()!=3){
+                        selectTrue=false;
+                    }
+                    break;
+            }
+            //如果是版主进行额外操作
+            if((iSelect>1||iSelect<0)&&(user.getAuthority()==3)){
+                if(iSelect==2){
+                    //添加版块
+                    selectTrue=true;
+                    addBoard(user);
+                }else  if(iSelect==3) {
+                    //删除版块
+                    selectTrue=true;
+                    deleteBoard(user);
+                }else {
+                    selectTrue=false;
+                }
+            }
+            if(!selectTrue){
+                System.out.println("无此功能，敬请期待！请重新选择其他功能：");
+            }
+        }
+    }
 
     /**
      * 查看版块
      * @param user
      */
-    private static void boardScreen(User user) throws InterruptedException {
+    private static void boardShow(User user) throws InterruptedException {
         while(true){
             //显示所有版块
             List<Board> boardList=user.getBoards();
@@ -221,12 +270,26 @@ public class Main {
     }
 
     /**
+     * 添加版块
+     * @param user
+     */
+    private static void addBoard(User user){
+
+    }
+
+    /**
+     * 删除版块
+     * @param user
+     */
+    private static void deleteBoard(User user){
+
+    }
+
+    /**
      * 显示版块下内容并进行相应操作
      * @param user
      */
     private static void boardContentScreen(Board board,User user) throws InterruptedException {
-
-
 
         boolean selectTrue=false; //是否选择正确
         while(true){
