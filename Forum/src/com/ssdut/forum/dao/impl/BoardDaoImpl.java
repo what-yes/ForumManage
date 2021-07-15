@@ -65,10 +65,14 @@ public class BoardDaoImpl implements BoardDao {
         int affectedRow = 0;
         try{
             conn = JdbcUtil.getConnection();
+            //删除版块所包含的所有帖子
+            st=conn.prepareStatement("delete from post where boardId=? ");
+            st.setInt(1, boardId);
+            affectedRow = st.executeUpdate();
+            //删除版块
             st = conn.prepareStatement("delete from board where boardId=?");
             st.setInt(1, boardId);
             affectedRow = st.executeUpdate();
-
         }catch(Exception e){
             e.printStackTrace();
         }finally {

@@ -152,7 +152,7 @@ public class Main {
 
         while (!bHome) {
             System.out.println("-----------主页面-----------");
-            System.out.println("1.查看版块");
+            System.out.println("1.版块管理");
             System.out.println("2.查看已发帖");
             System.out.println("3.用户管理");
             System.out.println("4.退出系统");
@@ -243,7 +243,7 @@ public class Main {
             List<Board> boardList=user.getBoards();
             printBoards(boardList);
             //选择进入哪个版块
-            System.out.println("请选择进入哪一个版块：(输入0返回主界面)");
+            System.out.println("请选择进入哪一个版块：(输入0返回)");
             int boardId=input.nextInt();
             Board board=null;
             boolean haveBoardId=false;
@@ -282,7 +282,16 @@ public class Main {
      * @param user
      */
     private static void deleteBoard(User user){
-
+        System.out.println("请输入您想删除的版块Id(输入0退出):");
+        int boardId =input.nextInt();
+        if(boardId ==0){
+            return;
+        }
+        if(!user.deleteBoard(boardId)){
+            System.out.println("删除失败！");
+        }else {
+            System.out.println("删除成功！");
+        }
     }
 
     /**

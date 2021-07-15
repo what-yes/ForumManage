@@ -205,4 +205,11 @@ public class User {
     public boolean cancelBoardMgr(Board board){
         return role.cancelBoardMgr(board);
     }
+
+    /**
+     * 根据boardId删除版块
+     */
+    public boolean deleteBoard(int boardId){
+        return role.deleteBoard(boardId);
+    }
 }
