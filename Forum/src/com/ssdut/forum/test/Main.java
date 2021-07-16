@@ -449,13 +449,9 @@ public class Main {
                     case 8:
                         selectTrue=true;
                         //添加版主
-<<<<<<< Updated upstream
+
                         addBoardMgr(user);
-                        break; //不能使用break
-=======
-                        addBoardMgr(user,board);
                         return; //不能使用break
->>>>>>> Stashed changes
                     case 9:
                         selectTrue=true;
                         //取消版主
