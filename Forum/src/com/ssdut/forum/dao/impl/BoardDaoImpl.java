@@ -8,6 +8,7 @@ import com.ssdut.forum.util.JdbcUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,11 +48,22 @@ public class BoardDaoImpl implements BoardDao {
                 // System.out.println("'"+board.getBoardName()+"'"+"板块已存在");
                 return affectedRow;
             }
-
-            st = conn.prepareStatement("insert into board values(?)");
+            //创建版块
+            st = conn.prepareStatement("insert into board(boardName) values(?)");
             st.setString(1, board.getBoardName());
             affectedRow = st.executeUpdate();
-
+            if(affectedRow>0){
+                if(board.getBoardMgrId()!=0){
+                    st=conn.prepareStatement("select * from board where boardName=? ");
+                    st.setString(1,board.getBoardName());
+                    rs=st.executeQuery();
+                    while (rs.next()){
+                        board.setBoardId(rs.getInt("boardId"));
+                    }
+                    //设置版块管理员
+                    affectedRow=setBoardMgr(board.getBoardMgrId(),board.getBoardId())?1:0;
+                }
+            }
         }catch(Exception e){
             e.printStackTrace();
         }finally {
@@ -69,10 +81,22 @@ public class BoardDaoImpl implements BoardDao {
             st=conn.prepareStatement("delete from post where boardId=? ");
             st.setInt(1, boardId);
             affectedRow = st.executeUpdate();
+            //获得版块
+            st=conn.prepareStatement("select * from board where boardId=? ");
+            st.setInt(1,boardId);
+            rs=st.executeQuery();
+            Board board=new Board();
+            while (rs.next()){
+                board.setBoardId(rs.getInt("boardId"));
+                board.setBoardName(rs.getString("boardName"));
+                board.setBoardMgrId(rs.getInt("boardMgrId"));
+            }
             //删除版块
             st = conn.prepareStatement("delete from board where boardId=?");
             st.setInt(1, boardId);
             affectedRow = st.executeUpdate();
+            //删除版块管理员
+            deleteBoardMgr(board);
         }catch(Exception e){
             e.printStackTrace();
         }finally {
