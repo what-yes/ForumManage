@@ -22,7 +22,7 @@ public class UserDaoImpl implements UserDao {
         User user = null;
         try {
             conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("select * from user where userName=? and password=? and state=0");
+            st = conn.prepareStatement("select * from user where userName=? and password=?");
             st.setString(1,userName);
             st.setString(2,password);
             rs = st.executeQuery();
@@ -34,7 +34,6 @@ public class UserDaoImpl implements UserDao {
                 user.setState(rs.getInt("state"));
                 user.setAuthority(rs.getInt("authority"));
             }
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
@@ -283,19 +282,21 @@ public class UserDaoImpl implements UserDao {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
+        boolean find = false;
         List<User> list = new ArrayList<>();
         try {
             conn = JdbcUtil.getConnection();
             st = conn.prepareStatement("select * from user where userName=?");
             st.setString(1,userName);
             rs = st.executeQuery();
-
+            if(rs.next())
+                find = true;
         }catch(Exception e){
             e.printStackTrace();
         }finally {
             JdbcUtil.closeAll(rs,st,conn);
         }
-        return !(rs==null);
+        return find;
     }
 
     @Override
@@ -315,7 +316,7 @@ public class UserDaoImpl implements UserDao {
             //我在想上面这句话会不会改变rs的指向而导致下面的语句出错
             System.out.println("用户ID\t用户名\t用户状态\t板块ID\t板块名");
             while(rs.next()){
-                System.out.printf("%-4d%-4s%-4d%-4d%-4s",rs.getInt("userId"),rs.getString("userName"),state.get(rs.getInt("state")),rs.getInt("boardId"),rs.getString("boardName"));
+                System.out.printf("%-4d%-4s%-4s%-4d%-4s\n",rs.getInt("userId"),rs.getString("userName"),state.get(rs.getInt("state")),rs.getInt("boardId"),rs.getString("boardName"));
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -332,7 +333,7 @@ public class UserDaoImpl implements UserDao {
         PreparedStatement st = null;
         ResultSet rs = null;
         User user = null;
-        List<User> list = new ArrayList<>();
+
         try {
             conn = JdbcUtil.getConnection();
             st = conn.prepareStatement("select * from user where userId=?");
@@ -344,14 +345,15 @@ public class UserDaoImpl implements UserDao {
                 user.setUserName(rs.getString("userName"));
                 user.setPassWord(rs.getString("password"));
                 user.setState(rs.getInt("state"));
+                user.setAuthority(rs.getInt("authority"));
             }
-
 
         }catch(Exception e){
             e.printStackTrace();
         }finally {
             JdbcUtil.closeAll(rs,st,conn);
         }
+
         return user;
     }
 }

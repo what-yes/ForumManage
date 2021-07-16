@@ -14,10 +14,11 @@ import java.util.List;
 public interface Normal {
     /**
      * @description 删帖  只能删除自己的帖子
+     * @param userId
      * @param postId
      * @return
      */
-    boolean deletePost(int postId);
+    boolean deletePost(int userId,int postId);
 
     /**
      * 查询所有板块信息

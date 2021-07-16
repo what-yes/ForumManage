@@ -32,6 +32,11 @@ public class BaseServiceImpl implements BaseService {
         return pd.savePost(post) > 0;
     }
 
+    /**
+     * 普通用户删帖
+     * @param postId
+     * @return
+     */
     @Override
     public boolean deletePost(int postId) {
         return pd.deletePost(postId) > 0;

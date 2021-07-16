@@ -61,7 +61,7 @@ public class Role {
      * @return
      */
     public boolean addPost(Post post){
-        boolean flag=false;
+        boolean flag;
         if(normal==null){
             System.out.println("您还没有登录，请登陆后再操作");
             return false;
@@ -75,13 +75,14 @@ public class Role {
      * @param postId
      * @return
      */
-    public boolean deletePost(int postId){
-        boolean flag=false;
+    public boolean deletePost(int userId,int postId){
+        boolean flag;
 
         if(normal==null){
             System.out.println("您还没有登录，请登陆后再操作");
+            return false;
         }else if(admin==null&&boardMgr==null){
-            flag=normal.deletePost(postId);
+            flag=normal.deletePost(userId,postId);
         }else{
             flag=boardMgr.DeletePost(postId);
         }
@@ -180,12 +181,14 @@ public class Role {
      * @return
      */
     public boolean StickPost(int postId){
-        boolean flag=false;
+        boolean flag;
 
         if(normal==null){
             System.out.println("您还没有登录，请登陆后再操作");
+            return false;
         }else if(admin==null&&boardMgr==null){
             System.out.println("抱歉，您不具备该权限");
+            return false;
         }else{
             flag=boardMgr.StickPost(postId);
         }
@@ -199,12 +202,14 @@ public class Role {
      * @return
      */
     public boolean CancelStick(int postId){
-        boolean flag=false;
+        boolean flag;
 
         if(normal==null){
             System.out.println("您还没有登录，请登陆后再操作");
+            return false;
         }else if(admin==null&&boardMgr==null){
             System.out.println("抱歉，您不具备该权限");
+            return false;
         }else{
             flag=boardMgr.CancelStick(postId);
         }
@@ -217,12 +222,14 @@ public class Role {
      * @return
      */
     public boolean DisableUser(int userId){
-        boolean flag=false;
+        boolean flag;
 
         if(normal==null){
             System.out.println("您还没有登录，请登陆后再操作");
+            return false;
         }else if(admin==null&&boardMgr==null){
             System.out.println("抱歉，您不具备该权限");
+            return false;
         }else{
             flag=boardMgr.DisableUser(userId);
         }
@@ -235,11 +242,13 @@ public class Role {
      * @return
      */
     public boolean CancelDisable(int userId){
-        boolean flag=false;
+        boolean flag;
         if(normal==null){
             System.out.println("您还没有登录，请登陆后再操作");
+            return false;
         }else if(admin==null&&boardMgr==null){
             System.out.println("抱歉，您不具备该权限");
+            return false;
         }else{
             flag=boardMgr.CancelDisable(userId);
         }
@@ -253,32 +262,17 @@ public class Role {
      * @return
      */
     public boolean setBoardMgr(int userId, int boardId){
-        boolean flag=false;
+        boolean flag;
 
         if(normal==null){
             System.out.println("您还没有登录，请登陆后再操作");
+            return false;
         }else if(admin==null){
             System.out.println("抱歉，您不具备该权限");
+            return false;
         }
         flag=admin.setBoardMgr(userId, boardId);
 
-        return flag;
-    }
-
-    /**
-     * 取消管理员权限
-     * @param boardId
-     * @return
-     */
-    public boolean deleteBoardMgr(int boardId){
-        boolean flag=false;
-
-        if(normal==null){
-            System.out.println("您还没有登录，请登陆后再操作");
-        }else if(admin==null){
-            System.out.println("抱歉，您不具备该权限");
-        }
-        flag=admin.deleteBoardMgr(boardId);
         return flag;
     }
 
@@ -292,12 +286,14 @@ public class Role {
      * @return
      */
     public boolean addBoard(Board board){
-        boolean flag=false;
+        boolean flag;
 
         if(normal==null){
             System.out.println("您还没有登录，请登陆后再操作");
+            return false;
         }else if(admin==null){
             System.out.println("抱歉，您不具备该权限");
+            return false;
         }
         flag=admin.addBoard(board);
 
@@ -310,12 +306,14 @@ public class Role {
      * @return
      */
     public boolean deleteBoard(int boardId){
-        boolean flag=false;
+        boolean flag;
 
         if(normal==null){
             System.out.println("您还没有登录，请登陆后再操作");
+            return false;
         }else if(admin==null){
             System.out.println("抱歉，您不具备该权限");
+            return false;
         }
         flag=admin.deleteBoard(boardId);
 
@@ -339,5 +337,25 @@ public class Role {
         boardMgr.showDisableUserList();
     }
 
-    public boolean getUserById(int userId){ return admin.getUserById(userId); }
+    public User getUserById(int userId){ return admin.getUserById(userId); }
+
+    /**
+     * 根据board取消版主
+     * @param board
+     * @return
+     */
+    public boolean cancelBoardMgr(Board board){
+        boolean flag;
+
+        if(normal==null){
+            System.out.println("您还没有登录，请登陆后再操作");
+            return false;
+        }else if(admin==null){
+            System.out.println("抱歉，您不具备该权限");
+            return false;
+        }
+        flag=admin.cancelBoardMgr(board);
+
+        return flag;
+    }
 }

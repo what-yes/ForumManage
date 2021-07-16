@@ -3,10 +3,7 @@ import com.ssdut.forum.dao.PostDao;
 import com.ssdut.forum.entity.Post;
 import com.ssdut.forum.util.JdbcUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,14 +19,23 @@ public class PostDaoImpl implements PostDao{
         int affectedRow = 0;
         try {
             conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("insert into table post(title, content, userId, boardId, replyTo, belongTo) values(?,?,?,?,?,?)");
+            st = conn.prepareStatement("insert into post(title, content, userId, boardId, replyTo, belongTo, stick) values(?,?,?,?,?,?,?)");
 
             st.setString(1, post.getTitle());
             st.setString(2, post.getContent());
             st.setInt(3, post.getUserId());
             st.setInt(4, post.getBoardId());
-            st.setInt(5, post.getReplyTo());
-            st.setInt(6, post.getBelongTo());
+            if(post.getReplyTo() == 0){
+                st.setNull(5, Types.INTEGER);
+            }else{
+                st.setInt(5, post.getReplyTo());
+            }
+            if(post.getBelongTo() == 0){
+                st.setNull(6, Types.INTEGER);
+            }else{
+                st.setInt(6, post.getBelongTo());
+            }
+            st.setInt(7, 0);
             affectedRow = st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -39,6 +45,42 @@ public class PostDaoImpl implements PostDao{
         return affectedRow;
     }
 
+    /**
+     * 普通用户删帖
+     * @param userId
+     * @param postId 帖子编号
+     * @return
+     */
+    @Override
+    public int deletePost(int userId,int postId) {
+
+        Post post = null;
+        List<Post> list = new ArrayList<>();
+        int affectedRow = 0;
+        try {
+            conn = JdbcUtil.getConnection();
+            st = conn.prepareStatement("delete from post where userId=? and belongTo=?");
+            st.setInt(1, userId);
+            st.setInt(2, postId);
+            affectedRow += st.executeUpdate();
+            st = conn.prepareStatement("delete from post where userId=? and postId=?");
+            st.setInt(1, userId);
+            st.setInt(2, postId);
+            affectedRow += st.executeUpdate();
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        } finally {
+            JdbcUtil.closeAll(rs, st, conn);
+        }
+        return affectedRow;
+    }
+
+    /**
+     * 管理员删帖
+     * @param postId
+     * @return
+     */
     @Override
     public int deletePost(int postId) {
 
@@ -47,23 +89,15 @@ public class PostDaoImpl implements PostDao{
         int affectedRow = 0;
         try {
             conn = JdbcUtil.getConnection();
-            conn.setAutoCommit(false);
-            rs = st.executeQuery();
             st = conn.prepareStatement("delete from post where belongTo=?");
             st.setInt(1, postId);
             affectedRow += st.executeUpdate();
             st = conn.prepareStatement("delete from post where postId=?");
             st.setInt(1, postId);
             affectedRow += st.executeUpdate();
-            conn.commit();
 
         } catch (SQLException e){
             e.printStackTrace();
-            try {
-                conn.rollback();
-            } catch (SQLException e1){
-                e1.printStackTrace();
-            }
         } finally {
             JdbcUtil.closeAll(rs, st, conn);
         }
@@ -166,11 +200,11 @@ public class PostDaoImpl implements PostDao{
         try{
             conn = JdbcUtil.getConnection();
             st = conn.prepareStatement("update post " +
-                    "set ?=? " +
+                    "set " + field +" =? " +
                     "where postId = ?");
-            st.setObject(1, field);
-            st.setObject(2, newValue);
-            st.setInt(3, postId);
+            //st.setString(1, field);
+            st.setObject(1, newValue);
+            st.setInt(2, postId);
             isChanged = st.executeUpdate()>0;
 
         }catch (SQLException e){
@@ -187,7 +221,7 @@ public class PostDaoImpl implements PostDao{
         Post post;
         try{
             conn = JdbcUtil.getConnection();
-            st = conn.prepareStatement("select * from post where userId=?");
+            st = conn.prepareStatement("select post.*,user.userName from post join user on post.userId=user.userId where post.userId=?");
             st.setInt(1, userId);
             rs = st.executeQuery();
             while(rs.next()){

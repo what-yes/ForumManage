@@ -137,6 +137,19 @@ public class User {
         return role.getAllReplyByPostId(postId, ownerId);
     }
 
+    public boolean addPost(Post post){
+        return role.addPost(post);
+    }
+    /**
+     * 删帖
+     * @param userId
+     * @param postId
+     * @return
+     */
+    public boolean deletePost(int userId,int postId){
+        return role.deletePost(userId,postId);
+    }
+
     public boolean MoveOutBlackList(int userId, int blackId){
         return role.MoveOutBlackList(userId, blackId);
     }
@@ -149,5 +162,54 @@ public class User {
         role.showDisableUserList();
     }
 
+    /**
+     * 添加置顶
+     * @param postId
+     */
+    public void addStick(int postId){
+        role.StickPost(postId);
+    }
 
+    /**
+     * 删除置顶
+     * @param postId
+     */
+    public void cancelStick(int postId){
+        role.CancelStick(postId);
+    }
+
+    /**
+     * 添加管理员权限
+     * @param userId
+     * @param boardId
+     * @return
+     */
+    public boolean setBoardMgr(int userId, int boardId){
+        return role.setBoardMgr(userId,boardId);
+    }
+
+    /**
+     * 根据userId查询用户
+     * @param userId
+     * @return
+     */
+    public User getUserById(int userId){
+        return role.getUserById(userId);
+    }
+
+    /**
+     * 根据board取消版主
+     * @param board
+     * @return
+     */
+    public boolean cancelBoardMgr(Board board){
+        return role.cancelBoardMgr(board);
+    }
+
+    /**
+     * 根据boardId删除版块
+     */
+    public boolean deleteBoard(int boardId){
+        return role.deleteBoard(boardId);
+    }
 }

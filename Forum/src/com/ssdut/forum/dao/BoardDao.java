@@ -40,10 +40,10 @@ public interface BoardDao {
 
     /**
      * 取消板块管理员
-     * @param boardId
+     * @param board
      * @return
      */
-    boolean deleteBoardMgr(int boardId);
+    boolean deleteBoardMgr(Board board);
 
     /**
      * 判断userId是否是版块的管理员

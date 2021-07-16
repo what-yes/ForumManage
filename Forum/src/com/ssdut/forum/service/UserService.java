@@ -42,12 +42,6 @@ public interface UserService {
      */
     boolean setBoardMgr(int userId, int boardId);
 
-    /**
-     * 取消版主
-     * @param boardId
-     * @return
-     */
-    boolean deleteBoardMgr(int boardId);
 
     /**
      * 显示板块管理员信息
@@ -60,6 +54,6 @@ public interface UserService {
      * @param userId
      * @return
      */
-    boolean getUserById(int userId);
+    User getUserById(int userId);
 
 }

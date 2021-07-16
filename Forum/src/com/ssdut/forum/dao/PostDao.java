@@ -13,9 +13,16 @@ public interface PostDao {
     int savePost(Post post);
 
     /**
-     * 根据帖号删除主帖
-     * @param postId 帖子编号
-     * @return 返回受影响行数
+     * 普通用户根据用户Id和帖Id删除帖
+     * @param userId
+     * @param postId
+     * @return
+     */
+    int deletePost(int userId,int postId);
+    /**
+     * 管理员根据帖Id删除帖
+     * @param postId
+     * @return
      */
     int deletePost(int postId);
 

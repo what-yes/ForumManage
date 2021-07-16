@@ -12,12 +12,8 @@ public class DefaultAdmin implements Admin {
     BoardService boardService = new BoardServiceImpl();
     @Override
     public boolean setBoardMgr(int userId, int boardId) {
-        return userService.setBoardMgr(userId, boardId);
-    }
 
-    @Override
-    public boolean deleteBoardMgr(int boardId) {
-        return userService.deleteBoardMgr(boardId);
+        return userService.setBoardMgr(userId, boardId);
     }
 
     @Override
@@ -35,5 +31,16 @@ public class DefaultAdmin implements Admin {
         userService.showBoardMgrList();
     }
 
-    public boolean getUserById(int useId){ return userService.getUserById(useId); }
+    @Override
+    public User getUserById(int useId){ return userService.getUserById(useId); }
+
+    @Override
+    /**
+     * 根据board取消版主
+     * @param board
+     * @return
+     */
+    public boolean cancelBoardMgr(Board board){
+        return boardService.cancelBoardMgr(board);
+    }
 }
