@@ -273,7 +273,36 @@ public class Main {
      * @param user
      */
     private static void addBoard(User user){
+        while (true){
+            Board board=new Board();
+            System.out.println("请输入您想创建的版块名字(输入0退出):");
+            String boardName=input.next();
+            if(boardName.equals("0")){
+                return;
+            }
+            board.setBoardName(boardName);
+            while (true){
+                System.out.println("请输入您想任命该版块的管理员id(输入-1暂时不任命，输入0退出):");
+                int boardMgrId=input.nextInt();
+                if(boardMgrId==0){
+                    return;
+                }else if (boardMgrId!=-1){
+                    if(user.getUserById(boardMgrId)==null){//如果该userId不存在
+                        System.out.println("该用户不存在，请重新输入用户id！");
+                    }else {
+                        board.setBoardMgrId(boardMgrId);
+                        break;
+                    }
+                }
+            }
 
+            if(!user.addBoard(board)){
+                System.out.println("创建失败，请重新创建！");
+            }else{
+                System.out.println("创建成功！");
+                return;
+            }
+        }
     }
 
     /**
@@ -281,15 +310,18 @@ public class Main {
      * @param user
      */
     private static void deleteBoard(User user){
-        System.out.println("请输入您想删除的版块Id(输入0退出):");
-        int boardId =input.nextInt();
-        if(boardId ==0){
-            return;
-        }
-        if(!user.deleteBoard(boardId)){
-            System.out.println("删除失败！");
-        }else {
-            System.out.println("删除成功！");
+        while (true){
+            System.out.println("请输入您想删除的版块Id(输入0退出):");
+            int boardId =input.nextInt();
+            if(boardId ==0){
+                return;
+            }
+            if(!user.deleteBoard(boardId)){
+                System.out.println("删除失败，请重新输入！");
+            }else {
+                System.out.println("删除成功！");
+                return;
+            }
         }
     }
 
@@ -685,7 +717,7 @@ public class Main {
         int newAdd = input.nextInt();
         if(newAdd == 0)
             return;
-        while(user.AddIntoBlackList(user.getUserId(), newAdd) != true){
+        while(!user.AddIntoBlackList(user.getUserId(), newAdd)){
             System.out.print("请重新输入你想拉黑的ID：(输入0退出)");
             newAdd = input.nextInt();
             if(newAdd == 0)
@@ -701,7 +733,7 @@ public class Main {
         int newAdd = input.nextInt();
         if(newAdd == 0)
             return;
-        while(user.getRole().MoveOutBlackList(user.getUserId(), newAdd) != true){
+        while(!user.getRole().MoveOutBlackList(user.getUserId(), newAdd)){
             System.out.print("请重新输入你想移除拉黑的ID：(输入0退出)");
             newAdd = input.nextInt();
             if(newAdd == 0)
@@ -728,7 +760,7 @@ public class Main {
         int userId = input.nextInt();
         if(userId == 0)
             return ;
-        while(user.getRole().DisableUser(userId) == false){
+        while(!user.getRole().DisableUser(userId)){
             System.out.println("请重新输入:(输入0返回):");
             userId = input.nextInt();
             if(userId == 0)
@@ -746,7 +778,7 @@ public class Main {
         int userId = input.nextInt();
         if(userId == 0)
             return ;
-        while(user.getRole().CancelDisable(userId) == false){
+        while(!user.getRole().CancelDisable(userId)){
             System.out.println("请重新输入:(输入0返回):");
             userId = input.nextInt();
             if(userId == 0)

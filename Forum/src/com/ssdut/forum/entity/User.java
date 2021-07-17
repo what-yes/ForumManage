@@ -212,4 +212,13 @@ public class User {
     public boolean deleteBoard(int boardId){
         return role.deleteBoard(boardId);
     }
+
+    /**
+     * 根据board添加版块
+     * @param board
+     * @return
+     */
+    public boolean addBoard(Board board){
+        return role.addBoard(board);
+    }
 }
