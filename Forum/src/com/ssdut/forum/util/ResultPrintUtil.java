@@ -83,12 +83,45 @@ public class ResultPrintUtil {
     }
 
     /**
+     * 查看某个帖子及其回帖
+     * @param list
+     */
+    public static void printReplies(List<Post> list){
+        Map<Integer,String> stick = new HashMap<>();
+        stick.put(0,"非置顶");
+        stick.put(1,"置顶");
+
+
+        int length_1 = list.size();
+        System.out.println(length_1);
+        String[][] data = new String[length_1+1][7];
+        String[] elements = new String[7];
+        elements[0] = "postID";
+        elements[1] = "userID";
+        elements[2] = "postTopic";
+        elements[3] = "postContent";
+        elements[4] = "isStick";
+        elements[5] = "replyTo";
+        elements[6] = "belongTo";
+        data[0] = elements;
+        for(int i=1;i<=length_1;i++){
+            String userId = Integer.toString(list.get(i-1).getUserId());
+            String content = list.get(i-1).getContent();
+//            String content = list.get(i-1).getContent().length()>=5 ? list.get(i-1).getContent().substring(0,5) + "..." :list.get(i-1).getContent();
+            String replyTo = list.get(i-1).getReplyTo() == 0 ? "" : Integer.toString(list.get(i-1).getReplyTo());
+            String belongTo = list.get(i-1).getBelongTo() == 0 ? "" : Integer.toString(list.get(i-1).getBelongTo());
+            data[i] = new String[]{Integer.toString(list.get(i-1).getPostId()),userId,list.get(i-1).getTitle(), content, stick.get(list.get(i-1).getStick()), replyTo, belongTo};
+        }
+
+        tableWithLinesAndMaxWidth(data);
+    }
+
+    /**
      * 打印所有版块
      */
     public static void printBoards(List<Board> list){
 
         int length_1 = list.size();
-        System.out.println(length_1);
         String[][] data = new String[length_1+1][2];
         String[] elements = new String[2];
         elements[0] = "BoardID";

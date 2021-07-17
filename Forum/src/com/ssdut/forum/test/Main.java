@@ -14,8 +14,7 @@ import com.ssdut.forum.util.SensitiveWordFilterUtil;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.ssdut.forum.util.ResultPrintUtil.printBoards;
-import static com.ssdut.forum.util.ResultPrintUtil.printPosts;
+import static com.ssdut.forum.util.ResultPrintUtil.*;
 
 /**
  * ClassName: Main
@@ -393,7 +392,7 @@ public class Main {
                 System.out.println("");
                 continue;
             }else{
-                printPosts(postList);
+                printReplies(postList);
             }
             System.out.println("回复请按1，退出该贴请按0");
             int inputNumber2 = input.nextInt();
