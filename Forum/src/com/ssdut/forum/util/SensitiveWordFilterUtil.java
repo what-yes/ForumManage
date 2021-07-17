@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 public class SensitiveWordFilterUtil {
     private static Map sensitiveWordMap = null;  //使用DFA后的敏感词树
     private static int minMatchType = 1;
+    private static int maxMatchType = 2;
     private static Set<String> sensitiveWordSet= null;
     private static FileThreadUtil fileThreadUtil = new FileThreadUtil();
 

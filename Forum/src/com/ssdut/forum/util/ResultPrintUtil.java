@@ -60,32 +60,32 @@ public class ResultPrintUtil {
 
 
         int length_1 = list.size();
-        System.out.println(length_1);
-        String[][] data = new String[length_1+1][7];
-        String[] elements = new String[7];
+        String[][] data = new String[length_1+1][5];
+        String[] elements = new String[5];
         elements[0] = "postID";
         elements[1] = "userID";
         elements[2] = "postTopic";
         elements[3] = "postContent";
         elements[4] = "isStick";
-        elements[5] = "replyTo";
-        elements[6] = "belongTo";
+        //elements[5] = "replyTo";
+        //elements[6] = "belongTo";
         data[0] = elements;
         for(int i=1;i<=length_1;i++){
             String userId = Integer.toString(list.get(i-1).getUserId());
-            String content = list.get(i-1).getContent().length()>=5 ? list.get(i-1).getContent().substring(0,5) + "..." :list.get(i-1).getContent();
-            String replyTo = list.get(i-1).getReplyTo() == 0 ? "" : Integer.toString(list.get(i-1).getReplyTo());
-            String belongTo = list.get(i-1).getBelongTo() == 0 ? "" : Integer.toString(list.get(i-1).getBelongTo());
-            data[i] = new String[]{Integer.toString(list.get(i-1).getPostId()),userId,list.get(i-1).getTitle(), content, stick.get(list.get(i-1).getStick()), replyTo, belongTo};
+            String title = list.get(i-1).getContent().length()>8 ? list.get(i-1).getContent().substring(0,5) + "..." :list.get(i-1).getContent();
+            String content = list.get(i-1).getContent().length()>5 ? list.get(i-1).getContent().substring(0,5) + "..." :list.get(i-1).getContent();
+            //String replyTo = list.get(i-1).getReplyTo() == 0 ? "" : Integer.toString(list.get(i-1).getReplyTo());
+            //String belongTo = list.get(i-1).getBelongTo() == 0 ? "" : Integer.toString(list.get(i-1).getBelongTo());
+            data[i] = new String[]{Integer.toString(list.get(i-1).getPostId()),userId,title, content, stick.get(list.get(i-1).getStick())};
         }
-
+        for(int i=0; i<length_1+1; i++){
+            for(int j=2; j<4; j++){
+                data[i][j] = MyAlign(data[i][j], 20, 0);
+            }
+        }
         tableWithLinesAndMaxWidth(data);
     }
 
-    /**
-     * 查看某个帖子及其回帖
-     * @param list
-     */
     public static void printReplies(List<Post> list){
         Map<Integer,String> stick = new HashMap<>();
         stick.put(0,"非置顶");
@@ -93,25 +93,32 @@ public class ResultPrintUtil {
 
 
         int length_1 = list.size();
-        System.out.println(length_1);
-        String[][] data = new String[length_1+1][7];
-        String[] elements = new String[7];
-        elements[0] = "postID";
-        elements[1] = "userID";
-        elements[2] = "postTopic";
-        elements[3] = "postContent";
-        elements[4] = "isStick";
-        elements[5] = "replyTo";
-        elements[6] = "belongTo";
+        String[][] data = new String[length_1+1][6];
+        String[] elements = new String[6];
+        elements[0] = "Post No.";
+        elements[1] = "ID";
+        elements[2] = "标题";
+        elements[3] = "内容";
+        elements[4] = "状态";
+        elements[5] = "回复给";
+        //elements[6] = "belongTo";
         data[0] = elements;
         for(int i=1;i<=length_1;i++){
             String userId = Integer.toString(list.get(i-1).getUserId());
+            String title = list.get(i-1).getTitle() != null ? list.get(i-1).getTitle() :"回帖";
             String content = list.get(i-1).getContent();
 //            String content = list.get(i-1).getContent().length()>=5 ? list.get(i-1).getContent().substring(0,5) + "..." :list.get(i-1).getContent();
             String replyTo = list.get(i-1).getReplyTo() == 0 ? "" : Integer.toString(list.get(i-1).getReplyTo());
-            String belongTo = list.get(i-1).getBelongTo() == 0 ? "" : Integer.toString(list.get(i-1).getBelongTo());
-            data[i] = new String[]{Integer.toString(list.get(i-1).getPostId()),userId,list.get(i-1).getTitle(), content, stick.get(list.get(i-1).getStick()), replyTo, belongTo};
+//            String belongTo = list.get(i-1).getBelongTo() == 0 ? "" : Integer.toString(list.get(i-1).getBelongTo());
+
+            data[i] = new String[]{Integer.toString(list.get(i-1).getPostId()), userId, title, content, stick.get(list.get(i-1).getStick()), replyTo};
         }
+        for(int i=0; i<length_1+1; i++){
+            for(int j=2; j<6; j++){
+                MyAlign(data[i][j], 10, 0);
+            }
+        }
+
 
         tableWithLinesAndMaxWidth(data);
     }
@@ -132,6 +139,54 @@ public class ResultPrintUtil {
         }
 
         tableWithLinesAndMaxWidth(data);
+    }
+
+    /**
+     * 根据中文字符数自动补齐空格
+     * @param str 原字符串
+     * @param length 所需长度
+     * @param type 0：左对齐 1：右对齐 2：居中
+     * @return 修改后的字符串
+     */
+    public static String MyAlign(String str, int length, int type) {
+        int strLen = str.length();
+        char word = 0;
+        int count = 0;
+        for(int i = 0; i<str.length(); i++){
+            word = str.charAt(i);
+            if(word<='\u9fa5' && word>='\u4e00'){
+                count+=1;
+            }
+        }
+        strLen += (count/2);
+        int space = length - strLen;
+        int leftCount = 0;
+        int rightCount = 0;
+        switch (type){
+            case 0:
+                leftCount=0;
+                rightCount=space;
+                break;
+            case 1:
+                leftCount = space;
+                rightCount = 0;
+                break;
+            case 2:
+                leftCount = space/2;
+                rightCount = space - leftCount;
+                break;
+            default:
+                break;
+        }
+        String leftSpace = "";
+        String rightSpace = "";
+        for(int i = 0; i<leftCount; i++){
+            leftSpace+=" ";
+        }
+        for(int i = 0; i<rightCount; i++){
+            rightSpace+=" ";
+        }
+        return leftSpace + str + rightSpace;
     }
 
 
@@ -172,9 +227,7 @@ public class ResultPrintUtil {
                     } else if ((row[i].length() > (splitRow * maxWidth))) {
                         // If data is more than max width, then crop data at maxwidth.
                         // Remaining cropped data will be part of next row.
-                        int end = row[i].length() > ((splitRow * maxWidth) + maxWidth)
-                                ? (splitRow * maxWidth) + maxWidth
-                                : row[i].length();
+                        int end = Math.min(row[i].length(), ((splitRow * maxWidth) + maxWidth));
                         newRow[i] = row[i].substring((splitRow * maxWidth), end);
                         needExtraRow = true;
                     } else {
@@ -199,14 +252,24 @@ public class ResultPrintUtil {
          * Map columnLengths is <column_number, column_length>
          */
         Map<Integer, Integer> columnLengths = new HashMap<>();
-        Arrays.stream(finalTable).forEach(a -> Stream.iterate(0, (i -> i < a.length), (i -> ++i)).forEach(i -> {
-            if (columnLengths.get(i) == null) {
-                columnLengths.put(i, 0);
+        for (int i = 0; i < finalTable.length; i++){
+            for(int j = 0; j<finalTable[i].length; j++){
+                if (columnLengths.get(j) == null) {
+                    columnLengths.put(j, 0);
+                }
+                if (columnLengths.get(j) < finalTable[i][j].length()) {
+                    columnLengths.put(j, finalTable[i][j].length());
+                }
             }
-            if (columnLengths.get(i) < a[i].length()) {
-                columnLengths.put(i, a[i].length());
-            }
-        }));
+        }
+//        Arrays.stream(finalTable).forEach(a -> Stream.iterate(0, (i -> i < a.length), (i -> ++i)).forEach(i -> {
+//            if (columnLengths.get(i) == null) {
+//                columnLengths.put(i, 0);
+//            }
+//            if (columnLengths.get(i) < a[i].length()) {
+//                columnLengths.put(i, a[i].length());
+//            }
+//        }));
 //        System.out.println("columnLengths = " + columnLengths);
 
         /*
@@ -214,7 +277,10 @@ public class ResultPrintUtil {
          */
         final StringBuilder formatString = new StringBuilder("");
         String flag = leftJustifiedRows ? "-" : "";
-        columnLengths.entrySet().stream().forEach(e -> formatString.append("| %" + flag + e.getValue() + "s "));
+        //columnLengths.entrySet().stream().forEach(e -> formatString.append("| %" + flag + e.getValue() + "s "));
+        for(Map.Entry<Integer, Integer> entry : columnLengths.entrySet()){
+            formatString.append("| %" + flag + entry.getValue() + "s ");
+        }
         formatString.append("|\n");
 //        System.out.println("formatString = " + formatString.toString());
 

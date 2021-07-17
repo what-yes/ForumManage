@@ -33,6 +33,7 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) throws InterruptedException {
+        input.useDelimiter("\n");
         Main.startForumSys();
     }
 
