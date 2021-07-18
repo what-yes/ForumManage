@@ -60,23 +60,30 @@ public class ResultPrintUtil {
 
 
         int length_1 = list.size();
-        System.out.println(length_1);
-        String[][] data = new String[length_1+1][7];
-        String[] elements = new String[7];
+        //System.out.println(length_1);
+        String[][] data = new String[length_1+1][5];
+        String[] elements = new String[5];
         elements[0] = "postID";
         elements[1] = "userID";
         elements[2] = "postTopic";
         elements[3] = "postContent";
         elements[4] = "isStick";
-        elements[5] = "replyTo";
-        elements[6] = "belongTo";
         data[0] = elements;
         for(int i=1;i<=length_1;i++){
             String userId = Integer.toString(list.get(i-1).getUserId());
-            String content = list.get(i-1).getContent().length()>=5 ? list.get(i-1).getContent().substring(0,5) + "..." :list.get(i-1).getContent();
-            String replyTo = list.get(i-1).getReplyTo() == 0 ? "" : Integer.toString(list.get(i-1).getReplyTo());
-            String belongTo = list.get(i-1).getBelongTo() == 0 ? "" : Integer.toString(list.get(i-1).getBelongTo());
-            data[i] = new String[]{Integer.toString(list.get(i-1).getPostId()),userId,list.get(i-1).getTitle(), content, stick.get(list.get(i-1).getStick()), replyTo, belongTo};
+            String title = list.get(i-1).getTitle().length()>8 ? list.get(i-1).getTitle().substring(0,8) + "..." :list.get(i-1).getTitle();
+            String content = list.get(i-1).getContent().length()>10 ? list.get(i-1).getContent().substring(0,10) + "..." :list.get(i-1).getContent();
+            //String replyTo = list.get(i-1).getReplyTo() == 0 ? "" : Integer.toString(list.get(i-1).getReplyTo());
+            //String belongTo = list.get(i-1).getBelongTo() == 0 ? "" : Integer.toString(list.get(i-1).getBelongTo());
+            data[i] = new String[]{Integer.toString(list.get(i-1).getPostId()),userId,title, content, stick.get(list.get(i-1).getStick())};
+        }
+        for(int i=0; i<length_1+1; i++){
+            data[i][0] = MyAlign(data[i][0], elements[0].length(), 2);
+            data[i][1] = MyAlign(data[i][1], elements[1].length(), 2);
+            data[i][2] = MyAlign(data[i][2], elements[2].length(), 2);
+            data[i][3] = MyAlign(data[i][3], elements[3].length(), 2);
+            data[i][4] = MyAlign(data[i][4], elements[4].length(), 0);
+
         }
 
         tableWithLinesAndMaxWidth(data);
@@ -93,7 +100,7 @@ public class ResultPrintUtil {
 
 
         int length_1 = list.size();
-        System.out.println(length_1);
+        //System.out.println(length_1);
         String[][] data = new String[length_1+1][7];
         String[] elements = new String[7];
         elements[0] = "postID";
@@ -107,11 +114,11 @@ public class ResultPrintUtil {
         for(int i=1;i<=length_1;i++){
             String userId = Integer.toString(list.get(i-1).getUserId());
             String content = list.get(i-1).getContent();
-            String title = list.get(i-1).getTitle().length()>=5 ? list.get(i-1).getTitle().substring(0,5) + "..." :list.get(i-1).getTitle();
+            String title = list.get(i-1).getTitle() != null ? list.get(i-1).getTitle() :"reply";
 //            String content = list.get(i-1).getContent().length()>=5 ? list.get(i-1).getContent().substring(0,5) + "..." :list.get(i-1).getContent();
             String replyTo = list.get(i-1).getReplyTo() == 0 ? "" : Integer.toString(list.get(i-1).getReplyTo());
             String belongTo = list.get(i-1).getBelongTo() == 0 ? "" : Integer.toString(list.get(i-1).getBelongTo());
-            data[i] = new String[]{Integer.toString(list.get(i-1).getPostId()),userId,list.get(i-1).getTitle(), content, stick.get(list.get(i-1).getStick()), replyTo, belongTo};
+            data[i] = new String[]{Integer.toString(list.get(i-1).getPostId()),userId,title, content, stick.get(list.get(i-1).getStick()), replyTo, belongTo};
         }
 
         tableWithLinesAndMaxWidth(data);
@@ -133,6 +140,55 @@ public class ResultPrintUtil {
         }
 
         tableWithLinesAndMaxWidth(data);
+    }
+
+
+    /**
+     * 根据中文字符数自动补齐空格
+     * @param str 原字符串
+     * @param length 所需长度
+     * @param type 0：左对齐 1：右对齐 2：居中
+     * @return 修改后的字符串
+     */
+    public static String MyAlign(String str, int length, int type) {
+        int strLen = str.length();
+        char word = 0;
+        int count = 0;
+        for(int i = 0; i<str.length(); i++){
+            word = str.charAt(i);
+            if(word<='\u9fa5' && word>='\u4e00'){
+                count+=1;
+            }
+        }
+        strLen += (count/2)%2==0 ? count/2 : (count/2 + 2);
+        int space = length - strLen;
+        int leftCount = 0;
+        int rightCount = 0;
+        switch (type){
+            case 0:
+                leftCount=0;
+                rightCount=space;
+                break;
+            case 1:
+                leftCount = space;
+                rightCount = 0;
+                break;
+            case 2:
+                leftCount = space/2;
+                rightCount = space - leftCount;
+                break;
+            default:
+                break;
+        }
+        String leftSpace = "";
+        String rightSpace = "";
+        for(int i = 0; i<leftCount; i++){
+            leftSpace+=" ";
+        }
+        for(int i = 0; i<rightCount; i++){
+            rightSpace+=" ";
+        }
+        return leftSpace + str + rightSpace;
     }
 
 
@@ -215,7 +271,13 @@ public class ResultPrintUtil {
          */
         final StringBuilder formatString = new StringBuilder("");
         String flag = leftJustifiedRows ? "-" : "";
-        columnLengths.entrySet().stream().forEach(e -> formatString.append("| %" + flag + e.getValue() + "s "));
+
+        //columnLengths.entrySet().stream().forEach(e -> formatString.append("| %" + flag + e.getValue() + "s "));
+        for(Map.Entry<Integer, Integer> entry : columnLengths.entrySet()){
+            //formatString.append("| %" + flag + entry.getValue() + "s ");
+            formatString.append("| %" + flag + entry.getValue() + "s ");
+        }
+
         formatString.append("|\n");
 //        System.out.println("formatString = " + formatString.toString());
 
@@ -236,11 +298,22 @@ public class ResultPrintUtil {
          * Print table
          */
 //        System.out.print(line);
+
+
         Arrays.stream(finalTable).limit(1).forEach(a -> System.out.printf(formatString.toString(), a));
         System.out.print(line);
 
-        Stream.iterate(1, (i -> i < finalTable.length), (i -> ++i))
-                .forEach(a -> System.out.printf(formatString.toString(), finalTable[a]));
+        for(int i = 1; i<finalTable.length; i++){
+//            for(int j = 0; j<finalTable[i].length; j++){
+//                System.out.print("| ");
+//                System.out.print(finalTable[i][j]);
+//                System.out.print(" ");
+//            }
+//            System.out.println("|");
+            System.out.printf(formatString.toString(), finalTable[i]);
+        }
+//        Stream.iterate(1, (i -> i < finalTable.length), (i -> ++i))
+//                .forEach(a -> System.out.printf(formatString.toString(), finalTable[a]));
         System.out.print(line);
     }
 

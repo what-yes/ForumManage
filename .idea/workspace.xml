@@ -2,19 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="122c5597-6eaf-43e1-9944-58dd4bb97da0" name="Default Changelist" comment="完善Authority/DAO/RenameUSER">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_7_8_19_05_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_7_8_19_05__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Forum/sensitive-words/网址.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Forum/sensitive-words/色情类.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/sensitive-words/色情类.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/sensitive-words/广告.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/sensitive-words/广告.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/sensitive-words/政治类.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/sensitive-words/政治类.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/test/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/util/FileThreadUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/util/FileThreadUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/util/ResultPrintUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/util/ResultPrintUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/util/SensitiveWordFilterUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forum/src/com/ssdut/forum/util/SensitiveWordFilterUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/dao/impl/BoardDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/dao/impl/BoardDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/entity/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/test/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/util/ResultPrintUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/util/SensitiveWordFilterUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/util/ResultPrintUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ForumManage/com/ssdut/forum/util/ResultPrintUtil.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +49,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Workspace/Java/start" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />

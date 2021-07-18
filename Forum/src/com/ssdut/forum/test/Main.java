@@ -447,13 +447,13 @@ public class Main {
         String inputString;
         System.out.println("请输入帖子标题：");
         inputString = input.next();
-        System.out.println(inputString);
+        //System.out.println(inputString);
         String newString = sensitiveWordFilterUtil.replaceSensitiveWord(inputString, 1, "*");
-        System.out.println(newString);
+        //System.out.println(newString);
         newPost.setTitle(newString);
         System.out.println("请输入帖子内容：");
         inputString = input.next();
-        System.out.println(inputString);
+        //System.out.println(inputString);
         newPost.setContent(sensitiveWordFilterUtil.replaceSensitiveWord(inputString, 1, "*"));
         user.addPost(newPost);
     }
